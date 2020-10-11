@@ -1,0 +1,458 @@
+*{
+	margin: 0;
+	padding: 0;
+	font-family: Century Gothic;
+}
+
+body{
+	background-image: url(../media/mountain-bg.jpg);
+	height: 100vh;
+	background-size: cover;
+	background-position: center;
+	background-color: #100b07;
+}
+
+main{
+	display: flex;
+}
+
+aside.main-aside{
+	flex: 0.2;
+	height: 95vh;
+	background-color: #495464;
+	opacity: 0.8;
+}
+
+aside.main-aside h2{
+	position: absolute;
+	top: 15%;
+	width: 18%;
+	padding-left: 1%;
+	padding-right: 1%;
+	color: #bbbbbe;
+	text-align: center;
+}
+
+aside.main-aside #navigation ul{
+	position: absolute;
+	top: 25%;
+	margin-top: 10px;
+	width: 18%;
+	padding-left: 1%;
+	padding-right: 1%;
+	color: #bbbbbe;
+	text-align: center;
+	list-style-type: none;
+}
+
+aside.main-aside #navigation ul li{
+	margin-top: 5%;
+	margin-bottom: 5%;
+}
+
+aside.main-aside #navigation ul li a{
+	text-decoration: none;
+	color: #bbbbbe;
+	font-family: Poppins, sans-serif;
+	font-size: 18px;
+	transition: 0.5s ease;
+}
+
+aside.main-aside #navigation ul li a:hover{
+	text-decoration: none;
+	color: #f4f4f2;
+	font-family: Poppins, sans-serif;
+	font-size: 18px;
+	text-decoration: underline;
+}
+
+aside.main-aside #navigation ul li.active a{
+	text-decoration: none;
+	color: #f4f4f2;
+	font-family: Poppins, sans-serif;
+	font-size: 18px;
+	text-decoration: underline;
+}
+
+footer{
+	top: 95%;
+	height: 5vh;
+	background-color: #495464;
+	opacity: 1;
+	align-items: center;
+}
+
+footer p{
+	text-align: center;
+	vertical-align: middle;
+	padding-top: 1vh;
+	padding-bottom: 0.5vh;
+	height: 3.5vh;
+	color: #bbbfca;
+	font-family: Poppins, sans-serif;
+	font-size: 11px;
+}
+
+footer p a{
+	text-decoration: none;
+	color: #bbbfca;
+	font-family: Poppins, sans-serif;
+	font-size: 11px;
+}
+
+#main{
+	flex: 0.8;
+	height: 95vh;
+	background-color: rgba(187, 191, 202, 0.2);
+	margin-left: 5px;
+	overflow-y: scroll;
+}
+
+#main::-webkit-scrollbar{
+	width: 5px;
+	background: rgba(187, 187, 190, 0.8);
+}
+
+#main::-webkit-scrollbar:hover{
+	width: 13px;
+	background: rgba(187, 187, 190, 1);
+}
+
+#main::-webkit-scrollbar-thumb{
+	width: 5px;
+	background: rgba(73, 84, 100, 0.8);
+}
+
+#main::-webkit-scrollbar-thumb:hover{
+	background: rgba(73, 84, 100, 1);
+}
+
+#cover{
+	height: 85vh;
+	margin-bottom: 5vh;
+	padding-bottom: 5vh;
+}
+
+#profile-picture img{
+	position: relative;
+	width: 15%;
+	opacity: 0.8;
+	margin-left: 37.5%;
+	margin-right: 37.5%;
+	border-radius: 50%;
+	border: 2px solid;
+	border-color: #495464;
+	margin-top: 10%;
+	background-color: rgba(0, 0, 0, 0);
+	
+}
+
+#cover h1{
+	position: relative;
+	top: 10%;
+	width: 40%;
+	padding-left: 30%;
+	padding-right: 30%;
+	color: #495464;
+	text-align: center;
+	font-family: Poppins, sans-serif;
+	font-size: 36px;
+}
+
+#cover p{
+	position: relative;
+	top: 10%;
+	width: 50%;
+	padding-left: 25%;
+	padding-right: 25%;
+	color: #495464;
+	text-align: center;
+	font-family: Poppins, sans-serif;
+	font-size: 20px;
+}
+
+#projects h2{
+	color: rgba(187, 191, 202, 1);
+	padding-left: 20px;
+	padding-top: 15px;
+	position: sticky;
+	top: 0;
+	padding-bottom: 15px;
+	/*border-radius: 10px;*/
+	background: #495464;
+	z-index: 1;
+	font-size: 32px;
+}
+
+#projects ul{
+	list-style-type: none;
+	margin-top: 30px;
+}
+
+li.project-item {
+	margin-left: 15%;
+	margin-right: 25px;
+	margin-top: 10px;
+	margin-bottom: 5px;
+	background: rgba(187, 191, 202, 0.8);
+	border-radius: 5px;
+	text-decoration: none;
+	border: 2px solid;
+	border-color: #495464;
+	width: 700px;
+	box-shadow: 1px 1px #bbbbbe;
+}
+
+li.project-item a{
+	text-decoration: none;
+}
+
+li.project-item h3{
+	padding-top: 15px;
+	padding-left: 15px;
+	padding-bottom: 10px;
+	color: #495464;
+}
+
+li.project-item p{
+	padding-top: 10px;
+	padding-left: 15px;
+	padding-bottom: 10px;
+	color: #495464;
+}
+
+video.project-video{
+	width: 640px;
+	height: 360px;
+	padding-left: 20px;
+}
+
+#about{
+	height: 95vh;
+	background: rgba(187, 191, 202, 0.8);
+}
+
+#about h2{
+	position: relative;
+	top: 35%;
+	width: 40%;
+	padding-left: 30%;
+	padding-right: 30%;
+	color: #495464;
+	text-align: center;
+	font-family: Poppins, sans-serif;
+	font-size: 36px;
+}
+
+#about p{
+	position: relative;
+	top: 45%;
+	width: 50%;
+	padding-left: 25%;
+	padding-right: 25%;
+	color: #495464;
+	text-align: center;
+	font-family: Poppins, sans-serif;
+	font-size: 20px;
+}
+
+
+
+
+
+/*--------------------contact.html--------------------*/
+
+#contact{
+	position: relative;
+	padding-top: 5px;
+	background-color: rgba(244, 244, 242, 0.7);
+	padding-bottom: 15px;
+	padding-left: 5px;
+	border-bottom: 1px solid;
+	border-color: rgba(73, 84, 100, 0.6);
+}
+
+#contact h1{
+	padding: 5px;
+	color: #495464;
+}
+
+#contact ul{
+	list-style-type: none;
+}
+
+li.contact-item{
+	padding: 5px;
+	color: #495464;
+	font-family: Poppins, sans-serif;
+}
+
+li.contact-item a{
+	text-decoration: none;
+}
+
+span.fa{
+	color: #495464;
+	margin-right: 5px;
+	font-size: 18px;
+}
+
+span.contact-description{
+	display: inline-block;
+	flex: 0.15;
+	margin-right: 5px;
+	color: #495464;
+	width: 90px;
+}
+
+span.contact-value{
+	display: inline-block;
+	color: #495464;
+}
+
+
+
+
+/*--------------------cv.html--------------------*/
+aside.cv-aside{
+	flex: 0.2;
+	height: 95vh;
+}
+
+aside.cv-aside ul{
+	list-style-type: none;
+}
+
+aside.cv-aside div.left{
+	width: 5%;
+	height: 95vh;
+	background-color: #495464;
+	opacity: 0.8;
+	display: inline-block;
+}
+
+aside.cv-aside div.left h2, aside.cv-aside div.left nav{
+	display: none;
+}
+
+div.left:hover + div.right{
+	display: none;
+}
+
+aside.cv-aside div.left:hover{
+	width: 100%;
+}
+
+aside.cv-aside div.left:hover h2{
+	display: inline-block;
+	position: absolute;
+	top: 15%;
+	width: 18%;
+	padding-left: 1%;
+	padding-right: 1%;
+	color: #bbbbbe;
+	text-align: center;
+}
+
+aside.cv-aside div.left:hover nav{
+	display: inline-block;
+}
+
+aside.cv-aside div.left:hover ul{
+	position: absolute;
+	top: 25%;
+	margin-top: 10px;
+	width: 18%;
+	padding-left: 1%;
+	padding-right: 1%;
+	color: #bbbbbe;
+	text-align: center;
+	list-style-type: none;
+}
+
+aside.cv-aside div.left:hover ul li{
+	margin-top: 5%;
+	margin-bottom: 5%;
+}
+
+aside.cv-aside div.left:hover ul li a{
+	text-decoration: none;
+	color: #bbbbbe;
+	font-family: Poppins, sans-serif;
+	font-size: 18px;
+	transition: 0.5s ease;
+}
+
+aside.cv-aside div.left:hover ul li a:hover{
+	text-decoration: none;
+	color: #f4f4f2;
+	font-family: Poppins, sans-serif;
+	font-size: 18px;
+	text-decoration: underline;
+}
+
+aside.cv-aside div.left:hover ul li.active a{
+	text-decoration: none;
+	color: #f4f4f2;
+	font-family: Poppins, sans-serif;
+	font-size: 18px;
+	text-decoration: underline;
+}
+
+
+
+
+
+aside.cv-aside div.right{
+	width: 95%;
+	position: absolute;
+	top: 0;
+	width: auto;
+	height: 95vh;
+	display: inline-block;
+	background-color: #495464;
+}
+
+aside.cv-aside div.right ul{
+	position: absolute;
+	top: 25%;
+	margin-top: 10px;
+	width: 18%;
+	padding-left: 1%;
+	padding-right: 1%;
+	color: #495464;
+	text-align: center;
+	list-style-type: none;
+}
+
+aside.cv-aside div.right ul li{
+	margin-top: 5%;
+	margin-bottom: 5%;
+}
+
+aside.cv-aside div.right ul li a{
+	text-decoration: none;
+	color: #495464;
+	font-family: Poppins, sans-serif;
+	font-size: 18px;
+	transition: 0.5s ease;
+}
+
+aside.cv-aside div.right ul li a:hover{
+	text-decoration: none;
+	color: #f4f4f2;
+	font-family: Poppins, sans-serif;
+	font-size: 18px;
+	text-decoration: underline;
+}
+
+aside.cv-aside div.right ul li.active a{
+	text-decoration: none;
+	color: #f4f4f2;
+	font-family: Poppins, sans-serif;
+	font-size: 18px;
+	text-decoration: underline;
+}
+
+
+
