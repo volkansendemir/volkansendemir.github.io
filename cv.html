@@ -1,90 +1,546 @@
-<!!DOCTYPE html>
+<!--!DOCTYPE html-->
 <html>
 	<head>
 		<title>Volkan Şendemir</title>
-		<link rel="stylesheet" type="text/css" href="css/style.css">
-		<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Poppins" />
+		<link rel="stylesheet" type="text/css" href="css/cv-style.css">
+		<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Poppins">
+		<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+		<script src="js/cv.js" type="text/javascript"></script>
 	</head>
 	<body>
-		<main>
-			<aside class="cv-aside">
-				<div class="left">
-					<h2>Volkan Şendemir</h2>
-					<nav id="main-navigation">
-						<ul>
-							<li>
-								<a href="/">Home</a>
-							</li>
-							<li class="active">
-								<a href="cv">CV</a>
-							</li>
-							<li>
-								<a href="projects">Projects</a>
-							</li>
-							<li>					
-								<a href="work-station">Work Station</a>
-							</li>
-							<li>					
-								<a href="contact">Contact</a>
-							</li>
-						</ul>
-					</nav>
-				</div>
-				<div class="right">
-					<nav>
-						<ul>
-							<li>
-								<a href="#">Summary</a>
-							</li>
-							<li>
-								<a href="#">Work Experience</a>
-							</li>
-							<li>
-								<a href="#">Education</a>
-							</li>
-							<li>					
-								<a href="#">Additional</a>
-							</li>
-						</ul>
-					</nav>
-				</div>
+		<div class="upper">
+			<aside class="aside-left">
+				<nav class="left-nav-global">
+					<h2 class="nav-header">Volkan Şendemir</h2>
+					<ul class="nav-list">
+						<li class="nav-item">
+							<a href="/">Home</a>
+						</li>
+						<li class="nav-item active">
+							<a href="/cv">CV</a>
+						</li>
+						<li class="nav-item">
+							<a href="/projects">Projects</a>
+						</li>
+						<li class="nav-item">
+							<a href="/work-station">Work Station</a>
+						</li>
+						<li class="nav-item">
+							<a href="/contact">Contact</a>
+						</li>
+					</ul>
+				</nav>
 			</aside>
-			<div id="main">
-				<section id="Contact">
-					<h1>Contact</h1>
-					<ul>
-						<li class="contact-item">
-							<a href="mailto:vsendemir16@ku.edu.tr">
-								<span class="fa fa-envelope"></span>
-								<span class="contact-description">Email:</span>
-								<span class="contact-value">vsendemir16@ku.edu.tr</span>
-							</a>
+			<aside class="aside-right">
+				<h2 class="cv-header">Volkan Şendemir</h2>
+				<nav class="nav-cv">
+					<ul class="cv-nav-list">
+						<li class="cv-nav-item">
+							<a href="#summary">Summary</a>
 						</li>
-						<li class="contact-item">
-							<a href="https://www.linkedin.com/in/volkansendemir/" target="_blank">
-								<span class="fa fa-linkedin"></span>
-								<span class="contact-description">LinkedIn:</span>
-								<span class="contact-value">www.linkedin.com/in/volkansendemir/</span>
-							</a>
+						<li class="cv-nav-item">
+							<a href="#work-experience">Work Experience</a>
 						</li>
-						<li class="contact-item">
-							<a href="https://github.com/volkansendemir/" target="_blank">
-								<span class="fa fa-github"></span>
-								<span class="contact-description">GitHub:</span>
-								<span class="contact-value">www.github.com/volkansendemir/</span>
-							</a>
+						<li class="cv-nav-item">
+							<a href="#education">Education</a>
 						</li>
-						<li class="contact-item">
-							<span class="fa fa-whatsapp"></span>
-							<span class="contact-description">WhatsApp:</span>
-							<span class="contact-value">I'm always accessible on WhatsApp</span>
+						<li class="cv-nav-item">					
+							<a href="#additional">Additional</a>
+						</li>
+						<li class="cv-nav-item">					
+							<a href="#transcript">Transcript</a>
+						</li>
+					</ul>
+				</nav>
+			</aside>
+			<main>
+				<section class="cv">
+					<h1>Curriculum Vitae</h1>
+					<ul class="cv-items">
+						<li class="cv-item" id="summary">
+							<h2>Summary</h2>
+							<div class="summary">
+								<p>I am a fresh graduate of Koç University with a solid education in Business Administration and Economics.</p>
+								<p>I hold tracks on Finance, Accounting, Financial Institutions and Macroeconomic Policy.</p>
+								<p>My programming knowledge covers Visual Basic for Applications and Python, mainly focusing on automation of MS Office applications and interaction with the web through RestAPI or Selenium.</p>
+								<p>I am a very advanced Excel user, covering a myriad of topics including Pivot Tables, Pivot Charts, Vlookups, Index-Match, and complex Array Formulas. I encourage you to check out my projects in Excel.</p>
+								<p>I enjoy data analytics and dabble in machine learning, but I am rather a beginner in this field.</p>
+							</div>
+						</li>
+						<li class="cv-item" id="work-experience">
+							<h2>Work Experience</h2>
+							<ul class="we-list">
+								<li class="we-item">
+									<div class="we-header">
+										<h3 class="institution">Koç University, Istanbul, Turkey</h3>
+										<div class="date"><time datetime="2018-05-01">01 May 2018</time> – <time datetime="2020-02-01">01 February 2020</time></div>
+									</div>
+									<div class="title">Part-Time Work-Study Employee, Data Analyst (20h/week)</div>
+									<ul class="description-list">
+										<li class="description">
+											Involved mostly in the automation of internal reports, mainly using Excel Visual Basic (VBA Macro)
+										</li>
+										<li class="description">
+											Collected, manipulated, and reported data, including major data extraction from the web
+										</li>
+										<li class="description">
+											Occasionally worked with other internal departments on automation, optimization, other data projects
+										</li>
+									</ul>
+								</li>
+								<li class="we-item">
+									<div class="we-header">
+										<h3 class="institution">Heidrick & Struggles, Istanbul, Turkey</h3>
+										<div class="date"><time datetime="2017-05-29">29 May 2017</time> – <time datetime="2017-09-14">14 September 2017</time></div>
+									</div>
+									<div class="title">Full-time Summer Intern (40h/week)</div>
+									<ul class="description-list">
+										<li class="description">
+											Worked on search projects, mapping and identifying the talent pool of executives from various sectors
+										</li>
+										<li class="description">
+											Assisted on preparing business development files and gathering company information
+										</li>
+										<li class="description">
+											Worked directly with the Partner, assisting him on executive assessments
+										</li>
+										<li class="description">
+											Attended assessment interviews of high-level executives, writing reports to be presented directly to the Chief Executive Officer of a leading telecommunications company and his related high-level staff
+										</li>
+									</ul>
+								</li>
+							</ul>
+						</li>
+						<li class="cv-item" id="education">
+							<h2>Education</h2>
+							<ul class="edu-list">
+								<li class="edu-item">
+									<div class="edu-header">
+										<h3 class="institution">Koç University, Istanbul, Turkey</h3>
+										<div class="date"><time datetime="2016-09-01">2016</time> – <time datetime="2020-06-01">2020</time></div>
+									</div>
+									<div class="detail">
+										<div class="major">Business Administration and Economics</div>
+										<div class="gpa">Double-Major, 3.78/4.00 GPA</div>
+									</div>
+								</li>
+								<li class="edu-item">
+									<div class="edu-header">
+										<h3 class="institution">Vienna University of Technology, Vienna, Austria</h3>
+										<div class="date">2014 – 2016</div>
+									</div>
+									<div class="detail">
+										<div class="major">Mechanical Engineering</div>
+										<div class="gpa">Not completed</div>
+									</div>
+								</li>
+								<li class="edu-item">
+									<div class="edu-header">
+										<h3 class="institution">Koç Private High School, Istanbul, Turkey</h3>
+										<div class="date">2009 – 2014</div>
+									</div>
+									<div class="detail">
+										<div class="major">High School Diploma</div>
+										<div class="gpa">Including one year of preparatory English school</div>
+									</div>
+								</li>
+							</ul>
+						</li>
+						<li class="cv-item" id="additional">
+							<h2>Additional</h2>
+							<ul class="add-list">
+								<li class="add-item">
+									<div class="addition">Computer</div>
+									<ul class="add-sub-list">
+										<li class="add-sub-item">
+											Mainly focused on Visual Basic for Applications (VBA), interaction between MS Excel, Word, PowerPoint and Outlook as well as Selenium for browser automation and XHR for data extraction
+										</li>
+										<li class="add-sub-item">
+											Advanced user of MS Office Programs
+										</li>
+										<li class="add-sub-item">
+											Advanced formulas and charts, PivotTables and PivotCharts, and Array Formulas in MS Excel
+										</li>
+										<li class="add-sub-item">
+											Experience in Python: mainly pandas, sk-learn, and requests, as well as some APIs
+										</li>
+										<li class="add-sub-item">
+											Various projects in Java including web scraping and data manipulation/reporting
+										</li>
+										<li class="add-sub-item">
+											Limited SQL, Access and RDBMS knowledge
+										</li>
+										<li class="add-sub-item">
+											Some experience in Power BI and R
+										</li>
+									</ul>
+								</li>
+								<li class="add-item">
+									<div class="addition">Tracks</div>
+									<div class="addition-details">Finance, Macroeconomic Policy and Financial Institutions</div>
+								</li>
+								<li class="add-item">
+									<div class="addition">Other Specializations</div>
+									<div class="addition-details">Accounting, Auditing, Operations and Strategy</div>
+								</li>
+								<li class="add-item">
+									<div class="addition">Languages <a href="https://en.wikipedia.org/wiki/ILR_scale" target="_blank">(ILR Scale)</a></div>
+									<ul class="add-sub-list">
+										<li class="add-sub-item">
+											English: Full professional proficiency
+										</li>
+										<li class="add-sub-item">
+											German: Limited working proficiency
+										</li>
+										<li class="add-sub-item">
+											Turkish: Native proficiency
+										</li>
+									</ul>
+								</li>
+							</ul>
+						</li>
+						<li class="cv-item" id="transcript">
+							<h2 id="transcript">Transcript</h2>
+							<ul class="transcript-list">
+								<li class="transcript-item">
+									<div class="transcript-header">Finance and Accounting<button class="fa fa-angle-down"></button></div>
+									<table class="transcript-table">
+										<thead class="table-header">
+											<tr>
+												<th class="cc-header">Course Code</th>
+												<th class="cn-header">Course Name</th>
+												<th class="grade-header">Grade</th>
+											</tr>
+										</thead>
+										<tbody class="table-body">
+											<tr>
+												<td>ACT202</td>
+												<td>Financial Accounting</td>
+												<td>A+</td>
+											</tr>
+											<tr>
+												<td>ACCT202</td>
+												<td>Management Accounting</td>
+												<td>B+</td>
+											</tr>
+											<tr>
+												<td>ACCT321</td>
+												<td>Financial Statement Analysis</td>
+												<td>A</td>
+											</tr>
+											<tr>
+												<td>ACCT403</td>
+												<td>Auditing</td>
+												<td>A-</td>
+											</tr>
+											
+											<tr>
+												<td>MFIN202</td>
+												<td>Introduction to Financial Management</td>
+												<td>A</td>
+											</tr>
+											<tr>
+												<td>MFIN301</td>
+												<td>Corporate Finance</td>
+												<td>A</td>
+											</tr>
+											<tr>
+												<td>MFIN304</td>
+												<td>Investment Management</td>
+												<td>A-</td>
+											</tr>
+											<tr>
+												<td>MFIN351</td>
+												<td>Risk Management</td>
+												<td>A-</td>
+											</tr>
+											<tr>
+												<td>MFIN403</td>
+												<td>Financial Markets and Institutions</td>
+												<td>A-</td>
+											</tr>
+										</tbody>
+									</table>
+								</li>
+								<li class="transcript-item">
+									<div class="transcript-header">Data Analytics and Computer<i class="fa fa-angle-down"></i></div>
+									<table class="transcript-table">
+										<thead class="table-header">
+											<tr>
+												<th class="cc-header">Course Code</th>
+												<th class="cn-header">Course Name</th>
+												<th class="grade-header">Grade</th>
+											</tr>
+										</thead>
+										<tbody class="table-body">
+											<tr>
+												<td>COMP130</td>
+												<td>Introduction to Programming</td>
+												<td>AU</td>
+											</tr>
+											<tr>
+												<td>COMP132</td>
+												<td>Advanced Programming</td>
+												<td>AU</td>
+											</tr>
+											<tr>
+												<td>COMP202</td>
+												<td>Data Structures and Algorithms</td>
+												<td>AU</td>
+											</tr>
+											<tr>
+												<td>COMP306</td>
+												<td>Database Management Systems</td>
+												<td>AU</td>
+											</tr>
+											<tr>
+												<td>MATH101</td>
+												<td>Finite Mathematics</td>
+												<td>A+</td>
+											</tr>
+											<tr>
+												<td>MATH102</td>
+												<td>Calculus</td>
+												<td>A</td>
+											</tr>
+											<tr>
+												<td>MATH201</td>
+												<td>Statistics</td>
+												<td>A-</td>
+											</tr>
+											<tr>
+												<td>MGIS301</td>
+												<td>Management Information Systems</td>
+												<td>A</td>
+											</tr>
+											<tr>
+												<td>MKTG301</td>
+												<td>Marketing Research</td>
+												<td>A-</td>
+											</tr>
+											<tr>
+												<td>QMBU301</td>
+												<td>Quantitative Methods in Business</td>
+												<td>A</td>
+											</tr>
+											<tr>
+												<td>QMBU310</td>
+												<td>Introduction to Management Science</td>
+												<td>A</td>
+											</tr>
+											<tr>
+												<td>QMBU450</td>
+												<td>Advanced Data Analytics in Python</td>
+												<td>A</td>
+											</tr>
+										</tbody>
+									</table>
+								</li>
+								<li class="transcript-item">
+									<div class="transcript-header">Operations and Strategy<i class="fa fa-angle-down"></i></div>
+									<table class="transcript-table">
+										<thead class="table-header">
+											<tr>
+												<th class="cc-header">Course Code</th>
+												<th class="cn-header">Course Name</th>
+												<th class="grade-header">Grade</th>
+											</tr>
+										</thead>
+										<tbody class="table-body">
+											<tr>
+												<td>MGMT335</td>
+												<td>Strategy in a Global Environment</td>
+												<td>A+</td>
+											</tr>
+											<tr>
+												<td>OPSM302</td>
+												<td>Service Operations</td>
+												<td>A</td>
+											</tr>
+											<tr>
+												<td>OPSM410</td>
+												<td>Operations Strategy</td>
+												<td>AU</td>
+											</tr>
+										</tbody>
+									</table>
+								</li>
+								<li class="transcript-item">
+									<div class="transcript-header">Business Administration<i class="fa fa-angle-down"></i></div>
+									<table class="transcript-table">
+										<thead class="table-header">
+											<tr>
+												<th class="cc-header">Course Code</th>
+												<th class="cn-header">Course Name</th>
+												<th class="grade-header">Grade</th>
+											</tr>
+										</thead>
+										<tbody class="table-body">
+											<tr>
+												<td>BLAW202</td>
+												<td>Business Law</td>
+												<td>C+</td>
+											</tr>
+											<tr>
+												<td>BUSA499</td>
+												<td>Business Administration Capstone</td>
+												<td>A</td>
+											</tr>
+											<tr>
+												<td>MKTG201</td>
+												<td>Marketing Management</td>
+												<td>B</td>
+											</tr>
+											<tr>
+												<td>MKTG302</td>
+												<td>Consumer Behavior</td>
+												<td>AU</td>
+											</tr>
+											<tr>
+												<td>MKTG302</td>
+												<td>Consumer Behavior</td>
+												<td>AU</td>
+											</tr>
+										</tbody>
+									</table>
+								</li>
+								<li class="transcript-item">
+									<div class="transcript-header">Economics<i class="fa fa-angle-down"></i></div>
+									<table class="transcript-table">
+										<thead class="table-header">
+											<tr>
+												<th class="cc-header">Course Code</th>
+												<th class="cn-header">Course Name</th>
+												<th class="grade-header">Grade</th>
+											</tr>
+										</thead>
+										<tbody class="table-body">
+											<tr>
+												<td>ECIR313</td>
+												<td>Introduction to Global Political Economy</td>
+												<td>B</td>
+											</tr>
+											<tr>
+												<td>ECON100</td>
+												<td>Principles of Economics</td>
+												<td>A</td>
+											</tr>
+											<tr>
+												<td>ECON201</td>
+												<td>Intermediate Microeconomics</td>
+												<td>A-</td>
+											</tr>
+											<tr>
+												<td>ECON202</td>
+												<td>Macroeconomics</td>
+												<td>A-</td>
+											</tr>
+											<tr>
+												<td>ECON311</td>
+												<td>Introduction to Econometrics</td>
+												<td>A-</td>
+											</tr>
+											<tr>
+												<td>ECON321</td>
+												<td>International Trade</td>
+												<td>A-</td>
+											</tr>
+											<tr>
+												<td>ECON360</td>
+												<td>Money and Banking</td>
+												<td>B+</td>
+											</tr>
+											<tr>
+												<td>ECON481</td>
+												<td>Turkish Economy</td>
+												<td>C+</td>
+											</tr>
+											<tr>
+												<td>ECON499</td>
+												<td>Economics Capstone</td>
+												<td>C+</td>
+											</tr>
+										</tbody>
+									</table>
+								</li>	
+								<li class="transcript-item">
+									<div class="transcript-header">Others<i class="fa fa-angle-down"></i></div>
+									<table class="transcript-table">
+										<thead class="table-header">
+											<tr>
+												<th class="cc-header">Course Code</th>
+												<th class="cn-header">Course Name</th>
+												<th class="grade-header">Grade</th>
+											</tr>
+										</thead>
+										<tbody class="table-body">
+											<tr>
+												<td>ACWR101</td>
+												<td>Basic Academic Writing</td>
+												<td>A</td>
+											</tr>
+											<tr>
+												<td>ACWR103</td>
+												<td>Academic Writing for Business</td>
+												<td>A</td>
+											</tr>
+											<tr>
+												<td>ASIU105</td>
+												<td>War in Literature</td>
+												<td>A</td>
+											</tr>
+											<tr>
+												<td>ETHR109</td>
+												<td>Environmental Ethics</td>
+												<td>A</td>
+											</tr>
+											<tr>
+												<td>HIST300</td>
+												<td>History of Modern Turkey</td>
+												<td>A</td>
+											</tr>
+											<tr>
+												<td>HUMS117</td>
+												<td>Rationality and Irrationality</td>
+												<td>B+</td>
+											</tr>
+											<tr>
+												<td>PSYC100</td>
+												<td>Psyhology</td>
+												<td>A</td>
+											</tr>
+											<tr>
+												<td>SCIE107</td>
+												<td>Energy and Environment</td>
+												<td>A+</td>
+											</tr>
+											<tr>
+												<td>SOSC105</td>
+												<td>Migration and Globalization</td>
+												<td>A</td>
+											</tr>
+											<tr>
+												<td>SOSC108</td>
+												<td>Social Origins of Wealth</td>
+												<td>AU</td>
+											</tr>
+											<tr>
+												<td>TURK100</td>
+												<td>Turkish Speech and Composition</td>
+												<td>A</td>
+											</tr>
+										</tbody>
+									</table>
+								</li>
+							</ul>
 						</li>
 					</ul>
 				</section>
-			</div>
-		</main>
+			</main>
+		</div>
+
 		<footer>
-			<p><a href="contact">by Volkan Şendemir</a></p>
+			<span>by <a href="">Volkan Şendemir</a></span>
 		</footer>
 	</body>
 </html>
