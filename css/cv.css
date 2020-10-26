@@ -658,7 +658,12 @@ ul.transcript-list > li.transcript-item > div.transcript-header {
 
 li.transcript-item > div.transcript-header > i.fa.fa-angle-down {
 	grid-column: 2/3;
-	cursor: pointer;
+	cursor: pointer !important;
+}
+
+li.transcript-item > div.transcript-header > i.fa.fa-angle-up {
+	grid-column: 2/3;
+	cursor: pointer !important;
 }
 
 ul.transcript-list > li.transcript-item > table.transcript-table {
