@@ -656,8 +656,9 @@ ul.transcript-list > li.transcript-item > div.transcript-header {
 	border-bottom: 1px solid rgba(177, 177, 177, 0.5);
 }
 
-li.transcript-item > div.transcript-header > button.fa.fa-angle-down {
+li.transcript-item > div.transcript-header > i.fa.fa-angle-down {
 	grid-column: 2/3;
+	cursor: pointer;
 }
 
 ul.transcript-list > li.transcript-item > table.transcript-table {
