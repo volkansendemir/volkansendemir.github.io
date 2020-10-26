@@ -656,12 +656,12 @@ ul.transcript-list > li.transcript-item > div.transcript-header {
 	border-bottom: 1px solid rgba(177, 177, 177, 0.5);
 }
 
-li.transcript-item > div.transcript-header > i.fa.fa-angle-down {
+li.transcript-item > div.transcript-header > i.fa.fa-angle-down::before {
 	grid-column: 2/3;
 	cursor: pointer !important;
 }
 
-li.transcript-item > div.transcript-header > i.fa.fa-angle-up {
+li.transcript-item > div.transcript-header > i.fa.fa-angle-up::before {
 	grid-column: 2/3;
 	cursor: pointer !important;
 }
