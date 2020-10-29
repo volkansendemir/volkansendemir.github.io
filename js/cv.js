@@ -226,7 +226,7 @@ window.addEventListener('load', function () {
 		}
 		
 		/*     react     */
-		if ((h1.className.indexOf("visible") > -1) && h1.getBoundingClientRect().top < (header.getBoundingClientRect().height * 1.5) && !h1_flying && !going_up) {
+		if ((h1.className.indexOf("visible") > -1) && h1.getBoundingClientRect().top < (header.getBoundingClientRect().height * 0.75) && !h1_flying && !going_up) {
 			h1_flying = true;
 			h1.removeEventListener("animationend", land_h1, false);
 			h1.addEventListener("animationend", taxi_h1, false);
@@ -237,7 +237,7 @@ window.addEventListener('load', function () {
 			h1.addEventListener("animationend", land_h1, false);
 			h1.setAttribute("class", "visible flyin");
 		}
-		if ((welcome.className.indexOf("visible") > -1) && welcome.getBoundingClientRect().top < (header.getBoundingClientRect().height * 1.5) && !welcome_flying && !going_up) {
+		if ((welcome.className.indexOf("visible") > -1) && welcome.getBoundingClientRect().top < (header.getBoundingClientRect().height * 0.75) && !welcome_flying && !going_up) {
 			welcome_flying = true;
 			welcome.removeEventListener("animationend", land_welcome, false);
 			welcome.addEventListener("animationend", taxi_welcome, false);
@@ -248,7 +248,7 @@ window.addEventListener('load', function () {
 			welcome.addEventListener("animationend", land_welcome, false);
 			welcome.setAttribute("class", "welcome visible flyin");
 		}
-		if ((summary.className.indexOf("visible") > -1) && summary.getBoundingClientRect().top < (header.getBoundingClientRect().height * 1.5) && !summary_flying && !going_up) {
+		if ((summary.className.indexOf("visible") > -1) && summary.getBoundingClientRect().top < (header.getBoundingClientRect().height * 0.75) && !summary_flying && !going_up) {
 			summary_flying = true;
 			summary.removeEventListener("animationend", land_summary, false);
 			summary.addEventListener("animationend", taxi_summary, false);
@@ -259,7 +259,7 @@ window.addEventListener('load', function () {
 			summary.addEventListener("animationend", land_summary, false);
 			summary.setAttribute("class", "summary visible flyin");
 		}
-		if ((description.className.indexOf("visible") > -1) && description.getBoundingClientRect().top < (header.getBoundingClientRect().height * 1.5) && !description_flying && !going_up) {
+		if ((description.className.indexOf("visible") > -1) && description.getBoundingClientRect().top < (header.getBoundingClientRect().height * 0.75) && !description_flying && !going_up) {
 			description_flying = true;
 			description.removeEventListener("animationend", land_description, false);
 			description.addEventListener("animationend", taxi_description, false);
@@ -277,7 +277,7 @@ window.addEventListener('load', function () {
 			h1.removeEventListener("animationend", taxi_h1, false);
 			h1.addEventListener("animationend", land_h1, false);
 			h1.setAttribute("class", "visible flyin");
-		} else if (!going_up && (h1.className.indexOf("flyin") > -1) && h1.getBoundingClientRect().top > (header.getBoundingClientRect().height * 0.75)) {
+		} else if (!going_up && (h1.className.indexOf("flyin") > -1) && h1.getBoundingClientRect().top > (header.getBoundingClientRect().height * 1.25)) {
 			h1_flying = true;
 			h1.removeEventListener("animationend", land_h1, false);
 			h1.addEventListener("animationend", taxi_h1, false);
@@ -288,7 +288,7 @@ window.addEventListener('load', function () {
 			welcome.removeEventListener("animationend", taxi_welcome, false);
 			welcome.addEventListener("animationend", land_welcome, false);
 			welcome.setAttribute("class", "welcome visible flyin");
-		} else if (!going_up && (welcome.className.indexOf("flyin") > -1) && welcome.getBoundingClientRect().top > (header.getBoundingClientRect().height * 0.75)) {
+		} else if (!going_up && (welcome.className.indexOf("flyin") > -1) && welcome.getBoundingClientRect().top > (header.getBoundingClientRect().height * 1.25)) {
 			welcome_flying = true;
 			welcome.removeEventListener("animationend", land_welcome, false);
 			welcome.addEventListener("animationend", taxi_welcome, false);
@@ -299,7 +299,7 @@ window.addEventListener('load', function () {
 			summary.removeEventListener("animationend", taxi_summary, false);
 			summary.addEventListener("animationend", land_summary, false);
 			summary.setAttribute("class", "summary visible flyin");
-		} else if (!going_up && (summary.className.indexOf("flyin") > -1) && summary.getBoundingClientRect().top > (header.getBoundingClientRect().height * 0.75)) {
+		} else if (!going_up && (summary.className.indexOf("flyin") > -1) && summary.getBoundingClientRect().top > (header.getBoundingClientRect().height * 1.25)) {
 			summary_flying = true;
 			summary.removeEventListener("animationend", land_summary, false);
 			summary.addEventListener("animationend", taxi_summary, false);
@@ -310,7 +310,7 @@ window.addEventListener('load', function () {
 			description.removeEventListener("animationend", taxi_description, false);
 			description.addEventListener("animationend", land_description, false);
 			description.setAttribute("class", "description visible flyin");
-		} else if (!going_up && (description.className.indexOf("flyin") > -1) && description.getBoundingClientRect().top > (header.getBoundingClientRect().height * 0.75)) {
+		} else if (!going_up && (description.className.indexOf("flyin") > -1) && description.getBoundingClientRect().top > (header.getBoundingClientRect().height * 1.25)) {
 			description_flying = true;
 			description.removeEventListener("animationend", land_description, false);
 			description.addEventListener("animationend", taxi_description, false);
