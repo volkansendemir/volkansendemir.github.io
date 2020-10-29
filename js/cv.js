@@ -316,6 +316,21 @@ window.addEventListener('load', function () {
 			description.addEventListener("animationend", taxi_description, false);
 			description.setAttribute("class", "description visible flyout");
 		}
+		if (cover.getBoundingClientRect().top <= 50px) {
+			main.scrollTo(0, 0);
+			h1.removeEventListener("animationend", taxi_h1, false);
+			h1.removeEventListener("animationend", land_h1, false);
+			h1.setAttribute("class", "visible");
+			welcome.removeEventListener("animationend", taxi_h1, false);
+			welcome.removeEventListener("animationend", land_h1, false);
+			welcome.setAttribute("class", "welcome visible");
+			summary.removeEventListener("animationend", taxi_h1, false);
+			summary.removeEventListener("animationend", land_h1, false);
+			summary.setAttribute("class", "summary visible");
+			description.removeEventListener("animationend", taxi_h1, false);
+			description.removeEventListener("animationend", land_h1, false);
+			description.setAttribute("class", "description visible");
+		}
 	};
 	
 	if (window.matchMedia("(max-width: 700px)").matches) {
