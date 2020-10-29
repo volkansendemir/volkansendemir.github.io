@@ -179,6 +179,11 @@ section.cover {
 		display: grid !important;
 		grid-template-columns: 1fr 2.5fr 18fr 2.5fr 1fr !important;
 	}
+	section.experiences > div.wrapper.edu > div.education > h2 {
+		font-size: 2.5vh;
+		font-weight: bold;
+		letter-spacing: -.025em;
+	}
 	ul.education-list > li.education-item {
 		max-width: 80vw !important;
 		max-height: 15vh !important;
@@ -196,6 +201,11 @@ section.cover {
 		
 		display: grid !important;
 		grid-template-columns: 1fr 2.5fr 18fr 2.5fr 1fr !important;
+	}
+	section.experiences > div.wrapper.we > div.work > h2 {
+		font-size: 2.5vh;
+		font-weight: bold;
+		letter-spacing: -.025em;
 	}
 }
 
