@@ -225,22 +225,30 @@ window.addEventListener('load', function () {
 	const trans_header = document.querySelector('.trans');
 	
 	const header_color = () => {
-		if (!going_up && education_header.getBoundingClientRect().top <= header.getBoundingClientRect().height) {
+		if (!going_up && education_header.getBoundingClientRect().top < header.getBoundingClientRect().height * 0.95) {
+			education_header.setAttribute("class", "education white");
+		} else if (!going_up && education_header.getBoundingClientRect().top <= header.getBoundingClientRect().height) {
 			education_header.setAttribute("class", "education black");
 		} else if (going_up && education_header.getBoundingClientRect().top > header.getBoundingClientRect().height) {
 			education_header.setAttribute("class", "education white");
 		}
-		if (!going_up && work_header.getBoundingClientRect().top <= header.getBoundingClientRect().height) {
+		if (!going_up && work_header.getBoundingClientRect().top < header.getBoundingClientRect().height * 0.95) {
+			work_header.setAttribute("class", "work white");
+		} else if (!going_up && work_header.getBoundingClientRect().top <= header.getBoundingClientRect().height) {
 			work_header.setAttribute("class", "work black");
 		} else if (going_up && work_header.getBoundingClientRect().top > header.getBoundingClientRect().height) {
 			work_header.setAttribute("class", "work white");
 		}
-		if (!going_up && addition_header.getBoundingClientRect().top <= header.getBoundingClientRect().height) {
+		if (!going_up && addition_header.getBoundingClientRect().top < header.getBoundingClientRect().height * 0.95) {
+			addition_header.setAttribute("class", "addition white");
+		} else if (!going_up && addition_header.getBoundingClientRect().top <= header.getBoundingClientRect().height) {
 			addition_header.setAttribute("class", "addition black");
 		} else if (going_up && addition_header.getBoundingClientRect().top > header.getBoundingClientRect().height) {
 			addition_header.setAttribute("class", "addition white");
 		}
-		if (!going_up && trans_header.getBoundingClientRect().top <= header.getBoundingClientRect().height) {
+		if (!going_up && trans_header.getBoundingClientRect().top < header.getBoundingClientRect().height * 0.95) {
+			trans_header.setAttribute("class", "trans white");
+		} else if (!going_up && trans_header.getBoundingClientRect().top <= header.getBoundingClientRect().height) {
 			trans_header.setAttribute("class", "trans black");
 		} else if (going_up && trans_header.getBoundingClientRect().top > header.getBoundingClientRect().height) {
 			trans_header.setAttribute("class", "trans white");
@@ -528,6 +536,4 @@ window.addEventListener('load', function () {
 			}
 	  });
 	}
-	
-	
 });
