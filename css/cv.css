@@ -234,12 +234,6 @@ section.cover {
 		font-weight: bold !important;
 		letter-spacing: -.025em !important;
 	}
-	.flyin {
-		animation: come-in 0.25s ease-out !important;
-	}
-	.flyout {
-		animation: come-out 0.25s ease-in !important;
-	}
 }
 
 section.cover > h1 {
