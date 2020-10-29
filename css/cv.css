@@ -47,6 +47,7 @@ aside {
 	
 	background-color: rgba(0, 0, 0, 0.9);
 	backdrop-filter: saturate(180%) blur(20px);
+	-webkit-backdrop-filter: saturate(180%) blur(20px);
 	
 	z-index: 9999;
 }
@@ -199,6 +200,7 @@ section.experiences > div.wrapper.edu > div.education.white {
 	
 	background-color: rgba(255, 255, 255, 1);
 	backdrop-filter: saturate(180%) blur(20px);
+	-webkit-backdrop-filter: saturate(180%) blur(20px);
 	
 	font-size: min(3vh, 2.5vw);
 	font-weight: bold;
@@ -212,6 +214,7 @@ section.experiences > div.wrapper.edu > div.education.black {
 	
 	background-color: rgba(0, 0, 0, 0.95);
 	backdrop-filter: saturate(180%) blur(20px);
+	-webkit-backdrop-filter: saturate(180%) blur(20px);
 	
 	font-size: min(3vh, 2.5vw);
 	font-weight: bold;
@@ -345,6 +348,7 @@ section.experiences > div.wrapper.we > div.work.white {
 	
 	background-color: rgba(255, 255, 255, 1);
 	backdrop-filter: saturate(180%) blur(20px);
+	-webkit-backdrop-filter: saturate(180%) blur(20px);
 	
 	font-size: min(3vh, 2.5vw);
 	font-weight: bold;
@@ -358,6 +362,7 @@ section.experiences > div.wrapper.we > div.work.black {
 	
 	background-color: rgba(0, 0, 0, 0.95);
 	backdrop-filter: saturate(180%) blur(20px);
+	-webkit-backdrop-filter: saturate(180%) blur(20px);
 	
 	font-size: min(3vh, 2.5vw);
 	font-weight: bold;
@@ -481,6 +486,7 @@ section.additional > div.addition.white {
 	
 	background-color: rgba(255, 255, 255, 1);
 	backdrop-filter: saturate(180%) blur(0.5em);
+	-webkit-backdrop-filter: saturate(180%) blur(0.5em);
 	
 	font-size: min(3vh, 2.5vw);
 	font-weight: bold;
@@ -494,6 +500,7 @@ section.additional > div.addition.black {
 	
 	background-color: rgba(0, 0, 0, 0.95);
 	backdrop-filter: saturate(180%) blur(20px);
+	-webkit-backdrop-filter: saturate(180%) blur(20px);
 	
 	font-size: min(3vh, 2.5vw);
 	font-weight: bold;
@@ -601,6 +608,7 @@ section.transcript > div.trans.white {
 	
 	background-color: rgba(255, 255, 255, 1);
 	backdrop-filter: saturate(180%) blur(0.5em);
+	-webkit-backdrop-filter: saturate(180%) blur(20px);
 	
 	font-size: min(3vh, 2.5vw);
 	font-weight: bold;
@@ -614,6 +622,7 @@ section.transcript > div.trans.black {
 	
 	background-color: rgba(255, 255, 255, 1);
 	backdrop-filter: saturate(180%) blur(0.5em);
+	-webkit-backdrop-filter: saturate(180%) blur(20px);
 	
 	font-size: min(3vh, 2.5vw);
 	font-weight: bold;
