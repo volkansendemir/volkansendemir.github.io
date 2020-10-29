@@ -45,6 +45,7 @@ window.addEventListener('load', function () {
 	main.addEventListener("scroll", header_opacity);
 	
 	
+	const cover = document.querySelector('.cover');
 	const h1 = document.querySelector('h1');
 	const welcome = document.querySelector('.welcome');
 	const summary = document.querySelector('.summary');
