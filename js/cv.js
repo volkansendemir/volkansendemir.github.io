@@ -317,6 +317,7 @@ window.addEventListener('load', function () {
 			description.addEventListener("animationend", taxi_description, false);
 			description.setAttribute("class", "description visible flyout");
 		}
+		
 		if (cover.getBoundingClientRect().top > 30) {
 			main.scrollTo(0, 0);
 			h1.removeEventListener("animationend", taxi_h1, false);
@@ -335,7 +336,7 @@ window.addEventListener('load', function () {
 			welcome_flying = false;
 			summary_flying = false;
 			description_flying = false;
-		} else if (cover.getBoundingClientRect().bottom > 30) {
+		} else if (cover.getBoundingClientRect().bottom < 30) {
 			h1.removeEventListener("animationend", taxi_h1, false);
 			h1.removeEventListener("animationend", land_h1, false);
 			h1.setAttribute("class", "hidden");
@@ -355,9 +356,14 @@ window.addEventListener('load', function () {
 		}
 	};
 	
-	if (window.matchMedia("(max-width: 700px)").matches) {
-		main.addEventListener("scroll", cover_mobile_flys);
-		
+	const cover_small_mobile_flys = () => {
+			
+	};
+	
+	if (window.matchMedia("(max-width: 600px)").matches) {
+		main.addEventListener("scroll", cover_small_mobile_flys);
+	} else if (window.matchMedia("(max-width: 700px)").matches) {
+		main.addEventListener("scroll", cover_flys);
 	} else {
 		main.addEventListener("scroll", cover_flys);
 	}
