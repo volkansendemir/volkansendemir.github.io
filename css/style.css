@@ -47,6 +47,7 @@ aside {
 	
 	background-color: rgba(0, 0, 0, 0.9);
 	backdrop-filter: saturate(180%) blur(20px);
+	-webkit-backdrop-filter: saturate(180%) blur(20px);
 	
 	z-index: 9999;
 }
@@ -168,6 +169,7 @@ section.projects > div.header.white {
 	
 	background-color: rgba(255, 255, 255, 1);
 	backdrop-filter: saturate(180%) blur(20px);
+	-webkit-backdrop-filter: saturate(180%) blur(20px);
 	
 	font-size: min(3vh, 2.5vw);
 	font-weight: bold;
@@ -181,6 +183,7 @@ section.projects > div.header.black {
 	
 	background-color: rgba(0, 0, 0, 0.95);
 	backdrop-filter: saturate(180%) blur(20px);
+	-webkit-backdrop-filter: saturate(180%) blur(20px);
 	
 	font-size: min(3vh, 2.5vw);
 	font-weight: bold;
