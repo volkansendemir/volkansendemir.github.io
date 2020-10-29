@@ -225,40 +225,40 @@ window.addEventListener('load', function () {
 	const trans_header = document.querySelector('.trans');
 	
 	const header_color = () => {
-		if (!going_up && education_header.getBoundingClientRect().top < header.getBoundingClientRect().height * 0.975) {
+		if (!going_up && education_header.getBoundingClientRect().top < header.getBoundingClientRect().height * 0.96) {
 			education_header.setAttribute("class", "education white");
 		} else if (!going_up && education_header.getBoundingClientRect().top <= header.getBoundingClientRect().height) {
 			education_header.setAttribute("class", "education black");
 		} else if (going_up && education_header.getBoundingClientRect().top > header.getBoundingClientRect().height) {
 			education_header.setAttribute("class", "education white");
-		} else if (going_up && education_header.getBoundingClientRect().top <= header.getBoundingClientRect().height * 0.975) {
+		} else if (going_up && education_header.getBoundingClientRect().top <= header.getBoundingClientRect().height * 0.96) {
 			education_header.setAttribute("class", "education black");
 		}
-		if (!going_up && work_header.getBoundingClientRect().top < header.getBoundingClientRect().height * 0.975) {
+		if (!going_up && work_header.getBoundingClientRect().top < header.getBoundingClientRect().height * 0.96) {
 			work_header.setAttribute("class", "work white");
 		} else if (!going_up && work_header.getBoundingClientRect().top <= header.getBoundingClientRect().height) {
 			work_header.setAttribute("class", "work black");
 		} else if (going_up && work_header.getBoundingClientRect().top > header.getBoundingClientRect().height) {
 			work_header.setAttribute("class", "work white");
-		} else if (going_up && work_header.getBoundingClientRect().top <= header.getBoundingClientRect().height * 0.975) {
+		} else if (going_up && work_header.getBoundingClientRect().top <= header.getBoundingClientRect().height * 0.96) {
 			work_header.setAttribute("class", "work black");
 		}
-		if (!going_up && addition_header.getBoundingClientRect().top < header.getBoundingClientRect().height * 0.975) {
+		if (!going_up && addition_header.getBoundingClientRect().top < header.getBoundingClientRect().height * 0.96) {
 			addition_header.setAttribute("class", "addition white");
 		} else if (!going_up && addition_header.getBoundingClientRect().top <= header.getBoundingClientRect().height) {
 			addition_header.setAttribute("class", "addition black");
 		} else if (going_up && addition_header.getBoundingClientRect().top > header.getBoundingClientRect().height) {
 			addition_header.setAttribute("class", "addition white");
-		} else if (going_up && addition_header.getBoundingClientRect().top <= header.getBoundingClientRect().height * 0.975) {
+		} else if (going_up && addition_header.getBoundingClientRect().top <= header.getBoundingClientRect().height * 0.96) {
 			addition_header.setAttribute("class", "addition black");
 		}
-		if (!going_up && trans_header.getBoundingClientRect().top < header.getBoundingClientRect().height * 0.975) {
+		if (!going_up && trans_header.getBoundingClientRect().top < header.getBoundingClientRect().height * 0.96) {
 			trans_header.setAttribute("class", "trans white");
 		} else if (!going_up && trans_header.getBoundingClientRect().top <= header.getBoundingClientRect().height) {
 			trans_header.setAttribute("class", "trans black");
 		} else if (going_up && trans_header.getBoundingClientRect().top > header.getBoundingClientRect().height) {
 			trans_header.setAttribute("class", "trans white");
-		} else if (going_up && trans_header.getBoundingClientRect().top <= header.getBoundingClientRect().height * 0.975) {
+		} else if (going_up && trans_header.getBoundingClientRect().top <= header.getBoundingClientRect().height * 0.96) {
 			trans_header.setAttribute("class", "trans black");
 		}
 	}
