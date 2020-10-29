@@ -180,7 +180,7 @@ section.cover {
 		grid-template-columns: 1fr 2.5fr 18fr 2.5fr 1fr !important;
 	}
 	section.experiences > div.wrapper.edu > div.education > h2 {
-		font-size: 2.5vh !important;
+		font-size: 3vh !important;
 		font-weight: bold !important;
 		letter-spacing: -.025em !important;
 	}
@@ -203,7 +203,7 @@ section.cover {
 		grid-template-columns: 1fr 2.5fr 18fr 2.5fr 1fr !important;
 	}
 	section.experiences > div.wrapper.we > div.work > h2 {
-		font-size: 2.5vh !important;
+		font-size: 3vh !important;
 		font-weight: bold !important;
 		letter-spacing: -.025em !important;
 	}
@@ -216,7 +216,7 @@ section.cover {
 		background: rgba(255, 255, 255, 1) !important;
 	}
 	section.additional > div.addition > h2 {
-		font-size: 2.5vh !important;
+		font-size: 3vh !important;
 		font-weight: bold !important;
 		letter-spacing: -.025em !important;
 	}
