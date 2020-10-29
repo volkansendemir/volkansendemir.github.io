@@ -318,7 +318,6 @@ window.addEventListener('load', function () {
 			description.setAttribute("class", "description visible flyout");
 		}
 		if (cover.getBoundingClientRect().top > 30) {
-			console.log(cover.getBoundingClientRect().top);
 			main.scrollTo(0, 0);
 			h1.removeEventListener("animationend", taxi_h1, false);
 			h1.removeEventListener("animationend", land_h1, false);
@@ -332,6 +331,23 @@ window.addEventListener('load', function () {
 			description.removeEventListener("animationend", taxi_h1, false);
 			description.removeEventListener("animationend", land_h1, false);
 			description.setAttribute("class", "description visible");
+			h1_flying = false;
+			welcome_flying = false;
+			summary_flying = false;
+			description_flying = false;
+		} else if (cover.getBoundingClientRect().bottom > 30) {
+			h1.removeEventListener("animationend", taxi_h1, false);
+			h1.removeEventListener("animationend", land_h1, false);
+			h1.setAttribute("class", "hidden");
+			welcome.removeEventListener("animationend", taxi_h1, false);
+			welcome.removeEventListener("animationend", land_h1, false);
+			welcome.setAttribute("class", "welcome hidden");
+			summary.removeEventListener("animationend", taxi_h1, false);
+			summary.removeEventListener("animationend", land_h1, false);
+			summary.setAttribute("class", "summary hidden");
+			description.removeEventListener("animationend", taxi_h1, false);
+			description.removeEventListener("animationend", land_h1, false);
+			description.setAttribute("class", "description hidden");
 			h1_flying = false;
 			welcome_flying = false;
 			summary_flying = false;
