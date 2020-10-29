@@ -332,6 +332,10 @@ window.addEventListener('load', function () {
 			description.removeEventListener("animationend", taxi_h1, false);
 			description.removeEventListener("animationend", land_h1, false);
 			description.setAttribute("class", "description visible");
+			h1_flying = false;
+			welcome_flying = false;
+			summary_flying = false;
+			description_flying = false;
 		}
 	};
 	
