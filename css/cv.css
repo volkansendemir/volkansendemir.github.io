@@ -163,6 +163,49 @@ section.cover {
 		font-family: Poppins, sans-serif !important;
 		color: rgba(177, 177, 177, 1) !important;
 	}
+	section.experiences {
+		grid-row: 5/6 !important;
+		display: grid !important;
+		grid-template-columns: 1fr 2.5fr 18fr 2.5fr 1fr !important;
+		grid-template-rows: 1fr 1fr !important;
+	}
+	section.experiences > div.wrapper.edu {
+		grid-row: 1/2 !important;
+		grid-column: 1/6 !important;
+		
+		min-height: max(45vh, auto) !important;
+		
+		display: grid !important;
+		grid-template-columns: 1fr 2.5fr 18fr 2.5fr 1fr !important;
+	}
+	section.experiences > div.wrapper.edu > div.education > h2 {
+		font-size: 3.5vh !important;
+		font-weight: bold !important;
+		letter-spacing: -.025em !important;
+	}
+	ul.education-list > li.education-item {
+		max-width: 80vw !important;
+		height: 15vh !important;
+		margin: 2vh !important;
+		padding: 1vh 4vh !important;
+		display: grid !important;
+		grid-template-rows: 3fr minmax(2fr, auto) !important;
+		box-shadow: 0.1em 0.1em 0.5em #888888 !important;
+	}
+	section.experiences > div.wrapper.we {
+		grid-row: 2/3 !important;
+		grid-column: 1/6 !important;
+		
+		min-height: max(45vh, auto) !important;
+		
+		display: grid !important;
+		grid-template-columns: 1fr 2.5fr 18fr 2.5fr 1fr !important;
+	}
+	section.experiences > div.wrapper.we > div.work > h2 {
+		font-size: 3.5vh !important;
+		font-weight: bold !important;
+		letter-spacing: -.025em !important;
+	}
 }
 
 section.cover > h1 {
