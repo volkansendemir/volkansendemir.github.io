@@ -231,6 +231,8 @@ window.addEventListener('load', function () {
 			education_header.setAttribute("class", "education black");
 		} else if (going_up && education_header.getBoundingClientRect().top > header.getBoundingClientRect().height) {
 			education_header.setAttribute("class", "education white");
+		} else if (going_up && education_header.getBoundingClientRect().top <= header.getBoundingClientRect().height * 0.95) {
+			education_header.setAttribute("class", "education black");
 		}
 		if (!going_up && work_header.getBoundingClientRect().top < header.getBoundingClientRect().height * 0.95) {
 			work_header.setAttribute("class", "work white");
@@ -238,6 +240,8 @@ window.addEventListener('load', function () {
 			work_header.setAttribute("class", "work black");
 		} else if (going_up && work_header.getBoundingClientRect().top > header.getBoundingClientRect().height) {
 			work_header.setAttribute("class", "work white");
+		} else if (going_up && work_header.getBoundingClientRect().top <= header.getBoundingClientRect().height * 0.95) {
+			work_header.setAttribute("class", "work black");
 		}
 		if (!going_up && addition_header.getBoundingClientRect().top < header.getBoundingClientRect().height * 0.95) {
 			addition_header.setAttribute("class", "addition white");
@@ -245,6 +249,8 @@ window.addEventListener('load', function () {
 			addition_header.setAttribute("class", "addition black");
 		} else if (going_up && addition_header.getBoundingClientRect().top > header.getBoundingClientRect().height) {
 			addition_header.setAttribute("class", "addition white");
+		} else if (going_up && addition_header.getBoundingClientRect().top <= header.getBoundingClientRect().height * 0.95) {
+			addition_header.setAttribute("class", "addition black");
 		}
 		if (!going_up && trans_header.getBoundingClientRect().top < header.getBoundingClientRect().height * 0.95) {
 			trans_header.setAttribute("class", "trans white");
@@ -252,6 +258,8 @@ window.addEventListener('load', function () {
 			trans_header.setAttribute("class", "trans black");
 		} else if (going_up && trans_header.getBoundingClientRect().top > header.getBoundingClientRect().height) {
 			trans_header.setAttribute("class", "trans white");
+		} else if (going_up && trans_header.getBoundingClientRect().top <= header.getBoundingClientRect().height * 0.95) {
+			trans_header.setAttribute("class", "trans black");
 		}
 	}
 	
@@ -535,5 +543,5 @@ window.addEventListener('load', function () {
 				table.className = "transcript-table nodisp";
 			}
 	  });
-	}
+	}	
 });
