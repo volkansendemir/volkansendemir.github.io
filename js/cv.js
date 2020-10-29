@@ -317,7 +317,8 @@ window.addEventListener('load', function () {
 			description.addEventListener("animationend", taxi_description, false);
 			description.setAttribute("class", "description visible flyout");
 		}
-		if (cover.getBoundingClientRect().top <= 50px) {
+		if (cover.getBoundingClientRect().top > 30) {
+			console.log(cover.getBoundingClientRect().top);
 			main.scrollTo(0, 0);
 			h1.removeEventListener("animationend", taxi_h1, false);
 			h1.removeEventListener("animationend", land_h1, false);
@@ -563,7 +564,6 @@ window.addEventListener('load', function () {
 	
 	/*     snap     */
 	
-	const cover = document.querySelector('.cover');
 	const experiences = document.querySelector('.experiences');
 	const additional = document.querySelector('.additional');
 	const transcript = document.querySelector('.transcript');
