@@ -272,45 +272,45 @@ window.addEventListener('load', function () {
 		}
 		
 		/*     reverse     */
-		if (going_up && (h1.className.indexOf("flyout") > -1) && h1.getBoundingClientRect().top < (header.getBoundingClientRect().height * 2)) {
+		if (going_up && (h1.className.indexOf("flyout") > -1) && h1.getBoundingClientRect().top < (header.getBoundingClientRect().height * 1.25)) {
 			h1_flying = true;
 			h1.removeEventListener("animationend", taxi_h1, false);
 			h1.addEventListener("animationend", land_h1, false);
 			h1.setAttribute("class", "visible flyin");
-		} else if (!going_up && (h1.className.indexOf("flyin") > -1) && h1.getBoundingClientRect().top > (header.getBoundingClientRect().height * 1.5)) {
+		} else if (!going_up && (h1.className.indexOf("flyin") > -1) && h1.getBoundingClientRect().top > (header.getBoundingClientRect().height * 1.25)) {
 			h1_flying = true;
 			h1.removeEventListener("animationend", land_h1, false);
 			h1.addEventListener("animationend", taxi_h1, false);
 			h1.setAttribute("class", "visible flyout");
 		}
-		if (going_up && (welcome.className.indexOf("flyout") > -1) && welcome.getBoundingClientRect().top < (header.getBoundingClientRect().height * 2.25)) {
+		if (going_up && (welcome.className.indexOf("flyout") > -1) && welcome.getBoundingClientRect().top < (header.getBoundingClientRect().height * 1.25)) {
 			welcome_flying = true;
 			welcome.removeEventListener("animationend", taxi_welcome, false);
 			welcome.addEventListener("animationend", land_welcome, false);
 			welcome.setAttribute("class", "welcome visible flyin");
-		} else if (!going_up && (welcome.className.indexOf("flyin") > -1) && welcome.getBoundingClientRect().top > (header.getBoundingClientRect().height * 2)) {
+		} else if (!going_up && (welcome.className.indexOf("flyin") > -1) && welcome.getBoundingClientRect().top > (header.getBoundingClientRect().height * 1.25)) {
 			welcome_flying = true;
 			welcome.removeEventListener("animationend", land_welcome, false);
 			welcome.addEventListener("animationend", taxi_welcome, false);
 			welcome.setAttribute("class", "welcome visible flyout");
 		}
-		if (going_up && (summary.className.indexOf("flyout") > -1) && summary.getBoundingClientRect().top < (header.getBoundingClientRect().height * 2.25)) {
+		if (going_up && (summary.className.indexOf("flyout") > -1) && summary.getBoundingClientRect().top < (header.getBoundingClientRect().height * 1.25)) {
 			welcome_flying = true;
 			summary.removeEventListener("animationend", taxi_summary, false);
 			summary.addEventListener("animationend", land_summary, false);
 			summary.setAttribute("class", "summary visible flyin");
-		} else if (!going_up && (summary.className.indexOf("flyin") > -1) && summary.getBoundingClientRect().top > (header.getBoundingClientRect().height * 2)) {
+		} else if (!going_up && (summary.className.indexOf("flyin") > -1) && summary.getBoundingClientRect().top > (header.getBoundingClientRect().height * 1.25)) {
 			summary_flying = true;
 			summary.removeEventListener("animationend", land_summary, false);
 			summary.addEventListener("animationend", taxi_summary, false);
 			summary.setAttribute("class", "summary visible flyout");
 		}
-		if (going_up && (description.className.indexOf("flyout") > -1) && description.getBoundingClientRect().top < (header.getBoundingClientRect().height * 2.5)) {
+		if (going_up && (description.className.indexOf("flyout") > -1) && description.getBoundingClientRect().top < (header.getBoundingClientRect().height * 1.25)) {
 			description_flying = true;
 			description.removeEventListener("animationend", taxi_description, false);
 			description.addEventListener("animationend", land_description, false);
 			description.setAttribute("class", "description visible flyin");
-		} else if (!going_up && (description.className.indexOf("flyin") > -1) && description.getBoundingClientRect().top > (header.getBoundingClientRect().height * 2)) {
+		} else if (!going_up && (description.className.indexOf("flyin") > -1) && description.getBoundingClientRect().top > (header.getBoundingClientRect().height * 1.25)) {
 			description_flying = true;
 			description.removeEventListener("animationend", land_description, false);
 			description.addEventListener("animationend", taxi_description, false);
