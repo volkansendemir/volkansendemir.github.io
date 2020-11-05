@@ -155,7 +155,7 @@ section.cover > div.description {
 }
 
 section.projects {
-	grid-row: 5/6;
+	grid-row: 4/5;
 	max-height: minmax(90vh, auto);
 
 	display: grid;
