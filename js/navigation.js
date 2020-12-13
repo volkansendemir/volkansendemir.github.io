@@ -160,6 +160,8 @@ window.onload = function() {
         mdown = false;
     });
 
+    document.addEventListener("touchend", preventBehavior, {passive: false});
+
     document.addEventListener("scroll", function(e) {
         window_object.windowX = document.body.getBoundingClientRect().left;
         window_object.windowY = document.body.getBoundingClientRect().top;
