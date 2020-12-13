@@ -70,6 +70,14 @@ window.onload = function() {
         mdown = true;
     });
 
+    function preventBehavior(e) {
+        if (mdown) {
+            e.preventDefault();
+        }
+    };
+
+    document.addEventListener("touchstart", preventBehavior, {passive: false});
+
     document.onmousemove = function(e) {
         if (mdown) {
             x_vec = ((touch_object.startX - e.pageX) * (touch_object.startX - e.pageX));
@@ -112,12 +120,6 @@ window.onload = function() {
         }
     }, false);
     
-    function preventBehavior(e) {
-        if (mdown) {
-            e.preventDefault();
-        }
-    };
-
     document.addEventListener("touchmove", preventBehavior, {passive: false});
     
     navbox_mouseup = function() {
