@@ -111,7 +111,15 @@ window.onload = function() {
             navbox_move();
         }
     }, false);
+    
+    function preventBehavior(e) {
+        if (mdown) {
+            e.preventDefault();
+        }
+    };
 
+    document.addEventListener("touchmove", preventBehavior, {passive: false});
+    
     navbox_mouseup = function() {
         if (dragging) {
             dragging = false;
