@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+    <title>Coding CSS example</title>
+    <link rel="stylesheet" href="css/coding.css">
+    <link rel="stylesheet" href="css/navigation.css">
+	<script type="text/javascript" src="js/navigation.js"></script>
+</head>
+<body>
+<pre class="python" id="first"><code class="python">
+    <span class="default"></span>
+	<span class="constant">def </span><span class="function">oneliner</span><span class="default">(</span><span class="default">):</span>
+	<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">print(sum([i </span><span class="constant">if </span><span class="default">i </span><span class="default">% </span><span class="default">mult_one </span><span class="default">== </span><span class="numeric">0 </span><span class="constant">or </span><span class="default">i </span><span class="default">% </span><span class="default">mult_two </span><span class="default">== </span><span class="numeric">0 </span><span class="constant">else </span><span class="numeric">0 </span><span class="constant">for </span><span class="default">i </span><span class="constant">in </span><span class="default">range</span><span class="default">(</span><span class="numeric">1</span><span class="constant">, </span><span class="default">lim_up)]))</span>
+	<span class="default"></span>
+</code></pre>
+<pre class="python" id="second"><code class="python">
+    <span class="default"></span>
+	<span class="constant">def </span><span class="function">brute_force</span><span class="default">(</span><span class="default">):</span>
+	<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">sum_mults </span><span class="default">= </span><span class="numeric">0</span>
+	<span class="default"></span>
+	<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="constant">for </span><span class="default">i </span><span class="constant">in </span><span class="default">range</span><span class="default">(</span><span class="numeric">1</span><span class="constant">, </span><span class="default">lim_up)</span><span class="default">:</span>
+	<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="constant">if </span><span class="default">i </span><span class="default">% </span><span class="default">mult_one </span><span class="default">== </span><span class="numeric">0 </span><span class="constant">or </span><span class="default">i </span><span class="default">% </span><span class="default">mult_two </span><span class="default">== </span><span class="numeric">0</span><span class="default">: </span><span class="default">sum_mults </span><span class="default">= </span><span class="default">sum_mults </span><span class="default">+ </span><span class="default">i</span>
+	<span class="default"></span>
+	<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="inbuilt">print</span><span class="default">(</span><span class="default">sum_mults)</span>
+	<span class="default"></span>
+</code></pre>
+<pre class="python" id="third"><code class="python">
+    <span class="default"></span>
+	<span class="constant">def </span><span class="function">strategic</span><span class="default">(</span><span class="default">):</span>
+	<span class="comment">    #1-333 sum *3 + 1-199 sum *5 - 1-66 sum *15</span>
+	<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">a </span><span class="default">= </span><span class="default">((1 </span><span class="default">+ </span><span class="default">int((lim_up </span><span class="default">- </span><span class="numeric">1</span><span class="default">) </span><span class="default">/ </span><span class="default">mult_one)</span><span class="default">) </span><span class="default">/ </span><span class="numeric">2 </span><span class="default">* </span><span class="default">int((lim_up </span><span class="default">- </span><span class="numeric">1</span><span class="default">) </span><span class="default">/ </span><span class="default">mult_one</span><span class="default">) </span><span class="default">* </span><span class="default">mult_one)</span>
+	<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">b </span><span class="default">= </span><span class="default">((1 </span><span class="default">+ </span><span class="default">int((lim_up </span><span class="default">- </span><span class="numeric">1</span><span class="default">) </span><span class="default">/ </span><span class="default">mult_two)</span><span class="default">) </span><span class="default">/ </span><span class="numeric">2 </span><span class="default">* </span><span class="default">int((lim_up </span><span class="default">- </span><span class="numeric">1</span><span class="default">) </span><span class="default">/ </span><span class="default">mult_two</span><span class="default">) </span><span class="default">* </span><span class="default">mult_two)</span>
+	<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">c </span><span class="default">= </span><span class="default"></span><span class="default">(</span><span class="numeric">1 </span><span class="default">+ </span><span class="default">int((lim_up </span><span class="default">- </span><span class="numeric">1</span><span class="default">) </span><span class="default">/ </span><span class="default"></span><span class="default">(</span><span class="default">mult_one </span><span class="default">* </span><span class="default">mult_two))</span><span class="default">) </span><span class="default">/ </span><span class="numeric">2 </span><span class="default">* </span><span class="default">int((lim_up </span><span class="default">- </span><span class="numeric">1</span><span class="default">) </span><span class="default">/ </span><span class="default"></span><span class="default">(</span><span class="default">mult_one </span><span class="default">* </span><span class="default">mult_two))</span>
+	<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">c </span><span class="default">= </span><span class="default">c </span><span class="default">* </span><span class="default">mult_one </span><span class="default">* </span><span class="default">mult_two</span>
+	<span class="default"></span>
+	<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">print(int(a+b-c))</span>
+	<span class="default"></span>
+</code></pre>
+<pre class="python" id="fourth"><code class="python">
+    <span class="default"></span>
+	<span class="default">lim_up </span><span class="default">= </span><span class="numeric">1000</span>
+	<span class="default">mult_one </span><span class="default">= </span><span class="numeric">3</span>
+	<span class="default">mult_two </span><span class="default">= </span><span class="numeric">5</span>
+	<span class="default"></span>
+	<span class="default">oneliner</span><span class="default">(</span><span class="default">)</span>
+	<span class="default">brute_force</span><span class="default">(</span><span class="default">)</span>
+	<span class="default">strategic</span><span class="default">(</span><span class="default">)</span>
+	<span class="default"></span>
+	<span class="comment">#964890th</span>
+	<span class="default"></span>
+</code></pre>
+<pre class="python" id="fifth"><samp class="python"><code class="python">
+	<span class="default">oneliner</span><span class="default">: </span><span class="numeric">233168</span>
+	<span class="default">brute_force</span><span class="default">: </span><span class="numeric">233168</span>
+	<span class="default">strategic</span><span class="default">: </span><span class="numeric">233168</span>
+</code></samp></pre>
+<div class="nav-box">
+	<div class="nav-container">
+		<nav>
+			<ul>
+				<li><a href="#first">One-liner solution</a></li>
+				<li><a href="#second">Brute-force solution</a></li>
+				<li><a href="#third">Strategic solution</a></li>
+				<li><a href="#fourth">Execution</a></li>
+				<li><a href="#fifth">Solution</a></li>
+			</ul>
+		</nav>
+	</div>
+	<div class="nav-placeholder">NAV</div>
+</div>
+</body>
+</html>
