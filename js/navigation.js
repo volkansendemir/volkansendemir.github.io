@@ -1,4 +1,4 @@
-var navbox_object, window_object, touch_object, navbox, navph, navcon;
+var navbox_object, window_object, touch_object, navbox, navph, navcon, hyperlinks;
 var has_appeared, mdown, dragging, timeout, last_touch, x_vec, y_vec, drag_dist, drag_x, drag_y;
 var touch_timer, check_timer;
 
@@ -20,13 +20,14 @@ window.onload = function() {
     navbox = document.querySelector("div.nav-box");
     navph = document.querySelector("div.nav-placeholder");
     navcon = document.querySelector("div.nav-container");
+    hyperlinks = document.querySelectorAll("div.nav-container > ul > li > a");
     has_appeared = false;
     mdown = false;
     dragging = false;
     touch_timer = new Date();
     check_timer = new Date();
 
-    navbox.onmouseover = function(e) {
+    navbox_mouseover = function(e) {
         if (timeout) {
             clearTimeout(timeout);
         }
@@ -35,6 +36,10 @@ window.onload = function() {
         }
     };
 
+    if (!'ontouchstart' in document.documentElement) {
+        navbox.onmouseover = navbox_mouseover;
+    }
+    
     navbox.onmouseout = function(e) {
         if (timeout) {
             clearTimeout(timeout);
@@ -44,7 +49,7 @@ window.onload = function() {
         }
     };
 
-    navbox.onmousedown = function(e) {
+    navbox_mousedown = function(e) {
         e.preventDefault();
         touch_object.relativeX = e.pageX - navbox.getBoundingClientRect().left;
         touch_object.relativeY = e.pageY - navbox.getBoundingClientRect().top;
@@ -52,6 +57,10 @@ window.onload = function() {
         touch_object.startY = e.pageY;
         mdown = true;
     };
+
+    if (!'ontouchstart' in document.documentElement) {
+        navbox.onmousedown = navbox_mousedown;
+    }
 
     navbox.addEventListener("touchstart", function(e) {
         touch_object.relativeX = e.touches[0].clientX - navbox.getBoundingClientRect().left;
@@ -93,7 +102,6 @@ window.onload = function() {
             }
         }
         if (dragging) {
-            e.preventDefault();
             drag_x = last_touch.clientX - touch_object.startX;
             drag_y = last_touch.clientY - touch_object.startY;
             touch_object.startX = last_touch.clientX;
@@ -104,7 +112,7 @@ window.onload = function() {
         }
     }, false);
 
-    document.onmouseup = function() {
+    navbox_mouseup = function() {
         if (dragging) {
             dragging = false;
             navbox_margin_check();
@@ -116,6 +124,10 @@ window.onload = function() {
         mdown = false;
     };
 
+    if (!'ontouchstart' in document.documentElement) {
+        document.onmouseup = navbox_mouseup;
+    }
+
     document.addEventListener("touchend", function(e) {
         if (dragging) {
             dragging = false;
@@ -124,8 +136,8 @@ window.onload = function() {
             navbox_object.windowY = navbox.getBoundingClientRect().top;
         } else if (mdown) {
             check_timer = new Date();
-            console.log();
             if ((check_timer - touch_timer) < 300) {
+                console.log(check_timer - touch_timer);
                 console.log("double-clicked");
                 if (!has_appeared && !dragging) {
                     navcon_appear(0);
@@ -200,6 +212,3 @@ navbox_margin_check = function(isappear=false) {
         navbox_object.windowY = 25;
     }
 };
-
-
-
