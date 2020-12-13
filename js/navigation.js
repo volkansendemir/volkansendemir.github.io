@@ -54,7 +54,6 @@ window.onload = function() {
     };
 
     navbox.addEventListener("touchstart", function(e) {
-        e.preventDefault();
         touch_object.relativeX = e.touches[0].clientX - navbox.getBoundingClientRect().left;
         touch_object.relativeY = e.touches[0].clientY - navbox.getBoundingClientRect().top;
         touch_object.startX = e.touches[0].clientX;
