@@ -1,0 +1,63 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.nav-box {
+    position: absolute;
+    top: 50px;
+    left: 50px;
+    min-width: 50px;
+    min-height: 50px;
+    background-color: rgba(255, 255, 255, 0.2);
+    transition: background-color 1s;
+    display: grid;
+    align-items: center;
+    justify-items: center;
+    box-shadow: 1px 1px 2px rgb(1, 1, 1);
+    white-space: nowrap;
+}
+
+.nav-container, .nav-placeholder {
+    transition: display 0.05s linear 0.95s, opacity 0.05s linear 0.95s;
+}
+
+.nav-placeholder {
+    color: rgb(45, 45, 45);
+}
+
+.nav-box:hover {
+    background-color: rgba(255, 255, 255, 0.8);
+}
+
+.nav-box:hover > .nav-placeholder {
+    opacity: 0;
+    transition: display 0.95s linear 0.05s, opacity 0.95s linear 0.05s;
+    color: rgb(5, 5, 5);
+}
+
+.nav-box:hover > .nav-container {
+    opacity: 1;
+    transition: display 0.95s linear 0.05s, opacity 0.95s linear 0.05s;
+}
+
+.nav-box > div.nav-container {
+    opacity: 0;
+    display: none;
+    padding: 1em;
+}
+
+.nav-box > div.nav-container > nav > ul {
+    list-style: disc;
+}
+
+.nav-box > div.nav-container > nav > ul > li > a {
+    color: rgb(45, 45, 45);
+    text-decoration: none;
+}
+
+
+
+
+
+

@@ -1,0 +1,88 @@
+:root {
+  --python_background: rgb(43, 43, 43); /*dark-grey*/
+  --python_default: rgb(169, 183, 198); /*grey*/
+  --python_constant: rgb(204, 120, 50); /*orange*/
+  --python_string: rgb(106, 135, 89); /*green*/
+  --python_inbuilt: rgb(136, 136, 198); /*blue*/
+  --python_function: rgb(255, 198, 109); /*yellow*/
+  --python_argument: rgb(170, 73, 38); /*red*/
+  --python_comment: rgb(114, 115, 122); /*darkish-grey*/
+  --python_numeric: rgb(104, 151, 198); /*light-blue*/
+}
+
+body {
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+pre {
+    margin: 1em;
+    padding-right: 1em;
+    padding-bottom: 1em;
+    overflow-x: scroll;
+}
+
+pre.python {
+    background-color: var(--python_background);
+}
+
+@media screen and (min-width: 600px) and (max-width: 3000px) {
+    code.python {
+        font-family: "consolas";
+        font-size: 16px;
+    }
+}
+
+@media screen and (min-width: 200px) and (max-width: 600px) {
+    code.python {
+        font-family: "consolas";
+        font-size: 12px;
+    }
+}
+
+code.python > span.default {
+    color: var(--python_default);
+}
+
+code.python > span.constant {
+    color: var(--python_constant);
+}
+
+code.python > span.string {
+    color: var(--python_string);
+}
+
+code.python > span.inbuilt {
+    color: var(--python_inbuilt);
+}
+
+code.python > span.function {
+    color: var(--python_function);
+}
+
+code.python > span.argument {
+    color: var(--python_argument);
+}
+
+code.python > span.comment {
+    color: var(--python_comment);
+}
+
+code.python > span.numeric {
+    color: var(--python_numeric);
+}
+
+pre::-webkit-scrollbar {
+    height: 3px;
+    border: 1px solid #d5d5d5;
+    background: rgba(255, 255, 255, 0.7);
+}
+
+pre::-webkit-scrollbar-thumb {
+  background: rgb(155, 155, 155);
+}
+
+
+
+
+
