@@ -36,10 +36,10 @@ window.onload = function() {
         }
     };
 
-    if (!'ontouchstart' in document.documentElement) {
+    if (!('ontouchstart' in window) && !(window.navigator.msPointerEnabled)) {
         navbox.onmouseover = navbox_mouseover;
     }
-    
+
     navbox.onmouseout = function(e) {
         if (timeout) {
             clearTimeout(timeout);
@@ -58,7 +58,7 @@ window.onload = function() {
         mdown = true;
     };
 
-    if (!'ontouchstart' in document.documentElement) {
+    if (!('ontouchstart' in window) && !(window.navigator.msPointerEnabled)) {
         navbox.onmousedown = navbox_mousedown;
     }
 
@@ -119,9 +119,9 @@ window.onload = function() {
             navbox_move();
         }
     }, false);
-    
+
     document.addEventListener("touchmove", preventBehavior, {passive: false});
-    
+
     navbox_mouseup = function() {
         if (dragging) {
             dragging = false;
@@ -134,7 +134,7 @@ window.onload = function() {
         mdown = false;
     };
 
-    if (!'ontouchstart' in document.documentElement) {
+    if (!('ontouchstart' in window) && !(window.navigator.msPointerEnabled)) {
         document.onmouseup = navbox_mouseup;
     }
 
