@@ -151,8 +151,12 @@ window.onload = function() {
                 console.log("double-clicked");
                 if (!has_appeared && !dragging) {
                     navcon_appear(0);
+                    document.removeEventListener("touchstart", preventBehavior, {passive: false});
+                    document.removeEventListener("touchend", preventBehavior, {passive: false});
                 } else if (has_appeared && !dragging) {
                     navcon_disappear(0);
+                    document.addEventListener("touchstart", preventBehavior, {passive: false});
+                    document.addEventListener("touchend", preventBehavior, {passive: false});
                 }
             } else {
                 console.log("clicked");
