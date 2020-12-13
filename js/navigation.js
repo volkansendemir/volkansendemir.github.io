@@ -93,6 +93,7 @@ window.onload = function() {
             }
         }
         if (dragging) {
+            e.preventDefault();
             drag_x = last_touch.clientX - touch_object.startX;
             drag_y = last_touch.clientY - touch_object.startY;
             touch_object.startX = last_touch.clientX;
