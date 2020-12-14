@@ -1,11 +1,18 @@
-var navbox_object, window_object, touch_object, navbox, navph, navcon, hyperlinks;
+var navbox_object, window_object, touch_object, navbox, navph, navcon, aside, hyperlinks;
 var has_appeared, mdown, dragging, timeout, last_touch, x_vec, y_vec, drag_dist, drag_x, drag_y;
 var touch_timer, check_timer;
+var navbox_pop;
+var is_popping, dx, dy, i;
 
 window.onload = function() {
     navbox_object = {
-        windowX: 50,
-        windowY: 50
+        windowX: window.innerWidth - 75,
+        windowY: 50,
+        currentX: 0,
+        currentY: 0,
+        defaultX: 0,
+        defaultY: 0,
+        limitY: 0
     };
     window_object = {
         windowX: document.body.getBoundingClientRect().left,
@@ -20,19 +27,30 @@ window.onload = function() {
     navbox = document.querySelector("div.nav-box");
     navph = document.querySelector("div.nav-placeholder");
     navcon = document.querySelector("div.nav-container");
+    aside = document.querySelector("aside");
     hyperlinks = document.querySelectorAll("div.nav-container > ul > li > a");
     has_appeared = false;
     mdown = false;
     dragging = false;
     touch_timer = new Date();
     check_timer = new Date();
+    navbox_pop = false;
+    is_popping = false;
+
+    navbox_object.defaultX = navbox.getBoundingClientRect().left - document.body.getBoundingClientRect().left;
+    navbox_object.defaultY = navbox.getBoundingClientRect().top - document.body.getBoundingClientRect().top;
+    navbox_object.limitY = navbox.getBoundingClientRect().height + navbox_object.defaultY;
+    aside.style.height = aside.getBoundingClientRect().height +"px";
+    aside.style.width = aside.getBoundingClientRect().width + "px";
 
     navbox_mouseover = function(e) {
-        if (timeout) {
-            clearTimeout(timeout);
-        }
-        if (!has_appeared && !dragging) {
-            navcon_appear(650);
+        if (navbox_pop) {
+            if (timeout) {
+                clearTimeout(timeout);
+            }
+            if (!has_appeared && !dragging) {
+                navcon_appear(650);
+            }
         }
     };
 
@@ -41,21 +59,25 @@ window.onload = function() {
     }
 
     navbox.onmouseout = function(e) {
-        if (timeout) {
-            clearTimeout(timeout);
-        }
-        if (has_appeared && !navbox.matches(":hover")) {
-            navcon_disappear(700);
+        if (navbox_pop) {
+            if (timeout) {
+                clearTimeout(timeout);
+            }
+            if (has_appeared && !navbox.matches(":hover")) {
+                navcon_disappear(700);
+            }
         }
     };
 
     navbox_mousedown = function(e) {
-        e.preventDefault();
-        touch_object.relativeX = e.pageX - navbox.getBoundingClientRect().left;
-        touch_object.relativeY = e.pageY - navbox.getBoundingClientRect().top;
-        touch_object.startX = e.pageX;
-        touch_object.startY = e.pageY;
-        mdown = true;
+        if (navbox_pop) {
+            e.preventDefault();
+            touch_object.relativeX = e.pageX - navbox.getBoundingClientRect().left;
+            touch_object.relativeY = e.pageY - navbox.getBoundingClientRect().top;
+            touch_object.startX = e.pageX;
+            touch_object.startY = e.pageY;
+            mdown = true;
+        }
     };
 
     if (!('ontouchstart' in window) && !(window.navigator.msPointerEnabled)) {
@@ -63,15 +85,17 @@ window.onload = function() {
     }
 
     navbox.addEventListener("touchstart", function(e) {
-        touch_object.relativeX = e.touches[0].clientX - navbox.getBoundingClientRect().left;
-        touch_object.relativeY = e.touches[0].clientY - navbox.getBoundingClientRect().top;
-        touch_object.startX = e.touches[0].clientX;
-        touch_object.startY = e.touches[0].clientY;
-        mdown = true;
+        if (navbox_pop) {
+            touch_object.relativeX = e.touches[0].clientX - navbox.getBoundingClientRect().left;
+            touch_object.relativeY = e.touches[0].clientY - navbox.getBoundingClientRect().top;
+            touch_object.startX = e.touches[0].clientX;
+            touch_object.startY = e.touches[0].clientY;
+            mdown = true;
+        }
     });
 
     function preventBehavior(e) {
-        if (mdown) {
+        if (mdown && navbox_pop) {
             e.preventDefault();
         }
     };
@@ -79,7 +103,7 @@ window.onload = function() {
     document.addEventListener("touchstart", preventBehavior, {passive: false});
 
     document.onmousemove = function(e) {
-        if (mdown) {
+        if (mdown && navbox_pop) {
             x_vec = ((touch_object.startX - e.pageX) * (touch_object.startX - e.pageX));
             y_vec = ((touch_object.startY - e.pageY) * (touch_object.startY - e.pageY));
             drag_dist = Math.sqrt(x_vec + y_vec);
@@ -87,7 +111,7 @@ window.onload = function() {
                 dragging = true;
             }
         }
-        if (dragging) {
+        if (dragging && navbox_pop) {
             e.preventDefault();
             drag_x = e.pageX - touch_object.startX;
             drag_y = e.pageY - touch_object.startY;
@@ -100,7 +124,7 @@ window.onload = function() {
     };
 
     document.addEventListener("touchmove", function(e) {
-        if (mdown) {
+        if (mdown && navbox_pop) {
             last_touch = e.targetTouches[0];
             x_vec = ((touch_object.startX - last_touch.clientX) * (touch_object.startX - last_touch.clientX));
             y_vec = ((touch_object.startY - last_touch.clientY) * (touch_object.startY - last_touch.clientY));
@@ -109,7 +133,7 @@ window.onload = function() {
                 dragging = true;
             }
         }
-        if (dragging) {
+        if (dragging && navbox_pop) {
             drag_x = last_touch.clientX - touch_object.startX;
             drag_y = last_touch.clientY - touch_object.startY;
             touch_object.startX = last_touch.clientX;
@@ -123,12 +147,12 @@ window.onload = function() {
     document.addEventListener("touchmove", preventBehavior, {passive: false});
 
     navbox_mouseup = function() {
-        if (dragging) {
+        if (dragging && navbox_pop) {
             dragging = false;
             navbox_margin_check();
             navbox_object.windowX = navbox.getBoundingClientRect().left;
             navbox_object.windowY = navbox.getBoundingClientRect().top;
-        } else if (mdown) {
+        } else if (mdown && navbox_pop) {
             console.log("clicked");
         }
         mdown = false;
@@ -139,15 +163,14 @@ window.onload = function() {
     }
 
     document.addEventListener("touchend", function(e) {
-        if (dragging) {
+        if (dragging && navbox_pop) {
             dragging = false;
             navbox_margin_check();
             navbox_object.windowX = navbox.getBoundingClientRect().left;
             navbox_object.windowY = navbox.getBoundingClientRect().top;
-        } else if (mdown) {
+        } else if (mdown && navbox_pop) {
             check_timer = new Date();
             if ((check_timer - touch_timer) < 300) {
-                console.log(check_timer - touch_timer);
                 console.log("double-clicked");
                 if (!has_appeared && !dragging) {
                     navcon_appear(0);
@@ -169,14 +192,23 @@ window.onload = function() {
     document.addEventListener("touchend", preventBehavior, {passive: false});
 
     document.addEventListener("scroll", function(e) {
+        if ((window_object.windowY < (50 - navbox_object.limitY)) && (!is_popping)) {
+            pop_navbox();
+        } else if ((window_object.windowY > (50 - navbox_object.limitY)) && (!is_popping)) {
+            unpop_navbox();
+        }
         window_object.windowX = document.body.getBoundingClientRect().left;
         window_object.windowY = document.body.getBoundingClientRect().top;
-        navbox_move();
+        if (navbox_pop && (!is_popping)) {
+            navbox_move();
+        }
     });
 
     window.onresize = function() {
-        navbox_move();
-        navbox_margin_check();
+        if (navbox_pop) {
+            navbox_move();
+            navbox_margin_check();
+        }
     };
 
 };
@@ -204,6 +236,8 @@ navcon_disappear = function(delayms) {
 navbox_move = function() {
     navbox.style.left = (navbox_object.windowX - window_object.windowX) + "px";
     navbox.style.top = (navbox_object.windowY - window_object.windowY) + "px";
+    navbox_object.currentX = navbox_object.windowX - window_object.windowX;
+    navbox_object.currentY = navbox_object.windowY - window_object.windowY;
 }
 
 navbox_margin_check = function(isappear=false) {
@@ -228,3 +262,89 @@ navbox_margin_check = function(isappear=false) {
         navbox_object.windowY = 25;
     }
 };
+
+pop_navbox = function() {
+    if ((!is_popping) && (!navbox_pop)) {
+        is_popping = true;
+        if (has_appeared) {
+            navcon_disappear();
+        }
+        navbox.style.position = "absolute";
+        navbox.style.transition = "background-color 1s";
+        navbox.style.alignItems = "center";
+        navbox.style.justifyItems = "center";
+        navbox.style.boxShadow = "0px 0px 2px rgb(1, 1, 1)";
+        navbox.style.whiteSpace = "nowrap";
+        navbox.style.touchAction = "manipulation";
+        navbox.style.animationName = "shadow-animation";
+        navcon.style.display = "none";
+        navph.style.display = "grid";
+        navbox.style.border = "1px solid rgba(0, 0, 0, 0.75)";
+        i = 1;
+
+        function smooth_pop() {
+            if ( i >= 40 ) {
+                is_popping = false;
+                navbox_pop = true;
+                navbox.style.backgroundColor = "rgba(255, 255, 255, 0.2)";
+                navbox.style.border = "1px solid rgba(0, 0, 0, 0.1)";
+                return;
+            }
+            dx = parseInt((navbox_object.windowX - window_object.windowX - navbox_object.currentX) / (40 - i + 1));
+            dy = parseInt((navbox_object.windowY - window_object.windowY - navbox_object.currentY) / (40 - i + 1));
+            i += 1;
+            navbox_object.currentX = navbox_object.currentX + dx;
+            if ( i >= 30 ) {
+                navbox_object.currentY = navbox_object.currentY + dy;
+                navbox.style.top = (navbox_object.currentY + dy) + 'px';
+            } else {
+                navbox_object.currentY = navbox_object.currentY + dy + 10;
+                navbox.style.top = (navbox_object.currentY + dy + 10) + 'px';
+            }
+            navbox.style.left = (navbox_object.currentX + dx) + 'px';
+            setTimeout(smooth_pop, 10);
+        }
+        smooth_pop();
+    }
+}
+
+unpop_navbox = function() {
+    if ((!is_popping) && (navbox_pop)) {
+        is_popping = true;
+        if (has_appeared) {
+            navcon_disappear();
+        }
+        navbox.style.backgroundColor = "rgba(255, 255, 255, 1)";
+        navbox.style.transition = "";
+        navbox.style.alignItems = "center";
+        navbox.style.justifyItems = "start";
+        navbox.style.boxShadow = "";
+        navbox.style.whiteSpace = "";
+        navbox.style.touchAction = "";
+        navbox.style.animationName = "";
+        navbox.style.border = "1px solid rgba(0, 0, 0, 0.75)";
+
+        i = 1;
+
+        function smooth_unpop() {
+            if ( i >= 40 ) {
+                is_popping = false;
+                navbox_pop = false;
+                navbox.style.position = "static";
+                navcon.style.display = "grid";
+                navph.style.display = "none";
+                navbox.style.border = "1px solid rgba(0, 0, 0, 0.1)";
+                return;
+            }
+            dx = parseInt((navbox_object.currentX - navbox_object.defaultX) / (40 - i + 1));
+            dy = parseInt((navbox_object.currentY - navbox_object.defaultY) / (40 - i + 1));
+            i += 1;
+            navbox_object.currentX = navbox_object.currentX - dx;
+            navbox_object.currentY = navbox_object.currentY - dy;
+            navbox.style.left = (navbox_object.currentX - dx) + 'px';
+            navbox.style.top = (navbox_object.currentY - dy) + 'px';
+            setTimeout(smooth_unpop, 5);
+        }
+        smooth_unpop();
+    }
+}
