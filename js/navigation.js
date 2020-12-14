@@ -24,10 +24,12 @@ window.onload = function() {
         relativeX: 0,
         relativeY: 0
     };
+    aside = document.querySelector("aside.nav-box-aside");
+    aside.id = "table_of_contents";
+    create_navbox();
     navbox = document.querySelector("div.nav-box");
     navph = document.querySelector("div.nav-placeholder");
     navcon = document.querySelector("div.nav-container");
-    aside = document.querySelector("aside");
     hyperlinks = document.querySelectorAll("div.nav-container > ul > li > a");
     has_appeared = false;
     mdown = false;
@@ -40,8 +42,8 @@ window.onload = function() {
     navbox_object.defaultX = navbox.getBoundingClientRect().left - document.body.getBoundingClientRect().left;
     navbox_object.defaultY = navbox.getBoundingClientRect().top - document.body.getBoundingClientRect().top;
     navbox_object.limitY = navbox.getBoundingClientRect().height + navbox_object.defaultY;
-    aside.style.height = aside.getBoundingClientRect().height +"px";
-    aside.style.width = aside.getBoundingClientRect().width + "px";
+    aside.style.height = aside.getBoundingClientRect().height - 16 +"px";
+    aside.style.width = aside.getBoundingClientRect().width -16 + "px";
 
     navbox_mouseover = function(e) {
         if (navbox_pop) {
@@ -49,7 +51,7 @@ window.onload = function() {
                 clearTimeout(timeout);
             }
             if (!has_appeared && !dragging) {
-                navcon_appear(650);
+                /*navcon_appear(650);*/
             }
         }
     };
@@ -153,7 +155,32 @@ window.onload = function() {
             navbox_object.windowX = navbox.getBoundingClientRect().left;
             navbox_object.windowY = navbox.getBoundingClientRect().top;
         } else if (mdown && navbox_pop) {
-            console.log("clicked");
+            if (has_appeared) {
+                navcon_disappear(0);
+                window_object.windowX = document.body.getBoundingClientRect().left;
+                window_object.windowY = document.body.getBoundingClientRect().top;
+                navbox_move();
+                window.location.hash = "";
+                history.pushState("", document.title, window.location.pathname);
+            } else {
+                check_timer = new Date();
+                if ((check_timer - touch_timer) < 500) {
+                    clearTimeout(click_timeout);
+                    window.location.hash = "table_of_contents";
+                    unpop_navbox();
+                    window.location.hash = "";
+                    history.pushState("", document.title, window.location.pathname);
+                } else {
+                    touch_timer = new Date();
+                    click_timeout = setTimeout(function() {
+                        navcon_appear(0);
+                        navbox_margin_check();
+                    }, 500);
+                }
+            }
+        } else if ((!mdown) && (!navbox_pop)) {
+            pop_navbox();
+            console.log("shud pop now");
         }
         mdown = false;
     };
@@ -169,22 +196,36 @@ window.onload = function() {
             navbox_object.windowX = navbox.getBoundingClientRect().left;
             navbox_object.windowY = navbox.getBoundingClientRect().top;
         } else if (mdown && navbox_pop) {
-            check_timer = new Date();
-            if ((check_timer - touch_timer) < 300) {
-                console.log("double-clicked");
-                if (!has_appeared && !dragging) {
-                    navcon_appear(0);
-                    document.removeEventListener("touchstart", preventBehavior, {passive: false});
-                    document.removeEventListener("touchend", preventBehavior, {passive: false});
-                } else if (has_appeared && !dragging) {
-                    navcon_disappear(0);
-                    document.addEventListener("touchstart", preventBehavior, {passive: false});
-                    document.addEventListener("touchend", preventBehavior, {passive: false});
-                }
+            if (has_appeared) {
+                navcon_disappear(0);
+                document.addEventListener("touchstart", preventBehavior, {passive: false});
+                document.addEventListener("touchend", preventBehavior, {passive: false});
+                window_object.windowX = document.body.getBoundingClientRect().left;
+                window_object.windowY = document.body.getBoundingClientRect().top;
+                navbox_move();
+                window.location.hash = "";
+                history.pushState("", document.title, window.location.pathname);
             } else {
-                console.log("clicked");
-                touch_timer = new Date();
+                check_timer = new Date();
+                if ((check_timer - touch_timer) < 500) {
+                    clearTimeout(click_timeout);
+                    window.location.hash = "table_of_contents";
+                    unpop_navbox();
+                    window.location.hash = "";
+                    history.pushState("", document.title, window.location.pathname);
+                } else {
+                    touch_timer = new Date();
+                    click_timeout = setTimeout(function() {
+                        navcon_appear(0);
+                        document.removeEventListener("touchstart", preventBehavior, {passive: false});
+                        document.removeEventListener("touchend", preventBehavior, {passive: false});
+                        navbox_margin_check();
+                    }, 500);
+                }
             }
+        } else if ((!mdown) && (!navbox_pop)) {
+            pop_navbox();
+            console.log("shud pop now");
         }
         mdown = false;
     });
@@ -213,10 +254,47 @@ window.onload = function() {
 
 };
 
+create_navbox = function() {
+    headers = document.querySelectorAll("h2");
+    var list = document.createElement("ul");
+    for (i = 0; i < headers.length; i++) {
+        listItem = document.createElement("li");
+        text = document.createTextNode(headers[i].textContent);
+        ancItem = document.createElement("a");
+        ancItem.setAttribute("href", "#"+headers[i].id)
+        ancItem.appendChild(text);
+        listItem.appendChild(ancItem);
+        list.appendChild(listItem);
+    }
+
+    var nv = document.createElement("nav");
+    nv.appendChild(list);
+
+    var nc = document.createElement("div");
+    nc.classList.add("nav-container");
+    nc.appendChild(nv);
+
+    var np = document.createElement("div");
+    np.classList.add("nav-placeholder");
+    text = document.createTextNode("NAV");
+    np.appendChild(text);
+
+    var ncr = document.createElement("div");
+    ncr.classList.add("nav-current");
+
+    var nb = document.createElement("div");
+    nb.classList.add("nav-box");
+    nb.appendChild(nc);
+    nb.appendChild(np);
+    nb.appendChild(ncr);
+    aside.appendChild(nb);
+};
+
 navcon_appear = function(delayms) {
     timeout = setTimeout(function() {
         navph.setAttribute("style", "display:none;");
         navcon.setAttribute("style", "display:grid;");
+        navbox.style.backgroundColor = "rgba(255, 255, 255, 1)";
         has_appeared = true;
         navbox_margin_check(true);
     }, delayms);
@@ -227,6 +305,7 @@ navcon_disappear = function(delayms) {
         navcon.setAttribute("style", "display:none;");
         navph.setAttribute("style", "display:grid;");
         navbox = document.querySelector("div.nav-box");
+        navbox.style.backgroundColor = "rgba(255, 255, 255, 0.2)";
         has_appeared = false;
         navbox_move();
         navbox_margin_check();
@@ -238,7 +317,7 @@ navbox_move = function() {
     navbox.style.top = (navbox_object.windowY - window_object.windowY) + "px";
     navbox_object.currentX = navbox_object.windowX - window_object.windowX;
     navbox_object.currentY = navbox_object.windowY - window_object.windowY;
-}
+};
 
 navbox_margin_check = function(isappear=false) {
     if ((navbox.getBoundingClientRect().left + navbox.getBoundingClientRect().width) > (window.innerWidth - 25)) {
@@ -273,7 +352,7 @@ pop_navbox = function() {
         navbox.style.transition = "background-color 1s";
         navbox.style.alignItems = "center";
         navbox.style.justifyItems = "center";
-        navbox.style.boxShadow = "0px 0px 2px rgb(1, 1, 1)";
+        navbox.style.boxShadow = "0px 0px 10px rgb(1, 1, 1)";
         navbox.style.whiteSpace = "nowrap";
         navbox.style.touchAction = "manipulation";
         navbox.style.animationName = "shadow-animation";
@@ -306,7 +385,7 @@ pop_navbox = function() {
         }
         smooth_pop();
     }
-}
+};
 
 unpop_navbox = function() {
     if ((!is_popping) && (navbox_pop)) {
@@ -347,4 +426,4 @@ unpop_navbox = function() {
         }
         smooth_unpop();
     }
-}
+};
