@@ -28,31 +28,28 @@ aside {
     justify-items: start;
     box-shadow: 0px 0px 2px rgb(1, 1, 1);
     user-select: none;
-    animation-duration: 15s;
+    animation-duration: 2s;
     animation-timing-function: ease-in-out;
     animation-iteration-count: infinite;
     animation-play-state: running;
     border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 2px;
 }
 
 @-webkit-keyframes shadow-animation {
-    00.00%  {box-shadow: 0px 0px 2px red;}
-    16.66%  {box-shadow: 0px 0px 2px yellow;}
-    33.33%  {box-shadow: 0px 0px 2px green;}
-    50.00%  {box-shadow: 0px 0px 2px cyan;}
-    66.66%  {box-shadow: 0px 0px 2px blue;}
-    83.33%  {box-shadow: 0px 0px 2px magenta;}
-    100.0%  {box-shadow: 0px 0px 2px red;}
+    00.00%  {box-shadow: 0px 0px 5px navy;}
+    25.00%  {box-shadow: 0px 0px 5px mediumblue;}
+    50.00%  {box-shadow: 0px 0px 5px blue;}
+    75.00%  {box-shadow: 0px 0px 5px mediumblue;}
+    100.0%  {box-shadow: 0px 0px 5px navy;}
 }
 
 @keyframes shadow-animation {
-    00.00%  {box-shadow: 0px 0px 2px red;}
-    16.66%  {box-shadow: 0px 0px 2px yellow;}
-    33.33%  {box-shadow: 0px 0px 2px green;}
-    50.00%  {box-shadow: 0px 0px 2px cyan;}
-    66.66%  {box-shadow: 0px 0px 2px blue;}
-    83.33%  {box-shadow: 0px 0px 2px magenta;}
-    100.0%  {box-shadow: 0px 0px 2px red;}
+    00.00%  {box-shadow: 0px 0px 5px navy;}
+    25.00%  {box-shadow: 0px 0px 5px mediumblue;}
+    50.00%  {box-shadow: 0px 0px 5px blue;}
+    75.00%  {box-shadow: 0px 0px 5px mediumblue;}
+    100.0%  {box-shadow: 0px 0px 5px navy;}
 }
 
 .nav-container, .nav-placeholder {
@@ -64,24 +61,10 @@ aside {
     display: none;
 }
 
-.nav-box:hover {
-    background-color: rgba(255, 255, 255, 0.8);
-}
-
-.nav-box:hover > .nav-placeholder {
-    opacity: 0;
-    transition: opacity 0.95s linear 0.05s;
-    color: rgb(5, 5, 5);
-}
-
-.nav-box:hover > .nav-container {
-    opacity: 1;
-    transition: display 0.95s linear 0.05s, opacity 0.95s linear 0.05s;
-}
-
 .nav-box > div.nav-container {
     display: grid;
-    padding: 1em;
+    margin-left: 1.5em;
+    padding: 0.5em;
 }
 
 .nav-box > div.nav-container > nav > ul {
