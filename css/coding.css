@@ -1,6 +1,10 @@
 :root {
+  --inline_background: rgb(228, 231, 240); /*dark-grey*/
+  --inline_default: rgb(49, 63, 78); /*dark-grey*/
   --python_background: rgb(43, 43, 43); /*dark-grey*/
+  --python_output_background: rgb(214, 217, 220); /*lighter-grey*/
   --python_default: rgb(169, 183, 198); /*grey*/
+  --python_output_default: rgb(69, 83, 98); /*grey*/
   --python_constant: rgb(204, 120, 50); /*orange*/
   --python_string: rgb(106, 135, 89); /*green*/
   --python_inbuilt: rgb(136, 136, 198); /*blue*/
@@ -8,6 +12,7 @@
   --python_argument: rgb(170, 73, 38); /*red*/
   --python_comment: rgb(114, 115, 122); /*darkish-grey*/
   --python_numeric: rgb(104, 151, 198); /*light-blue*/
+  --python_output_numeric: rgb(29, 76, 123); /*light-blue*/
 }
 
 body {
@@ -20,10 +25,16 @@ pre {
     padding-right: 1em;
     padding-bottom: 1em;
     overflow-x: scroll;
+    box-shadow: 0 0 2px rgb(1, 1, 1);
+    border-radius: 1px;
 }
 
 pre.python {
     background-color: var(--python_background);
+}
+
+pre.python.output {
+    background-color: var(--python_output_background);
 }
 
 @media screen and (min-width: 600px) and (max-width: 3000px) {
@@ -42,6 +53,10 @@ pre.python {
 
 code.python > span.default {
     color: var(--python_default);
+}
+
+samp.python > code.python > span.default {
+    color: var(--python_output_default);
 }
 
 code.python > span.constant {
@@ -72,6 +87,10 @@ code.python > span.numeric {
     color: var(--python_numeric);
 }
 
+samp.python > code.python > span.numeric {
+    color: var(--python_output_numeric);
+}
+
 pre::-webkit-scrollbar {
     height: 3px;
     border: 1px solid #d5d5d5;
@@ -82,7 +101,7 @@ pre::-webkit-scrollbar-thumb {
   background: rgb(155, 155, 155);
 }
 
-
-
-
-
+code.inline {
+    background-color: var(--inline_background);
+    color: var(--inline_default);
+}
