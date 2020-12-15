@@ -93,6 +93,9 @@ window.onload = function() {
             touch_object.startX = e.touches[0].clientX;
             touch_object.startY = e.touches[0].clientY;
             mdown = true;
+        } else {
+            document.removeEventListener("touchstart", preventBehavior, {passive: false});
+            document.removeEventListener("touchend", preventBehavior, {passive: false});
         }
     });
 
@@ -180,7 +183,6 @@ window.onload = function() {
             }
         } else if ((!mdown) && (!navbox_pop)) {
             pop_navbox();
-            console.log("shud pop now");
         }
         mdown = false;
     };
@@ -197,14 +199,14 @@ window.onload = function() {
             navbox_object.windowY = navbox.getBoundingClientRect().top;
         } else if (mdown && navbox_pop) {
             if (has_appeared) {
-                navcon_disappear(0);
-                document.addEventListener("touchstart", preventBehavior, {passive: false});
-                document.addEventListener("touchend", preventBehavior, {passive: false});
-                window_object.windowX = document.body.getBoundingClientRect().left;
-                window_object.windowY = document.body.getBoundingClientRect().top;
-                navbox_move();
-                window.location.hash = "";
-                history.pushState("", document.title, window.location.pathname);
+                setTimeout(function() {
+                    navcon_disappear(0);
+                    document.addEventListener("touchstart", preventBehavior, {passive: false});
+                    document.addEventListener("touchend", preventBehavior, {passive: false});
+                    window_object.windowX = document.body.getBoundingClientRect().left;
+                    window_object.windowY = document.body.getBoundingClientRect().top;
+                    navbox_move();
+                }, 50);
             } else {
                 check_timer = new Date();
                 if ((check_timer - touch_timer) < 500) {
@@ -224,8 +226,12 @@ window.onload = function() {
                 }
             }
         } else if ((!mdown) && (!navbox_pop)) {
-            pop_navbox();
-            console.log("shud pop now");
+            setTimeout(function() {
+                document.addEventListener("touchstart", preventBehavior, {passive: false});
+                document.addEventListener("touchend", preventBehavior, {passive: false});
+                pop_navbox();
+                console.log("shud pop now");
+            }, 50);
         }
         mdown = false;
     });
@@ -384,6 +390,7 @@ pop_navbox = function() {
             setTimeout(smooth_pop, 10);
         }
         smooth_pop();
+        navbox_margin_check();
     }
 };
 
