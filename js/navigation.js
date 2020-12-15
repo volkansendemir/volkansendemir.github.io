@@ -12,7 +12,9 @@ window.onload = function() {
         currentY: 0,
         defaultX: 0,
         defaultY: 0,
-        limitY: 0
+        limitY: 0,
+        initHeight: 0,
+        initWidth: 0
     };
     window_object = {
         windowX: document.body.getBoundingClientRect().left,
@@ -42,6 +44,8 @@ window.onload = function() {
     navbox_object.defaultX = navbox.getBoundingClientRect().left - document.body.getBoundingClientRect().left;
     navbox_object.defaultY = navbox.getBoundingClientRect().top - document.body.getBoundingClientRect().top;
     navbox_object.limitY = navbox.getBoundingClientRect().height + navbox_object.defaultY;
+    navbox_object.initHeight = navbox.getBoundingClientRect().height;
+    navbox_object.initWidth = navbox.getBoundingClientRect().width;
 
     navbox_mouseover = function(e) {
         if (navbox_pop) {
@@ -243,7 +247,7 @@ window.onload = function() {
     });
 
     document.addEventListener("touchend", preventBehavior, {passive: false});
-    console.log(window_object.windowX);
+
     document.addEventListener("scroll", function(e) {
         if (has_appeared) {
             navcon_disappear();
@@ -401,15 +405,14 @@ pop_navbox = function() {
                 navbox.style.top = (navbox_object.currentY + dy + 10) + 'px';
             }
             if ( i <= 20 ) {
-                navbox.style.minWidth = ((aside.getBoundingClientRect().width / 20 * (20 - i)) + 50) + 'px';
-                navbox.style.minHeight = ((aside.getBoundingClientRect().height / 20 * (20 - i)) + 50) + 'px';
+                navbox.style.minWidth = ((navbox_object.initWidth / 20 * (20 - i)) + 50) + 'px';
+                navbox.style.minHeight = ((navbox_object.initHeight / 20 * (20 - i)) + 50) + 'px';
             }
             navbox.style.left = (navbox_object.currentX + dx) + 'px';
             setTimeout(smooth_pop, 10);
         }
         smooth_pop();
         navbox_margin_check();
-        console.log(navbox.getBoundingClientRect().left);
     }
 };
 
@@ -445,8 +448,8 @@ unpop_navbox = function() {
                 return;
             }
             if ( i > 20 ) {
-                navbox.style.minWidth = (aside.getBoundingClientRect().width / 20 * Math.sqrt((i - 19)*20)) + 'px';
-                navbox.style.minHeight = (aside.getBoundingClientRect().height / 20 * Math.sqrt((i - 19)*20)) + 'px';
+                navbox.style.minWidth = (navbox_object.initWidth / 20 * Math.sqrt((i - 19)*20)) + 'px';
+                navbox.style.minHeight = (navbox_object.initHeight / 20 * Math.sqrt((i - 19)*20)) + 'px';
             }
             dx = parseInt((navbox_object.currentX - navbox_object.defaultX) / (40 - i + 1));
             dy = parseInt((navbox_object.currentY - navbox_object.defaultY) / (40 - i + 1));
