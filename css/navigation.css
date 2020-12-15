@@ -16,8 +16,7 @@ header, footer {
     grid-column: 1/4;
 }
 
-aside {
-    padding: 0.5em;
+aside.nav-box-aside {
 }
 
 .nav-box {
@@ -26,29 +25,32 @@ aside {
     display: grid;
     align-items: center;
     justify-items: start;
-    box-shadow: 0px 0px 2px rgb(1, 1, 1);
     user-select: none;
-    animation-duration: 2s;
+    animation-duration: 6s;
     animation-timing-function: ease-in-out;
     animation-iteration-count: infinite;
     animation-play-state: running;
-    border: 1px solid rgba(0, 0, 0, 0.1);
+    background-color: rgb(255, 255, 255);
     border-radius: 2px;
 }
 
 @-webkit-keyframes shadow-animation {
     00.00%  {box-shadow: 0px 0px 5px navy;}
-    25.00%  {box-shadow: 0px 0px 5px mediumblue;}
-    50.00%  {box-shadow: 0px 0px 5px blue;}
-    75.00%  {box-shadow: 0px 0px 5px mediumblue;}
+    25.00%  {box-shadow: 0px 0px 5px blue;}
+    35.00%  {box-shadow: 0px 0px 5px mediumblue;}
+    55.00%  {box-shadow: 0px 0px 5px dodgerblue;}
+    65.00%  {box-shadow: 0px 0px 5px mediumblue;}
+    75.00%  {box-shadow: 0px 0px 5px blue;}
     100.0%  {box-shadow: 0px 0px 5px navy;}
 }
 
 @keyframes shadow-animation {
     00.00%  {box-shadow: 0px 0px 5px navy;}
-    25.00%  {box-shadow: 0px 0px 5px mediumblue;}
-    50.00%  {box-shadow: 0px 0px 5px blue;}
-    75.00%  {box-shadow: 0px 0px 5px mediumblue;}
+    25.00%  {box-shadow: 0px 0px 5px blue;}
+    35.00%  {box-shadow: 0px 0px 5px mediumblue;}
+    55.00%  {box-shadow: 0px 0px 5px dodgerblue;}
+    65.00%  {box-shadow: 0px 0px 5px mediumblue;}
+    75.00%  {box-shadow: 0px 0px 5px blue;}
     100.0%  {box-shadow: 0px 0px 5px navy;}
 }
 
