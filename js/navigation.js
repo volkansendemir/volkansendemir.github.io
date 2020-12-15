@@ -314,6 +314,7 @@ navcon_appear = function(delayms) {
         navph.setAttribute("style", "display:none;");
         navcon.setAttribute("style", "display:grid;");
         navbox.style.backgroundColor = "rgba(255, 255, 255, 1)";
+        navbox.style.opacity = "1";
         has_appeared = true;
         navbox_margin_check(true);
     }, delayms);
@@ -325,6 +326,7 @@ navcon_disappear = function(delayms) {
         navph.setAttribute("style", "display:grid;");
         navbox = document.querySelector("div.nav-box");
         navbox.style.backgroundColor = "rgba(255, 255, 255, 0.2)";
+        navbox.style.opacity = "0.4";
         has_appeared = false;
         navbox_move();
         navbox_margin_check();
