@@ -2,7 +2,7 @@ var navbox_object, window_object, touch_object, navbox, navph, navcon, aside, hy
 var has_appeared, mdown, dragging, timeout, last_touch, x_vec, y_vec, drag_dist, drag_x, drag_y;
 var touch_timer, check_timer;
 var navbox_pop;
-var is_popping, dx, dy, i;
+var is_popping, is_unpopping, dx, dy, i;
 
 window.onload = function() {
     navbox_object = {
@@ -42,22 +42,26 @@ window.onload = function() {
     navbox_object.defaultX = navbox.getBoundingClientRect().left - document.body.getBoundingClientRect().left;
     navbox_object.defaultY = navbox.getBoundingClientRect().top - document.body.getBoundingClientRect().top;
     navbox_object.limitY = navbox.getBoundingClientRect().height + navbox_object.defaultY;
-    aside.style.height = aside.getBoundingClientRect().height - 16 +"px";
-    aside.style.width = aside.getBoundingClientRect().width -16 + "px";
 
     navbox_mouseover = function(e) {
         if (navbox_pop) {
             if (timeout) {
                 clearTimeout(timeout);
             }
-            if (!has_appeared && !dragging) {
-                /*navcon_appear(650);*/
+            if ((!has_appeared) && (!dragging)) {
+                navbox.style.opacity = "1";
+                navbox.style.backgroundColor = "rgba(255, 255, 255, 0.9)";
             }
         }
     };
 
     if (!('ontouchstart' in window) && !(window.navigator.msPointerEnabled)) {
         navbox.onmouseover = navbox_mouseover;
+        aside.style.height = aside.getBoundingClientRect().height +"px";
+        aside.style.width = aside.getBoundingClientRect().width + "px";
+    } else {
+        aside.style.height = aside.getBoundingClientRect().height +"px";
+        aside.style.width = aside.getBoundingClientRect().width + "px";
     }
 
     navbox.onmouseout = function(e) {
@@ -65,9 +69,12 @@ window.onload = function() {
             if (timeout) {
                 clearTimeout(timeout);
             }
-            if (has_appeared && !navbox.matches(":hover")) {
-                navcon_disappear(700);
-            }
+            timeout = setTimeout(function() {
+                if ((!has_appeared) && (!navbox.matches(":hover"))) {
+                    navbox.style.opacity = "0.9";
+                    navbox.style.backgroundColor = "rgba(255, 255, 255, 0.4)";
+                }
+            }, 500);
         }
     };
 
@@ -122,7 +129,9 @@ window.onload = function() {
             drag_y = e.pageY - touch_object.startY;
             touch_object.startX = e.pageX;
             touch_object.startY = e.pageY;
-            navbox_object.windowX = navbox_object.windowX + drag_x;
+            if (!is_unpopping) {
+                navbox_object.windowX = navbox_object.windowX + drag_x;
+            }
             navbox_object.windowY = navbox_object.windowY + drag_y;
             navbox_move();
         }
@@ -143,7 +152,9 @@ window.onload = function() {
             drag_y = last_touch.clientY - touch_object.startY;
             touch_object.startX = last_touch.clientX;
             touch_object.startY = last_touch.clientY;
-            navbox_object.windowX = navbox_object.windowX + drag_x;
+            if (!is_unpopping) {
+                navbox_object.windowX = navbox_object.windowX + drag_x;
+            }
             navbox_object.windowY = navbox_object.windowY + drag_y;
             navbox_move();
         }
@@ -155,14 +166,13 @@ window.onload = function() {
         if (dragging && navbox_pop) {
             dragging = false;
             navbox_margin_check();
-            navbox_object.windowX = navbox.getBoundingClientRect().left;
+            if (!is_unpopping) {
+                navbox_object.windowX = navbox.getBoundingClientRect().left;
+            }
             navbox_object.windowY = navbox.getBoundingClientRect().top;
         } else if (mdown && navbox_pop) {
             if (has_appeared) {
                 navcon_disappear(0);
-                window_object.windowX = document.body.getBoundingClientRect().left;
-                window_object.windowY = document.body.getBoundingClientRect().top;
-                navbox_move();
                 window.location.hash = "";
                 history.pushState("", document.title, window.location.pathname);
             } else {
@@ -177,7 +187,7 @@ window.onload = function() {
                     touch_timer = new Date();
                     click_timeout = setTimeout(function() {
                         navcon_appear(0);
-                        navbox_margin_check();
+                        navbox_margin_check(true);
                     }, 500);
                 }
             }
@@ -195,7 +205,9 @@ window.onload = function() {
         if (dragging && navbox_pop) {
             dragging = false;
             navbox_margin_check();
-            navbox_object.windowX = navbox.getBoundingClientRect().left;
+            if (!is_unpopping) {
+                navbox_object.windowX = navbox.getBoundingClientRect().left;
+            }
             navbox_object.windowY = navbox.getBoundingClientRect().top;
         } else if (mdown && navbox_pop) {
             if (has_appeared) {
@@ -203,8 +215,6 @@ window.onload = function() {
                     navcon_disappear(0);
                     document.addEventListener("touchstart", preventBehavior, {passive: false});
                     document.addEventListener("touchend", preventBehavior, {passive: false});
-                    window_object.windowX = document.body.getBoundingClientRect().left;
-                    window_object.windowY = document.body.getBoundingClientRect().top;
                     navbox_move();
                 }, 50);
             } else {
@@ -221,7 +231,7 @@ window.onload = function() {
                         navcon_appear(0);
                         document.removeEventListener("touchstart", preventBehavior, {passive: false});
                         document.removeEventListener("touchend", preventBehavior, {passive: false});
-                        navbox_margin_check();
+                        navbox_margin_check(true);
                     }, 500);
                 }
             }
@@ -230,24 +240,27 @@ window.onload = function() {
                 document.addEventListener("touchstart", preventBehavior, {passive: false});
                 document.addEventListener("touchend", preventBehavior, {passive: false});
                 pop_navbox();
-                console.log("shud pop now");
             }, 50);
         }
         mdown = false;
     });
 
     document.addEventListener("touchend", preventBehavior, {passive: false});
-
+    console.log(window_object.windowX);
     document.addEventListener("scroll", function(e) {
-        if ((window_object.windowY < (50 - navbox_object.limitY)) && (!is_popping)) {
+        if (has_appeared) {
+            navcon_disappear();
+        }
+        if ((window_object.windowY < (60 - navbox_object.limitY)) && (!is_popping)) {
             pop_navbox();
-        } else if ((window_object.windowY > (50 - navbox_object.limitY)) && (!is_popping)) {
+        } else if ((window_object.windowY > (60 - navbox_object.limitY)) && (!is_popping)) {
             unpop_navbox();
         }
+
         window_object.windowX = document.body.getBoundingClientRect().left;
         window_object.windowY = document.body.getBoundingClientRect().top;
         if (navbox_pop && (!is_popping)) {
-            navbox_move();
+            navbox_move(has_appeared);
         }
     });
 
@@ -318,21 +331,22 @@ navcon_disappear = function(delayms) {
     }, delayms);
 };
 
-navbox_move = function() {
+navbox_move = function(isappear=false) {
     navbox.style.left = (navbox_object.windowX - window_object.windowX) + "px";
     navbox.style.top = (navbox_object.windowY - window_object.windowY) + "px";
     navbox_object.currentX = navbox_object.windowX - window_object.windowX;
     navbox_object.currentY = navbox_object.windowY - window_object.windowY;
+    navbox_margin_check(isappear);
 };
 
 navbox_margin_check = function(isappear=false) {
     if ((navbox.getBoundingClientRect().left + navbox.getBoundingClientRect().width) > (window.innerWidth - 25)) {
-        if (!isappear) {
+        if ((!isappear) && (!is_unpopping) && (navbox_pop)) {
             navbox_object.windowX = window.innerWidth - 25 - navbox.getBoundingClientRect().width;
         }
         navbox.style.left = (window.innerWidth - 25 - navbox.getBoundingClientRect().width)+"px";
     }
-    if (navbox.getBoundingClientRect().left < 25) {
+    if ((navbox.getBoundingClientRect().left < 25) && (!is_popping) && (!is_unpopping) && (navbox_pop)) {
         navbox.style.left = "25px";
         navbox_object.windowX = 25;
     }
@@ -342,7 +356,7 @@ navbox_margin_check = function(isappear=false) {
         }
         navbox.style.top = (window.innerHeight - 25 - navbox.getBoundingClientRect().height)+"px";
     }
-    if (navbox.getBoundingClientRect().top < 25) {
+    if ((navbox.getBoundingClientRect().top < 25) && (!is_popping) && (navbox_pop)) {
         navbox.style.top = "25px";
         navbox_object.windowY = 25;
     }
@@ -355,7 +369,7 @@ pop_navbox = function() {
             navcon_disappear();
         }
         navbox.style.position = "absolute";
-        navbox.style.transition = "background-color 1s";
+        navbox.style.transition = "background-color 1s, opacity 0.5s";
         navbox.style.alignItems = "center";
         navbox.style.justifyItems = "center";
         navbox.style.boxShadow = "0px 0px 10px rgb(1, 1, 1)";
@@ -373,6 +387,7 @@ pop_navbox = function() {
                 navbox_pop = true;
                 navbox.style.backgroundColor = "rgba(255, 255, 255, 0.2)";
                 navbox.style.border = "1px solid rgba(0, 0, 0, 0.1)";
+                navbox.style.opacity = "0.4";
                 return;
             }
             dx = parseInt((navbox_object.windowX - window_object.windowX - navbox_object.currentX) / (40 - i + 1));
@@ -386,17 +401,23 @@ pop_navbox = function() {
                 navbox_object.currentY = navbox_object.currentY + dy + 10;
                 navbox.style.top = (navbox_object.currentY + dy + 10) + 'px';
             }
+            if ( i <= 20 ) {
+                navbox.style.minWidth = ((aside.getBoundingClientRect().width / 20 * (20 - i)) + 50) + 'px';
+                navbox.style.minHeight = ((aside.getBoundingClientRect().height / 20 * (20 - i)) + 50) + 'px';
+            }
             navbox.style.left = (navbox_object.currentX + dx) + 'px';
             setTimeout(smooth_pop, 10);
         }
         smooth_pop();
         navbox_margin_check();
+        console.log(navbox.getBoundingClientRect().left);
     }
 };
 
 unpop_navbox = function() {
     if ((!is_popping) && (navbox_pop)) {
         is_popping = true;
+        is_unpopping = true;
         if (has_appeared) {
             navcon_disappear();
         }
@@ -415,12 +436,18 @@ unpop_navbox = function() {
         function smooth_unpop() {
             if ( i >= 40 ) {
                 is_popping = false;
+                is_unpopping = false;
                 navbox_pop = false;
                 navbox.style.position = "static";
                 navcon.style.display = "grid";
                 navph.style.display = "none";
                 navbox.style.border = "1px solid rgba(0, 0, 0, 0.1)";
+                navbox.style.opacity = "1";
                 return;
+            }
+            if ( i > 20 ) {
+                navbox.style.minWidth = (aside.getBoundingClientRect().width / 20 * Math.sqrt((i - 19)*20)) + 'px';
+                navbox.style.minHeight = (aside.getBoundingClientRect().height / 20 * Math.sqrt((i - 19)*20)) + 'px';
             }
             dx = parseInt((navbox_object.currentX - navbox_object.defaultX) / (40 - i + 1));
             dy = parseInt((navbox_object.currentY - navbox_object.defaultY) / (40 - i + 1));
