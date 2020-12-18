@@ -15,32 +15,8 @@
   --python_output_numeric: rgb(29, 76, 123); /*light-blue*/
 }
 
-html {
-    background-color: rgb(243, 243, 243);
-    font-family: Hind Siliguri;
-}
-
-body {
-    overflow-y: auto;
-    overflow-x: hidden;
-    color: rgb(7, 7, 7);
-}
-
-main, header, footer, aside {
-    overflow: hidden;
-}
-
-main {
-    box-shadow: 0 0 1px rgb(125, 125, 125);
-    padding: 1em;
-}
-
-aside.nav-box-aside {
-    box-shadow: 0 0 1px rgb(125, 125, 125);
-}
-
 pre {
-    margin: 1em;
+    margin: 0.5em 1em 1em 1em;
     padding: 0.5em 1em 1.5em 1em;
     overflow-x: auto;
     box-shadow: 0 0 2px rgb(1, 1, 1);
@@ -55,18 +31,8 @@ pre.python.output {
     background-color: var(--python_output_background);
 }
 
-@media screen and (min-width: 600px) and (max-width: 3000px) {
-    code.python {
-        font-family: "consolas";
-        font-size: 16px;
-    }
-}
-
-@media screen and (min-width: 200px) and (max-width: 600px) {
-    code.python {
-        font-family: "consolas";
-        font-size: 12px;
-    }
+code {
+    z-index: -1;
 }
 
 code.python > span.default {
@@ -133,20 +99,31 @@ code.inline {
     border-radius: 5px;
 }
 
+@media screen and (min-width: 600px) and (max-width: 3000px) {
+    code.python {
+        font-family: "consolas";
+        font-size: 16px;
+    }
+}
+
+@media screen and (min-width: 200px) and (max-width: 600px) {
+    code.python {
+        font-family: "consolas";
+        font-size: 12px;
+    }
+}
+
 p {
-    margin: 0.75em;
-    line-height: 1.35em;
+    position: relative;
+    z-index: 1;
 }
 
-h1 {
-
+sup {
+    vertical-align: super;
+    font-size: smaller;
 }
 
-h2 {
-
-}
-
-h4 > a {
-    text-decoration: none;
-    color: rgb(7, 7, 7);
+sub {
+    vertical-align: sub;
+    font-size: smaller;
 }
