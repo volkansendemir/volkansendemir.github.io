@@ -4,47 +4,33 @@
     <meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Project Euler - 1</title>
+    <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/project.css">
     <link rel="stylesheet" href="../css/navigation.css">
     <link rel="stylesheet" href="../css/coding.css">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri&display=swap" rel="stylesheet">
+    <script type="text/javascript" src="../js/project-euler.js"></script>
+    <script type="text/javascript" src="../js/header.js"></script>
+    <script type="text/javascript" src="../js/breadcrumbs.js"></script>
 	<script type="text/javascript" src="../js/navigation.js"></script>
 </head>
 <body>
-<header></header>
-<aside class="nav-box-aside">
-	<nav class="breadcrumbs">
-        <ol itemscope itemtype="http://schema.org/BreadcrumbList" class="bc">
-            <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
-                <a itemprop="item" href="/">Home</a> >
-            </li>
-            <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
-                <a itemprop="item" href="/projects/">Projects</a> >
-            </li>
-            <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
-                <a itemprop="item" href=/projects/project-euler/">Project Euler</a> >
-            </li>
-            <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
-                <a itemprop="item">Problem 1</a>
-            </li>
-        </ol>
-    </nav>
-</aside>
+<header><nav class="global"></nav></header>
+<aside class="nav-box-aside"><nav class="breadcrumbs"></nav></aside>
 <main>
-	<div class="title">
-        <h1>Multiples of 3 and 5</h1>
-        <div class="solve">Solved on <time datetime="2020-10-17">Sat, 17 Oct 2020</time></div>
-        <div class="upload">Uploaded on <time datetime="2020-12-15">Tue, 15 Dec 2020</time></div>
-    </div>
-	<h4><a href="https://projecteuler.net/problem=1" target="_blank">Problem #1 of Project Euler series</a></h4>
-	<div class="source">
-        <h2 id="question">Question</h2>
-        <cite><a href="https://projecteuler.net/">Project Euler</a></cite>
+	<div class="question">
+		<div class="title">
+			<h1 id="question">Multiples of 3 and 5</h1>
+			<div class="solve">Solved on <time datetime="2020-10-17">Sat, 17 Oct 2020</time></div>
+			<div class="upload">Uploaded on <time datetime="2020-12-15">Tue, 15 Dec 2020</time></div>
+        </div>
         <blockquote class="question">
-            <p>If we list all the natural numbers below 10 that are multiples of 3 or 5, we get 3, 5, 6 and 9. The sum of these multiples is 23.</p>
-			<p>Find the sum of all the multiples of 3 or 5 below 1000.</p>
-        </blockquote>
+			<div>
+				<p>If we list all the natural numbers below 10 that are multiples of 3 or 5, we get <span style="display: inline-block">3, 5, 6 and 9.</span> The sum of these multiples is 23.</p>
+				<p>Find the sum of all the multiples of 3 or 5 below 1000.</p>
+			</div>
+		</blockquote>
     </div>
 	<h2 id="one_liner_solution">One-liner solution</h2>
 <pre class="python"><code class="python">
