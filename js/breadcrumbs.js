@@ -21,7 +21,7 @@ window.addEventListener("load", function() {
     libc.setAttribute("itemscope","");
     libc.setAttribute("itemtype", "http://schema.org/ListItem");
     olbc.appendChild(libc);
-    for (var i = 9; i < dirs.length; i++) {
+    for (var i = 3; i < dirs.length; i++) {
         text = document.createTextNode(">");
         sbc = document.createElement("span");
         sbc.appendChild(text);
@@ -34,7 +34,7 @@ window.addEventListener("load", function() {
         }
         cur_text = cur_split.join(" ");
         text = document.createTextNode(cur_text);
-        for (var j = 9; j < (i + 1); j++) {
+        for (var j = 3; j < (i + 1); j++) {
             cur_part = cur_part + "/" + dirs[j];
         }
         ancItem = document.createElement("a");
