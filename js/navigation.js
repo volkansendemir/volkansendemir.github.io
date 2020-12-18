@@ -52,7 +52,7 @@ window.onload = function() {
             if (timeout) {
                 clearTimeout(timeout);
             }
-            if ((!has_appeared) && (!dragging)) {
+            if ((!has_appeared) && (!dragging) && (!is_popping)) {
                 navbox.style.opacity = "1";
                 navbox.style.backgroundColor = "rgba(255, 255, 255, 0.9)";
             }
@@ -71,7 +71,7 @@ window.onload = function() {
                 clearTimeout(timeout);
             }
             timeout = setTimeout(function() {
-                if ((!has_appeared) && (!navbox.matches(":hover"))) {
+                if ((!has_appeared) && (!navbox.matches(":hover")) && (!is_popping)) {
                     navbox.style.opacity = "0.9";
                     navbox.style.backgroundColor = "rgba(255, 255, 255, 0.4)";
                 }
@@ -86,8 +86,8 @@ window.onload = function() {
             touch_object.relativeY = e.pageY - navbox.getBoundingClientRect().top;
             touch_object.startX = e.pageX;
             touch_object.startY = e.pageY;
-            mdown = true;
         }
+        mdown = true;
     };
 
     if (!('ontouchstart' in window) && !(window.navigator.msPointerEnabled)) {
@@ -100,11 +100,11 @@ window.onload = function() {
             touch_object.relativeY = e.touches[0].clientY - navbox.getBoundingClientRect().top;
             touch_object.startX = e.touches[0].clientX;
             touch_object.startY = e.touches[0].clientY;
-            mdown = true;
         } else {
             document.removeEventListener("touchstart", preventBehavior, {passive: false});
             document.removeEventListener("touchend", preventBehavior, {passive: false});
         }
+        mdown = true;
     });
 
     function preventBehavior(e) {
@@ -192,7 +192,7 @@ window.onload = function() {
                     }, 500);
                 }
             }
-        } else if ((!mdown) && (!navbox_pop)) {
+        } else if (mdown && (!navbox_pop)) {
             pop_navbox();
         }
         mdown = false;
@@ -275,8 +275,17 @@ window.onload = function() {
 };
 
 create_navbox = function() {
-    headers = document.querySelectorAll("h2");
     var list = document.createElement("ul");
+    headers = document.querySelectorAll("main > div.question > div.title > h1");
+    headers.id = "question";
+    listItem = document.createElement("li");
+    text = document.createTextNode("Question");
+    ancItem = document.createElement("a");
+    ancItem.setAttribute("href", "#question")
+    ancItem.appendChild(text);
+    listItem.appendChild(ancItem);
+    list.appendChild(listItem);
+    headers = document.querySelectorAll("h2");
     for (i = 0; i < headers.length; i++) {
         listItem = document.createElement("li");
         text = document.createTextNode(headers[i].textContent);
@@ -390,6 +399,7 @@ pop_navbox = function() {
                 navbox_pop = true;
                 navbox.style.backgroundColor = "rgba(255, 255, 255, 0.2)";
                 navbox.style.border = "1px solid rgba(0, 0, 0, 0.1)";
+                aside.style.borderBottom = "";
                 navbox.style.opacity = "0.4";
                 return;
             }
@@ -418,12 +428,15 @@ pop_navbox = function() {
 
 unpop_navbox = function() {
     if ((!is_popping) && (navbox_pop)) {
+        if (timeout) {
+            clearTimeout(timeout);
+        }
         is_popping = true;
         is_unpopping = true;
         if (has_appeared) {
             navcon_disappear();
         }
-        navbox.style.backgroundColor = "rgba(255, 255, 255, 1)";
+        navbox.style.backgroundColor = "rgb(174, 189, 245)";
         navbox.style.transition = "";
         navbox.style.alignItems = "center";
         navbox.style.justifyItems = "start";
@@ -437,6 +450,9 @@ unpop_navbox = function() {
 
         function smooth_unpop() {
             if ( i >= 40 ) {
+                if (timeout) {
+                    clearTimeout(timeout);
+                }
                 is_popping = false;
                 is_unpopping = false;
                 navbox_pop = false;
@@ -444,6 +460,8 @@ unpop_navbox = function() {
                 navcon.style.display = "grid";
                 navph.style.display = "none";
                 navbox.style.border = "1px solid rgba(0, 0, 0, 0.1)";
+                aside.style.borderBottom = "2px solid rgb(117, 143, 240)";
+                navbox.style.backgroundColor = "rgb(174, 189, 245)";
                 navbox.style.opacity = "1";
                 return;
             }
