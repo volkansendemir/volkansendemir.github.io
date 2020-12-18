@@ -1,25 +1,4 @@
-* {
-    margin: 0;
-    padding: 0;
-}
-
-body {
-    display: grid;
-    grid-template-columns: 1fr 8fr 1fr;
-}
-
-aside, main {
-    grid-column: 2/3;
-}
-
-header, footer {
-    grid-column: 1/4;
-}
-
-aside.nav-box-aside {
-}
-
-.nav-box {
+div.nav-box {
     min-width: 50px;
     min-height: 50px;
     display: grid;
@@ -30,8 +9,9 @@ aside.nav-box-aside {
     animation-timing-function: ease-in-out;
     animation-iteration-count: infinite;
     animation-play-state: running;
-    background-color: rgb(255, 255, 255);
+    background-color: rgb(174, 189, 245);
     border-radius: 2px;
+    z-index: 999;
 }
 
 @-webkit-keyframes shadow-animation {
@@ -54,30 +34,36 @@ aside.nav-box-aside {
     100.0%  {box-shadow: 0px 0px 5px navy;}
 }
 
-.nav-container, .nav-placeholder {
+div.nav-container, div.nav-placeholder {
     transition: opacity 0.05s linear 0.95s;
 }
 
-.nav-placeholder {
+div.nav-placeholder {
     color: rgb(45, 45, 45);
     display: none;
 }
 
-.nav-box > div.nav-container {
+div.nav-box > div.nav-container {
     display: grid;
     margin-left: 1.5em;
     padding: 0.5em;
 }
 
-.nav-box > div.nav-container > nav > ul {
+div.nav-box > div.nav-container > nav > ul {
     list-style: disc;
 }
 
-.nav-box > div.nav-container > nav > ul > li > a {
+div.nav-box > div.nav-container > nav > ul > li > a {
     color: rgb(45, 45, 45);
+    text-decoration: none;
+    transition: 0.5s;
+}
+
+div.nav-box > div.nav-container > nav > ul > li > a:hover {
+    color: rgb(74, 108, 237);
     text-decoration: none;
 }
 
-.nav-box > div.nav-current {
+div.nav-box > div.nav-current {
     display: none;
 }
