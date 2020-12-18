@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Project Euler - 25</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/project.css">
+    <link rel="stylesheet" href="../css/navigation.css">
+    <link rel="stylesheet" href="../css/coding.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri&display=swap" rel="stylesheet">
+    <script type="text/javascript" src="../js/project-euler.js"></script>
+    <script type="text/javascript" src="../js/header.js"></script>
+    <script type="text/javascript" src="../js/breadcrumbs.js"></script>
+	<script type="text/javascript" src="../js/navigation.js"></script>
+</head>
+<body>
+<header><nav class="global"></nav></header>
+<aside class="nav-box-aside"><nav class="breadcrumbs"></nav></aside>
+<main>
+	<div class="question">
+		<div class="title">
+			<h1 id="question">1000-digit Fibonacci number</h1>
+			<div class="solve">Solved on <time datetime="2020-10-17">Mon, 19 Oct 2020</time></div>
+			<div class="upload">Uploaded on <time datetime="2020-12-17">Thu, 17 Dec 2020</time></div>
+        </div>
+        <blockquote class="question">
+			<div>
+				<p>The Fibonacci sequence is defined by the recurrence relation:</p>
+                <p><span style="display: inline-block">F<sub>n</sub> = F<sub>n-1</sub> + F<sub>n-2</sub></span>, where <span style="display: inline-block">F<sub>1</sub> = 1</span> and <span style="display: inline-block">F<sub>2</sub> = 1</span>.</p>
+                <p>Hence the first 12 terms will be:</p>
+                <p>
+                    <ul style="list-style: none; margin-left: 1em;">
+                        <li>F<sub>1</sub> = 1</li>
+                        <li>F<sub>2</sub> = 1</li>
+                        <li>F<sub>3</sub> = 2</li>
+                        <li>F<sub>4</sub> = 3</li>
+                        <li>F<sub>5</sub> = 5</li>
+                        <li>F<sub>6</sub> = 8</li>
+                        <li>F<sub>7</sub> = 13</li>
+                        <li>F<sub>8</sub> = 21</li>
+                        <li>F<sub>9</sub> = 34</li>
+                        <li>F<sub>10</sub> = 55</li>
+                        <li>F<sub>11</sub> = 89</li>
+                        <li>F<sub>12</sub> = 144</li>
+                    </ul>
+                <p>The 12th term, F<sub>12</sub>, is the first term to contain three digits.</p>
+                <p>What is the index of the first term in the Fibonacci sequence to contain 1000 digits?</p>
+            </div>
+		</blockquote>
+    </div>
+	<h2 id="brute_force_solution">Brute-force solution</h2>
+<pre class="python"><code class="python">
+<span class="constant">def </span><span class="function">brute</span><span class="default">(</span><span class="default">):</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">fibonacci </span><span class="default">= </span><span class="default">[</span><span class="numeric">1</span><span class="constant">, </span><span class="numeric">1</span><span class="default">]</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="constant">while </span><span class="inbuilt">len</span><span class="default">(</span><span class="inbuilt">str</span><span class="default">(fibonacci[-</span><span class="numeric">1</span><span class="default">])</span><span class="default">) </span><span class="default">< </span><span class="numeric">1000</span><span class="default">:</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">fibonacci.append</span><span class="default">(</span><span class="default">fibonacci[-</span><span class="numeric">2</span><span class="default">] </span><span class="default">+ </span><span class="default">fibonacci[-</span><span class="numeric">1</span><span class="default">])</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="inbuilt">print</span><span class="default">(</span><span class="inbuilt">len</span><span class="default">(fibonacci))</span>
+</code></pre>
+	<div class="explanation">
+		<p>
+
+        </p>
+	</div>
+	<h2 id="execution">Execution</h2>
+<pre class="python"><code class="python">
+<span class="default">brute</span><span class="default">(</span><span class="default">)</span>
+<span class="default"></span>
+<span class="comment">#154490th</span>
+<span class="comment">#119474th to make it to problem 25</span>
+</code></pre>
+	<div class="explanation">
+		<p>
+
+        </p>
+	</div>
+	<h2 id="output">Output</h2>
+<pre class="python output"><samp class="python output"><code class="python">
+<span class="default">brute</span><span class="default">: </span><span class="numeric">4782</span>
+</code></samp></pre>
+	<div class="explanation">
+		<p>
+
+        </p>
+	</div>
+</main>
+<footer></footer>
+</body>
+</html>

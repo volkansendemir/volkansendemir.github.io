@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Project Euler - 6</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/project.css">
+    <link rel="stylesheet" href="../css/navigation.css">
+    <link rel="stylesheet" href="../css/coding.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri&display=swap" rel="stylesheet">
+    <script type="text/javascript" src="../js/project-euler.js"></script>
+    <script type="text/javascript" src="../js/header.js"></script>
+    <script type="text/javascript" src="../js/breadcrumbs.js"></script>
+	<script type="text/javascript" src="../js/navigation.js"></script>
+</head>
+<body>
+<header><nav class="global"></nav></header>
+<aside class="nav-box-aside"><nav class="breadcrumbs"></nav></aside>
+<main>
+    <div class="question">
+		<div class="title">
+			<h1 id="question">Sum square difference</h1>
+			<div class="solve">Solved on <time datetime="2020-10-17">Sat, 17 Oct 2020</time></div>
+            <div class="upload">Uploaded on <time datetime="2020-12-15">Tue, 15 Dec 2020</time></div>
+        </div>
+        <blockquote class="question">
+			<div>
+				<p>The sum of the squares of the first ten natural numbers is,</p>
+                <p>
+                    <span style="display: inline-block">1<sup>2</sup> + 2<sup>2</sup> + ... + 10<sup>2</sup> = 385</span>
+                </p>
+                <p>The square of the sum of the first ten natural numbers is,</p>
+                <p>
+                    <span style="display: inline-block">(1 + 2 + ... + 10)<sup>2</sup> = 55<sup>2</sup> = 3025</span>
+                </p>
+                <p>Hence the difference between the sum of the squares of the first ten natural numbers and the square of the sum is <span style="display: inline-block">3025 - 385 = 2640.</span></p>
+                <p>Find the difference between the sum of the squares of the first one hundred natural numbers and the square of the sum.</p>
+            </div>
+		</blockquote>
+    </div>
+	<h2 id="one_liner_solution">One-liner solution</h2>
+<pre class="python"><code class="python">
+<span class="constant">def </span><span class="function">oneliner</span><span class="default">(</span><span class="default">):</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="inbuilt">print</span><span class="default">((</span><span class="inbuilt">sum</span><span class="default">(</span><span class="inbuilt">list</span><span class="default">(</span><span class="inbuilt">range</span><span class="default">(lim_up + </span><span class="numeric">1</span><span class="default">))</span><span class="default">)**</span><span class="numeric">2</span><span class="default">) </span><span class="default">- </span><span class="inbuilt">sum</span><span class="default">(</span><span class="default">[x**</span><span class="numeric">2 </span><span class="constant">for </span><span class="default">x </span><span class="constant">in </span><span class="inbuilt">range</span><span class="default">(</span><span class="default">lim_up + </span><span class="numeric">1</span><span class="default">)]))</span>
+</code></pre>
+	<div class="explanation">
+		<p>
+            Straightforward question, straightforward answer. First we create a range up to our upper limit.
+            <br>We later convert this range object into a list and sum it. Now we can just take its square.
+            <br>For the second part, we loop through our range, taking the square of each element.
+            <br>We than sum the resulting list and subtract it from the previous sum.
+		</p>
+	</div>
+	<h2 id="brute_force_solution">Brute-force solution</h2>
+<pre class="python"><code class="python">
+<span class="constant">def </span><span class="function">brute</span><span class="default">(</span><span class="default">):</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">sum_of_squares </span><span class="default">= </span><span class="numeric">0</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">square_of_sums </span><span class="default">= </span><span class="numeric">0</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="constant">for </span><span class="default">i </span><span class="constant">in </span><span class="inbuilt">range</span><span class="default">(</span><span class="default">lim_up + </span><span class="numeric">1</span><span class="default">)</span><span class="default">:</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">sum_of_squares </span><span class="default">= </span><span class="default">sum_of_squares </span><span class="default">+ </span><span class="default">i**</span><span class="numeric">2</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">square_of_sums </span><span class="default">= </span><span class="default">square_of_sums </span><span class="default">+ </span><span class="default">i</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="inbuilt">print</span><span class="default">((square_of_sums**</span><span class="numeric">2</span><span class="default">) </span><span class="default">- </span><span class="default">sum_of_squares)</span>
+</code></pre>
+	<div class="explanation">
+		<p>
+            In the brute-force solution, as not to loop over twice over the same range, we perform two operations in the same loop.
+            <br>At each stage we add each element to the <code class="inline">square_of_sums</code> variable, and the square of each variable to <code class="inline">sum_of_squares</code>.
+            <br>Finally we square the <code class="inline">square_of_sums</code> variable and subtract it from <code class="inline">sum_of_squares</code>.
+		</p>
+	</div>
+	<h2 id="execution">Execution</h2>
+<pre class="python"><code class="python">
+<span class="default">lim_up </span><span class="default">= </span><span class="numeric">100</span>
+<span class="default">oneliner</span><span class="default">(</span><span class="default">)</span>
+<span class="default">brute</span><span class="default">(</span><span class="default">)</span>
+<span class="default"></span>
+<span class="comment">#493035th</span>
+</code></pre>
+	<div class="explanation">
+		<p>
+            Tested up to a million, solves in less than a second.
+            <br>A simple solution, but it goes to show how programming can be useful in mathematics.
+            <br>Doing these operations manually would take forever, but with programming they take milliseconds.
+		</p>
+	</div>
+	<h2 id="output">Output</h2>
+<pre class="python output"><samp class="python output"><code class="python">
+<span class="default">oneliner</span><span class="default">: </span><span class="numeric">25164150</span>
+<span class="default">brute</span><span class="default">: </span><span class="numeric">25164150</span>
+</code></samp></pre>
+</main>
+<footer></footer>
+</body>
+</html>

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Project Euler - 19</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/project.css">
+    <link rel="stylesheet" href="../css/navigation.css">
+    <link rel="stylesheet" href="../css/coding.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri&display=swap" rel="stylesheet">
+    <script type="text/javascript" src="../js/project-euler.js"></script>
+    <script type="text/javascript" src="../js/header.js"></script>
+    <script type="text/javascript" src="../js/breadcrumbs.js"></script>
+	<script type="text/javascript" src="../js/navigation.js"></script>
+</head>
+<body>
+<header><nav class="global"></nav></header>
+<aside class="nav-box-aside"><nav class="breadcrumbs"></nav></aside>
+<main>
+	<div class="question">
+		<div class="title">
+			<h1 id="question">Counting Sundays</h1>
+			<div class="solve">Solved on <time datetime="2020-10-19">Mon, 19 Oct 2020</time></div>
+			<div class="upload">Uploaded on <time datetime="2020-12-17">Thu, 17 Dec 2020</time></div>
+        </div>
+        <blockquote class="question">
+			<div>
+				<p>You are given the following information, but you may prefer to do some research for yourself.</p>
+				<p>
+					<ul>
+						<li style="margin-left: 1em">1 Jan 1900 was a Monday.</li>
+						<li style="margin-left: 1em">Thirty days has September,
+							<br>April, June and November.
+							<br>All the rest have thirty-one,
+							<br>Saving February alone,
+							<br>Which has twenty-eight, rain or shine.
+							<br>And on leap years, twenty-nine.
+						</li>
+						<li style="margin-left: 1em">A leap year occurs on any year evenly divisible by 4, but not on a century unless it is divisible by 400.</li>
+					</ul>
+				</p>
+				<p>How many Sundays fell on the first of the month during the twentieth century <span style="display: inline-block">(1 Jan 1901</span> to <span style="display: inline-block">31 Dec 2000)?</span></p>
+            </div>
+		</blockquote>
+    </div>
+	<h2 id="brute_force_solution">Brute-force solution</h2>
+<pre class="python"><code class="python">
+<span class="constant">def </span><span class="function">get_weekday</span><span class="default">(</span><span class="default">day_elapsed):</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">weekdays </span><span class="default">= </span><span class="default">[</span><span class="string">"sunday"</span><span class="default"></span><span class="constant">, </span><span class="default"></span><span class="string">"monday"</span><span class="default"></span><span class="constant">, </span><span class="default"></span><span class="string">"tuesday"</span><span class="default"></span><span class="constant">, </span><span class="default"></span><span class="string">"wednesday"</span><span class="default"></span><span class="constant">, </span><span class="default"></span><span class="string">"thursday"</span><span class="default"></span><span class="constant">, </span><span class="default"></span><span class="string">"friday"</span><span class="default"></span><span class="constant">, </span><span class="default"></span><span class="string">"saturday"</span><span class="default">]</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="constant">return </span><span class="default">weekdays[day_elapsed </span><span class="default">% </span><span class="numeric">7</span><span class="default">]</span>
+<span class="default"></span>
+<span class="default"></span>
+<span class="constant">def </span><span class="function">get_month_days</span><span class="default">(</span><span class="default">month):</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">month_days </span><span class="default">= </span><span class="default">[</span><span class="numeric">31</span><span class="constant">, </span><span class="numeric">28</span><span class="constant">, </span><span class="numeric">31</span><span class="constant">, </span><span class="numeric">30</span><span class="constant">, </span><span class="numeric">31</span><span class="constant">, </span><span class="numeric">30</span><span class="constant">, </span><span class="numeric">31</span><span class="constant">, </span><span class="numeric">31</span><span class="constant">, </span><span class="numeric">30</span><span class="constant">, </span><span class="numeric">31</span><span class="constant">, </span><span class="numeric">30</span><span class="constant">, </span><span class="numeric">31</span><span class="default">]</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="constant">return </span><span class="default">month_days[month </span><span class="default">- </span><span class="numeric">1</span><span class="default">]</span>
+<span class="default"></span>
+<span class="default"></span>
+<span class="constant">def </span><span class="function">get_day_offset</span><span class="default">(</span><span class="default">days_passed):</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="constant">return </span><span class="default">days_passed </span><span class="default">% </span><span class="numeric">7</span>
+</code></pre>
+	<div class="explanation">
+		<p>
+
+        </p>
+	</div>
+<pre class="python"><code class="python">
+<span class="constant">def </span><span class="function">brute</span><span class="default">(</span><span class="default">):</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">day_match </span><span class="default">= </span><span class="numeric">0</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">days_elapsed </span><span class="default">= </span><span class="numeric">0</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">offset </span><span class="default">= </span><span class="default">get_day_offset</span><span class="default">(</span><span class="numeric">365</span><span class="default">)</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="constant">for </span><span class="default">year </span><span class="constant">in </span><span class="inbuilt">range</span><span class="default">(</span><span class="numeric">1901</span><span class="constant">, </span><span class="numeric">2001</span><span class="default">)</span><span class="default">:</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="constant">for </span><span class="default">month </span><span class="constant">in </span><span class="inbuilt">range</span><span class="default">(</span><span class="numeric">1</span><span class="constant">, </span><span class="numeric">13</span><span class="default">)</span><span class="default">:</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">month_days </span><span class="default">= </span><span class="default">get_month_days</span><span class="default">(</span><span class="default">month)</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="constant">for </span><span class="default">day </span><span class="constant">in </span><span class="inbuilt">range</span><span class="default">(</span><span class="numeric">1</span><span class="constant">, </span><span class="default">month_days </span><span class="default">+ </span><span class="numeric">1</span><span class="default">)</span><span class="default">:</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">days_elapsed </span><span class="default">= </span><span class="default">days_elapsed </span><span class="default">+ </span><span class="numeric">1</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">weekday </span><span class="default">= </span><span class="default">get_weekday</span><span class="default">(</span><span class="default">days_elapsed </span><span class="default">+ </span><span class="default">offset)</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="constant">if </span><span class="default">day </span><span class="default">== </span><span class="numeric">1 </span><span class="constant">and </span><span class="default">weekday </span><span class="default">== </span><span class="default">t_day</span><span class="default">: </span><span class="default">day_match </span><span class="default">= </span><span class="default">day_match </span><span class="default">+ </span><span class="numeric">1</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="constant">if </span><span class="default">month </span><span class="default">== </span><span class="numeric">2 </span><span class="constant">and </span><span class="default">year </span><span class="default">% </span><span class="numeric">4 </span><span class="default">== </span><span class="numeric">0 </span><span class="constant">and </span><span class="default"></span><span class="default">(</span><span class="default">year </span><span class="default">% </span><span class="numeric">100 </span><span class="default">!= </span><span class="numeric">0 </span><span class="constant">or </span><span class="default">year </span><span class="default">% </span><span class="numeric">400 </span><span class="default">== </span><span class="numeric">0</span><span class="default">)</span><span class="default">:</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">days_elapsed </span><span class="default">= </span><span class="default">days_elapsed </span><span class="default">+ </span><span class="numeric">1</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">weekday </span><span class="default">= </span><span class="default">get_weekday</span><span class="default">(</span><span class="default">days_elapsed </span><span class="default">+ </span><span class="default">offset)</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">day </span><span class="default">= </span><span class="default">day </span><span class="default">+ </span><span class="numeric">1</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="inbuilt">print</span><span class="default">(</span><span class="default">day_match)</span>
+</code></pre>
+	<div class="explanation">
+		<p>
+
+        </p>
+	</div>
+	<h2 id="execution">Execution</h2>
+<pre class="python"><code class="python">
+<span class="default">t_day </span><span class="default">= </span><span class="default"></span><span class="string">"sunday"</span><span class="default"></span>
+<span class="default">brute</span><span class="default">(</span><span class="default">)</span>
+<span class="default"></span>
+<span class="comment">#133865th</span>
+</code></pre>
+	<div class="explanation">
+		<p>
+
+        </p>
+	</div>
+	<h2 id="output">Output</h2>
+<pre class="python output"><samp class="python output"><code class="python">
+<span class="default">brute</span><span class="default">: </span><span class="numeric">171</span>
+</code></samp></pre>
+	<div class="explanation">
+		<p>
+
+        </p>
+	</div>
+</main>
+<footer></footer>
+</body>
+</html>
