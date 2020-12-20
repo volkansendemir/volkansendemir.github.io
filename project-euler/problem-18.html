@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="format-detection" content="telephone=no" />
+    <title>Project Euler - 18</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/project.css">
+    <link rel="stylesheet" href="../css/navigation.css">
+    <link rel="stylesheet" href="../css/coding.css">
+    <link href="../fonts/hind_siliguri.css" rel="stylesheet">
+	<link href="../fonts/consolas.css" rel="stylesheet">
+    <script type="text/javascript" src="../js/project-euler.js"></script>
+    <script type="text/javascript" src="../js/header.js"></script>
+    <script type="text/javascript" src="../js/breadcrumbs.js"></script>
+	<script type="text/javascript" src="../js/navigation.js"></script>
+</head>
+<body>
+<header><nav class="global"></nav></header>
+<aside class="nav-box-aside"><nav class="breadcrumbs"></nav></aside>
+<main>
+	<div class="question">
+		<div class="title">
+			<h1 id="question">Maximum path sum I</h1>
+			<div class="solve">Solved on <time datetime="2020-10-19">Mon, 19 Oct 2020</time></div>
+			<div class="upload">Uploaded on <time datetime="2020-12-17">Thu, 17 Dec 2020</time></div>
+        </div>
+        <blockquote class="question">
+			<div>
+				<p>By starting at the top of the triangle below and moving to adjacent numbers on the row below, the maximum total from top to bottom is 23.</p>
+                <pre style="white-space: pre; overflow-x:scroll; max-width: 50vw; padding-bottom:0">
+   <b style="color: red">3</b>
+  <b style="color: red">7</b> 4
+ 2 <b style="color: red">4</b> 6
+8 5 <b style="color: red">9</b> 3
+                </pre>
+                <p>That is, <span style="display: inline-block">3 + 7 + 4 + 9 = 23.</span></p>
+                <p>Find the maximum total from top to bottom of the triangle below:</p>
+                <pre style="white-space: pre; overflow-x:scroll; max-width: 50vw; padding-bottom:0">
+                     75
+                   95 64
+                  17 47 82
+                18 35 87 10
+               20 04 82 47 65
+             19 01 23 75 03 34
+            88 02 77 73 07 63 67
+          99 65 04 28 06 16 70 92
+         41 41 26 56 83 40 80 70 33
+       41 48 72 33 47 32 37 16 94 29
+      53 71 44 65 25 43 91 52 97 51 14
+    70 11 33 28 77 73 17 78 39 68 17 57
+   91 71 52 38 17 14 91 43 58 50 27 29 48
+ 63 66 04 68 89 53 67 30 73 16 69 87 40 31
+04 62 98 27 23 09 70 98 73 93 38 53 60 04 23
+                </pre>
+                <p><b>NOTE:</b> As there are only 16384 routes, it is possible to solve this problem by trying every route. However, Problem 67, is the same challenge with a triangle containing one-hundred rows; it cannot be solved by brute force, and requires a clever method! ;o)</p>
+            </div>
+		</blockquote>
+    </div>
+	<h2 id="brute_force_solution">Brute-force solution</h2>
+<pre class="python"><code class="python">
+<span class="constant">def </span><span class="function">go_next</span><span class="default">(</span><span class="default">row</span><span class="constant">,</span><span class="default"> column</span><span class="constant">,</span><span class="default"> column</span><span class="constant">,</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="constant">global </span><span class="default">global_max</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">current </span><span class="default">= </span><span class="default">current </span><span class="default">+ </span><span class="default">triangle[row][column]</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="constant">if </span><span class="default">current </span><span class="default">> </span><span class="default">global_max</span><span class="default">: </span><span class="default">global_max </span><span class="default">= </span><span class="default">current</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="constant">if </span><span class="default">row </span><span class="default">+ </span><span class="numeric">1 </span><span class="default">== </span><span class="inbuilt">len</span><span class="default">(</span><span class="default">triangle)</span><span class="default">: </span><span class="constant">return</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">go_next</span><span class="default">(</span><span class="default">row </span><span class="default">+ </span><span class="numeric">1</span><span class="constant">, </span><span class="default">column</span><span class="constant">, </span><span class="default">current)</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">go_next</span><span class="default">(</span><span class="default">row </span><span class="default">+ </span><span class="numeric">1</span><span class="constant">, </span><span class="default">column </span><span class="default">+ </span><span class="numeric">1</span><span class="constant">, </span><span class="default">current)</span>
+</code></pre>
+	<div class="explanation">
+		<p>
+
+        </p>
+	</div>
+	<h2 id="execution">Execution</h2>
+<pre class="python"><code class="python">
+<span class="default">triangle </span><span class="default">= </span><span class="default">[[</span><span class="numeric">75</span><span class="default">]</span><span class="constant">,</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">[</span><span class="numeric">95</span><span class="constant">, </span><span class="numeric">64</span><span class="default">]</span><span class="constant">,</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">[</span><span class="numeric">17</span><span class="constant">, </span><span class="numeric">47</span><span class="constant">, </span><span class="numeric">82</span><span class="default">]</span><span class="constant">,</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">[</span><span class="numeric">18</span><span class="constant">, </span><span class="numeric">35</span><span class="constant">, </span><span class="numeric">87</span><span class="constant">, </span><span class="numeric">10</span><span class="default">]</span><span class="constant">,</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">[</span><span class="numeric">20</span><span class="constant">, </span><span class="numeric">4</span><span class="constant">, </span><span class="numeric">82</span><span class="constant">, </span><span class="numeric">47</span><span class="constant">, </span><span class="numeric">65</span><span class="default">]</span><span class="constant">,</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">[</span><span class="numeric">19</span><span class="constant">, </span><span class="numeric">1</span><span class="constant">, </span><span class="numeric">23</span><span class="constant">, </span><span class="numeric">75</span><span class="constant">, </span><span class="numeric">3</span><span class="constant">, </span><span class="numeric">34</span><span class="default">]</span><span class="constant">,</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">[</span><span class="numeric">88</span><span class="constant">, </span><span class="numeric">2</span><span class="constant">, </span><span class="numeric">77</span><span class="constant">, </span><span class="numeric">73</span><span class="constant">, </span><span class="numeric">7</span><span class="constant">, </span><span class="numeric">63</span><span class="constant">, </span><span class="numeric">67</span><span class="default">]</span><span class="constant">,</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">[</span><span class="numeric">99</span><span class="constant">, </span><span class="numeric">65</span><span class="constant">, </span><span class="numeric">4</span><span class="constant">, </span><span class="numeric">28</span><span class="constant">, </span><span class="numeric">6</span><span class="constant">, </span><span class="numeric">16</span><span class="constant">, </span><span class="numeric">70</span><span class="constant">, </span><span class="numeric">92</span><span class="default">]</span><span class="constant">,</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">[</span><span class="numeric">41</span><span class="constant">, </span><span class="numeric">41</span><span class="constant">, </span><span class="numeric">26</span><span class="constant">, </span><span class="numeric">56</span><span class="constant">, </span><span class="numeric">83</span><span class="constant">, </span><span class="numeric">40</span><span class="constant">, </span><span class="numeric">80</span><span class="constant">, </span><span class="numeric">70</span><span class="constant">, </span><span class="numeric">33</span><span class="default">]</span><span class="constant">,</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">[</span><span class="numeric">41</span><span class="constant">, </span><span class="numeric">48</span><span class="constant">, </span><span class="numeric">72</span><span class="constant">, </span><span class="numeric">33</span><span class="constant">, </span><span class="numeric">47</span><span class="constant">, </span><span class="numeric">32</span><span class="constant">, </span><span class="numeric">37</span><span class="constant">, </span><span class="numeric">16</span><span class="constant">, </span><span class="numeric">94</span><span class="constant">, </span><span class="numeric">29</span><span class="default">]</span><span class="constant">,</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">[</span><span class="numeric">53</span><span class="constant">, </span><span class="numeric">71</span><span class="constant">, </span><span class="numeric">44</span><span class="constant">, </span><span class="numeric">65</span><span class="constant">, </span><span class="numeric">25</span><span class="constant">, </span><span class="numeric">43</span><span class="constant">, </span><span class="numeric">91</span><span class="constant">, </span><span class="numeric">52</span><span class="constant">, </span><span class="numeric">97</span><span class="constant">, </span><span class="numeric">51</span><span class="constant">, </span><span class="numeric">14</span><span class="default">]</span><span class="constant">,</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">[</span><span class="numeric">70</span><span class="constant">, </span><span class="numeric">11</span><span class="constant">, </span><span class="numeric">33</span><span class="constant">, </span><span class="numeric">28</span><span class="constant">, </span><span class="numeric">77</span><span class="constant">, </span><span class="numeric">73</span><span class="constant">, </span><span class="numeric">17</span><span class="constant">, </span><span class="numeric">78</span><span class="constant">, </span><span class="numeric">39</span><span class="constant">, </span><span class="numeric">68</span><span class="constant">, </span><span class="numeric">17</span><span class="constant">, </span><span class="numeric">57</span><span class="default">]</span><span class="constant">,</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">[</span><span class="numeric">91</span><span class="constant">, </span><span class="numeric">71</span><span class="constant">, </span><span class="numeric">52</span><span class="constant">, </span><span class="numeric">38</span><span class="constant">, </span><span class="numeric">17</span><span class="constant">, </span><span class="numeric">14</span><span class="constant">, </span><span class="numeric">91</span><span class="constant">, </span><span class="numeric">43</span><span class="constant">, </span><span class="numeric">58</span><span class="constant">, </span><span class="numeric">50</span><span class="constant">, </span><span class="numeric">27</span><span class="constant">, </span><span class="numeric">29</span><span class="constant">, </span><span class="numeric">48</span><span class="default">]</span><span class="constant">,</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">[</span><span class="numeric">63</span><span class="constant">, </span><span class="numeric">66</span><span class="constant">, </span><span class="numeric">4</span><span class="constant">, </span><span class="numeric">68</span><span class="constant">, </span><span class="numeric">89</span><span class="constant">, </span><span class="numeric">53</span><span class="constant">, </span><span class="numeric">67</span><span class="constant">, </span><span class="numeric">30</span><span class="constant">, </span><span class="numeric">73</span><span class="constant">, </span><span class="numeric">16</span><span class="constant">, </span><span class="numeric">69</span><span class="constant">, </span><span class="numeric">87</span><span class="constant">, </span><span class="numeric">40</span><span class="constant">, </span><span class="numeric">31</span><span class="default">]</span><span class="constant">,</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">[</span><span class="numeric">4</span><span class="constant">, </span><span class="numeric">62</span><span class="constant">, </span><span class="numeric">98</span><span class="constant">, </span><span class="numeric">27</span><span class="constant">, </span><span class="numeric">23</span><span class="constant">, </span><span class="numeric">9</span><span class="constant">, </span><span class="numeric">70</span><span class="constant">, </span><span class="numeric">98</span><span class="constant">, </span><span class="numeric">73</span><span class="constant">, </span><span class="numeric">93</span><span class="constant">, </span><span class="numeric">38</span><span class="constant">, </span><span class="numeric">53</span><span class="constant">, </span><span class="numeric">60</span><span class="constant">, </span><span class="numeric">4</span><span class="constant">, </span><span class="numeric">23</span><span class="default">]]</span>
+<span class="default"></span>
+<span class="default">global_max </span><span class="default">= </span><span class="numeric">0</span>
+<span class="default">go_next</span><span class="default">(</span><span class="numeric">0</span><span class="constant">, </span><span class="numeric">0</span><span class="constant">, </span><span class="numeric">0</span><span class="default">)</span>
+<span class="default"></span>
+<span class="inbuilt">print</span><span class="default">(</span><span class="default">global_max)</span>
+<span class="default"></span>
+<span class="comment">#144067th</span>
+</code></pre>
+	<div class="explanation">
+		<p>
+
+        </p>
+	</div>
+	<h2 id="output">Output</h2>
+<pre class="python output"><samp class="python output"><code class="python">
+<span class="default">brute_force</span><span class="default">: </span><span class="numeric">1074</span>
+</code></samp></pre>
+	<div class="explanation">
+		<p>
+
+        </p>
+	</div>
+</main>
+<footer></footer>
+</body>
+</html>

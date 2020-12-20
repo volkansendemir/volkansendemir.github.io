@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="format-detection" content="telephone=no" />
+    <title>Project Euler - 26</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/project.css">
+    <link rel="stylesheet" href="../css/navigation.css">
+    <link rel="stylesheet" href="../css/coding.css">
+    <link href="../fonts/hind_siliguri.css" rel="stylesheet">
+	<link href="../fonts/consolas.css" rel="stylesheet">
+    <script type="text/javascript" src="../js/project-euler.js"></script>
+    <script type="text/javascript" src="../js/header.js"></script>
+    <script type="text/javascript" src="../js/breadcrumbs.js"></script>
+	<script type="text/javascript" src="../js/navigation.js"></script>
+</head>
+<body>
+<header><nav class="global"></nav></header>
+<aside class="nav-box-aside"><nav class="breadcrumbs"></nav></aside>
+<main>
+	<div class="question">
+		<div class="title">
+			<h1 id="question">Reciprocal cycles</h1>
+			<div class="solve">Solved on <time datetime="2020-12-18">Fri, 18 Dec 2020</time></div>
+			<div class="upload">Uploaded on <time datetime="2020-12-18">Fri, 18 Dec 2020</time></div>
+        </div>
+        <blockquote class="question">
+			<div>
+				<p>A unit fraction contains 1 in the numerator. The decimal representation of the unit fractions with denominators 2 to 10 are given:</p>
+                <ul style="list-style: none; margin-left:1em">
+                    <li><sup>1</sup>/<sub>2</sub> = 0.5</li>
+                    <li><sup>1</sup>/<sub>3</sub> = 0.(3)</li>
+                    <li><sup>1</sup>/<sub>4</sub> = 0.25</li>
+                    <li><sup>1</sup>/<sub>5</sub> = 0.2</li>
+                    <li><sup>1</sup>/<sub>6</sub> = 0.1(6)</li>
+                    <li><sup>1</sup>/<sub>7</sub> = 0.(142857)</li>
+                    <li><sup>1</sup>/<sub>8</sub> = 0.125</li>
+                    <li><sup>1</sup>/<sub>9</sub> = 0.(1)</li>
+                    <li><sup>1</sup>/<sub>10</sub> = 0.1</li>
+                </ul>
+                <p>Where 0.1(6) means 0.166666..., and has a 1-digit recurring cycle. It can be seen that <sup>1</sup>/<sub>7</sub> has a 6-digit recurring cycle.</p>
+                <p>Find the value of <span style="display: inline-block">d < 1000</span> for which <sup>1</sup>/<sub>d</sub> contains the longest recurring cycle in its decimal fraction part.</p>
+            </div>
+		</blockquote>
+    </div>
+	<h2 id="brute_force_solution">Brute-force solution</h2>
+<pre class="python"><code class="python">
+<span class="constant">def </span><span class="function">check_str</span><span class="default">(</span><span class="default">a</span><span class="constant">,</span><span class="default"> i</span><span class="constant">,</span><span class="default"> max_len</span><span class="constant">,</span><span class="default"> max_match</span><span class="default">):</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">str_fraction </span><span class="default">= </span><span class="inbuilt">str</span><span class="default">(Decimal(</span><span class="numeric">1</span><span class="default">) </span><span class="default">/ </span><span class="default">Decimal(i)).split(</span><span class="string">"."</span><span class="default">)[</span><span class="numeric">1</span><span class="default">][a:]</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">all_same </span><span class="default">= </span><span class="constant">True</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="constant">for </span><span class="default">dl </span><span class="constant">in </span><span class="inbuilt">range</span><span class="default">(</span><span class="numeric">1</span><span class="constant">, </span><span class="inbuilt">int</span><span class="default">(</span><span class="inbuilt">len</span><span class="default">(str_fraction</span><span class="default">) </span><span class="default">/ </span><span class="numeric">2</span><span class="default">))</span><span class="default">:</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">frac_start </span><span class="default">= </span><span class="default">str_fraction[</span><span class="numeric">0</span><span class="default">:dl]</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">all_same </span><span class="default">= </span><span class="constant">True</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="constant">for </span><span class="default">m </span><span class="constant">in </span><span class="inbuilt">range</span><span class="default">(</span><span class="inbuilt">int</span><span class="default">(</span><span class="inbuilt">len</span><span class="default">(str_fraction</span><span class="default">) </span><span class="default">/ </span><span class="default">dl))</span><span class="default">:</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">frac_part </span><span class="default">= </span><span class="default">str_fraction[dl </span><span class="default">* </span><span class="default">m:dl </span><span class="default">* </span><span class="default"></span><span class="default">(</span><span class="default">m </span><span class="default">+ </span><span class="numeric">1</span><span class="default">)]</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="constant">if </span><span class="default">frac_start </span><span class="default">!= </span><span class="default">frac_part</span><span class="default">: </span><span class="default">all_same </span><span class="default">= </span><span class="constant">False</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="constant">if </span><span class="default">all_same</span><span class="default">:</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="constant">if </span><span class="default">max_len </span><span class="default">< </span><span class="inbuilt">len</span><span class="default">(</span><span class="default">frac_part)</span><span class="default">:</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">max_len </span><span class="default">= </span><span class="inbuilt">len</span><span class="default">(</span><span class="default">frac_part)</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">max_match </span><span class="default">= </span><span class="default">i</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="constant">break</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="constant">return </span><span class="default">str_fraction</span><span class="constant">, </span><span class="default">all_same</span><span class="constant">, </span><span class="default">max_len</span><span class="constant">, </span><span class="default">max_match</span>
+</code></pre>
+	<div class="explanation">
+		<p>
+
+        </p>
+	</div>
+<pre class="python"><code class="python">
+<span class="constant">def </span><span class="function">brute</span><span class="default">(</span><span class="default">):</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">max_len </span><span class="default">= </span><span class="numeric">0</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">max_match </span><span class="default">= </span><span class="numeric">0</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">getcontext</span><span class="default">(</span><span class="default">).prec </span><span class="default">= </span><span class="default">precision</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="constant">for </span><span class="default">i </span><span class="constant">in </span><span class="inbuilt">range</span><span class="default">(</span><span class="numeric">10</span><span class="constant">, </span><span class="default">lim_up)</span><span class="default">:</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">all_same </span><span class="default">= </span><span class="constant">False</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">a </span><span class="default">= </span><span class="numeric">0</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">str_fraction </span><span class="default">= </span><span class="default"></span><span class="string">"  "</span><span class="default"></span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="constant">while </span><span class="constant">not </span><span class="default">all_same </span><span class="constant">and </span><span class="default">a </span><span class="default">< </span><span class="inbuilt">int</span><span class="default">(</span><span class="inbuilt">len</span><span class="default">(str_fraction</span><span class="default">) </span><span class="default">/ </span><span class="numeric">2</span><span class="default">)</span><span class="default">:</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">str_fraction</span><span class="constant">, </span><span class="default">all_same</span><span class="constant">, </span><span class="default">max_len</span><span class="constant">, </span><span class="default">max_match </span><span class="default">= </span><span class="default">check_str</span><span class="default">(</span><span class="default">a</span><span class="constant">, </span><span class="default">i</span><span class="constant">, </span><span class="default">max_len</span><span class="constant">, </span><span class="default">max_match)</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">a </span><span class="default">= </span><span class="default">a </span><span class="default">+ </span><span class="numeric">1</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="inbuilt">print</span><span class="default">(</span><span class="default"></span><span class="string">"hit:"</span><span class="default"></span><span class="constant">, </span><span class="default">max_match</span><span class="constant">, </span><span class="default"></span><span class="string">"rep_len:"</span><span class="default"></span><span class="constant">, </span><span class="default">max_len)</span>
+</code></pre>
+	<div class="explanation">
+		<p>
+
+        </p>
+	</div>
+	<h2 id="execution">Execution</h2>
+<pre class="python"><code class="python">
+<span class="default">precision </span><span class="default">= </span><span class="numeric">5000</span>
+<span class="default">lim_up </span><span class="default">= </span><span class="numeric">1000</span>
+<span class="default">brute</span><span class="default">(</span><span class="default">)</span>
+<span class="default"></span>
+<span class="comment">#83301st</span>
+</code></pre>
+	<div class="explanation">
+		<p>
+
+        </p>
+	</div>
+	<h2 id="output">Output</h2>
+<pre class="python output"><samp class="python output"><code class="python">
+<span class="default">brute</span><span class="default">: </span>
+<span class="default">hit</span><span class="default">: </span><span class="numeric">983</span>
+<span class="default">rep_len</span><span class="default">: </span><span class="numeric">982</span>
+</code></samp></pre>
+	<div class="explanation">
+		<p>
+
+        </p>
+	</div>
+</main>
+<footer></footer>
+</body>
+</html>

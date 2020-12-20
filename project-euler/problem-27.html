@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="format-detection" content="telephone=no" />
+    <title>Project Euler - 27</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/project.css">
+    <link rel="stylesheet" href="../css/navigation.css">
+    <link rel="stylesheet" href="../css/coding.css">
+    <link href="../fonts/hind_siliguri.css" rel="stylesheet">
+	<link href="../fonts/consolas.css" rel="stylesheet">
+    <script type="text/javascript" src="../js/project-euler.js"></script>
+    <script type="text/javascript" src="../js/header.js"></script>
+    <script type="text/javascript" src="../js/breadcrumbs.js"></script>
+	<script type="text/javascript" src="../js/navigation.js"></script>
+</head>
+<body>
+<header><nav class="global"></nav></header>
+<aside class="nav-box-aside"><nav class="breadcrumbs"></nav></aside>
+<main>
+	<div class="question">
+		<div class="title">
+			<h1 id="question">Quadratic primes</h1>
+			<div class="solve">Solved on <time datetime="2020-12-18">Fri, 18 Dec 2020</time></div>
+			<div class="upload">Uploaded on <time datetime="2020-12-18">Fri, 18 Dec 2020</time></div>
+        </div>
+        <blockquote class="question">
+			<div>
+				<p>Euler discovered the remarkable quadratic formula:</p>
+				<p>n<sup>2</sup> + n + 41</p>
+                <p>It turns out that the formula will produce 40 primes for the consecutive integer values <span style="display: inline-block">0 ≤ n ≤ 39</span>. However, when <span style="display: inline-block">n = 40</span>, <span style="display: inline-block">40<sup>2</sup> + 40 + 41 = 40(40 + 1) + 41</span> is divisible by 41, and certainly when <span style="display: inline-block">n = 41, 41<sup>2</sup> + 41 + 41</span> is clearly divisible by 41.</p>
+                <p>The incredible formula <span style="display: inline-block">n<sup>2</sup> -79n + 1601</span> was discovered, which produces 80 primes for the consecutive values <span style="display: inline-block">0 ≤ n ≤ 79</span>. The product of the coefficients, −79 and 1601, is −126479.</p>
+                <p>Considering quadratics of the form:</p>
+                <p><span style="display: inline-block">n<sup>2</sup> + an + b,</span> where <span style="display: inline-block">|a| < 1000</span> and <span style="display: inline-block">|b| < 1000</span></p>
+                <p>where |n| is the modulus/absolute value of n
+                <br>e.g. <span style="display: inline-block">|11| = 11</span> and <span style="display: inline-block">|-4| = 4</span></p>
+                <p>Find the product of the coefficients, a and b, for the quadratic expression that produces the maximum number of primes for consecutive values of n, starting with <span style="display: inline-block">n = 0</span>.</p>
+            </div>
+		</blockquote>
+    </div>
+	<h2 id="brute_force_solution">Brute-force solution</h2>
+<pre class="python"><code class="python">
+<span class="constant">def </span><span class="function">is_prime</span><span class="default">(</span><span class="default">num):</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="constant">if </span><span class="default">num </span><span class="default">< </span><span class="numeric">2</span><span class="default">: </span><span class="constant">return </span><span class="constant">False</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="constant">for </span><span class="default">i </span><span class="constant">in </span><span class="inbuilt">range</span><span class="default">(</span><span class="numeric">2</span><span class="constant">, </span><span class="inbuilt">int</span><span class="default">(num**(</span><span class="numeric">1</span><span class="default"> / </span><span class="numeric">2</span><span class="default">)))</span><span class="default">:</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="constant">if </span><span class="default">num </span><span class="default">% </span><span class="default">i </span><span class="default">== </span><span class="numeric">0</span><span class="default">:</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="constant">return </span><span class="constant">False</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="constant">return </span><span class="constant">True</span>
+<span class="default"></span>
+<span class="default"></span>
+<span class="constant">def </span><span class="function">get_known_primes</span><span class="default">(</span><span class="default">):</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">known_primes </span><span class="default">= </span><span class="default">[</span><span class="numeric">2</span><span class="default">]</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="constant">for </span><span class="default">i </span><span class="constant">in </span><span class="inbuilt">list</span><span class="default">(</span><span class="inbuilt">range</span><span class="default">(</span><span class="numeric">3</span><span class="constant">, </span><span class="default">lim_up))[::</span><span class="numeric">2</span><span class="default">]</span><span class="default">:</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="constant">if </span><span class="default">is_prime</span><span class="default">(</span><span class="default">i)</span><span class="default">:</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">known_primes.append</span><span class="default">(</span><span class="default">i)</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">known_primes.append</span><span class="default">(</span><span class="default">-i)</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="constant">return </span><span class="default">known_primes</span>
+</code></pre>
+	<div class="explanation">
+		<p>
+
+        </p>
+	</div>
+<pre class="python"><code class="python">
+<span class="constant">def </span><span class="function">test_max</span><span class="default">(</span><span class="default">a</span><span class="constant">,</span><span class="default"> b):</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">n </span><span class="default">= </span><span class="numeric">0</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">while </span><span class="default">is_prime(((n**</span><span class="numeric">2</span><span class="default">) </span><span class="default">+ </span><span class="default"></span><span class="default">(</span><span class="default">a </span><span class="default">* </span><span class="default">n</span><span class="default">) </span><span class="default">+ </span><span class="default">b))</span><span class="default">:</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">n </span><span class="default">= </span><span class="default">n </span><span class="default">+ </span><span class="numeric">1</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="constant">return </span><span class="default">n</span>
+<span class="default"></span>
+<span class="default"></span>
+<span class="constant">def </span><span class="function">brute</span><span class="default">(</span><span class="default">):</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">known_primes </span><span class="default">= </span><span class="default">get_known_primes</span><span class="default">(</span><span class="default">)</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">max_qpc </span><span class="default">= </span><span class="numeric">0</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">mult </span><span class="default">= </span><span class="numeric">0</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="constant">for </span><span class="default">a </span><span class="constant">in </span><span class="default">known_primes</span><span class="default">:</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="constant">for </span><span class="default">b </span><span class="constant">in </span><span class="default">known_primes</span><span class="default">:</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">result </span><span class="default">= </span><span class="default">test_max</span><span class="default">(</span><span class="default">a</span><span class="constant">, </span><span class="default">b)</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="constant">if </span><span class="default">result </span><span class="default">> </span><span class="default">max_qpc</span><span class="default">:</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">max_qpc </span><span class="default">= </span><span class="default">result</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">mult </span><span class="default">= </span><span class="default">a </span><span class="default">* </span><span class="default">b</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="inbuilt">print</span><span class="default">(</span><span class="default">mult)</span>
+</code></pre>
+	<div class="explanation">
+		<p>
+
+        </p>
+	</div>
+	<h2 id="execution">Execution</h2>
+<pre class="python"><code class="python">
+<span class="default">lim_up </span><span class="default">= </span><span class="numeric">1000</span>
+<span class="default">brute</span><span class="default">(</span><span class="default">)</span>
+<span class="default"></span>
+<span class="comment">#86682nd</span>
+</code></pre>
+	<div class="explanation">
+		<p>
+
+        </p>
+	</div>
+	<h2 id="output">Output</h2>
+<pre class="python output"><samp class="python output"><code class="python">
+<span class="default">brute</span><span class="default">: </span><span class="numeric">-59231</span>
+</code></samp></pre>
+	<div class="explanation">
+		<p>
+
+        </p>
+	</div>
+</main>
+<footer></footer>
+</body>
+</html>

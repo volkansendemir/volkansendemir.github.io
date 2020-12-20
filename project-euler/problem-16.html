@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="format-detection" content="telephone=no" />
+    <title>Project Euler - 16</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/project.css">
+    <link rel="stylesheet" href="../css/navigation.css">
+    <link rel="stylesheet" href="../css/coding.css">
+    <link href="../fonts/hind_siliguri.css" rel="stylesheet">
+	<link href="../fonts/consolas.css" rel="stylesheet">
+    <script type="text/javascript" src="../js/project-euler.js"></script>
+    <script type="text/javascript" src="../js/header.js"></script>
+    <script type="text/javascript" src="../js/breadcrumbs.js"></script>
+	<script type="text/javascript" src="../js/navigation.js"></script>
+</head>
+<body>
+<header><nav class="global"></nav></header>
+<aside class="nav-box-aside"><nav class="breadcrumbs"></nav></aside>
+<main>
+	<div class="question">
+		<div class="title">
+			<h1 id="question">Power digit sum</h1>
+			<div class="solve">Solved on <time datetime="2020-10-19">Mon, 19 Oct 2020</time></div>
+			<div class="upload">Uploaded on <time datetime="2020-12-17">Thu, 17 Dec 2020</time></div>
+        </div>
+        <blockquote class="question">
+			<div>
+				<p><span style="display: inline-block">2<sup>15</sup> = 32768</span> and the sum of its digits is <span style="display: inline-block">3 + 2 + 7 + 6 + 8 = 26.</span></p>
+				<p>What is the sum of the digits of the number <span style="display: inline-block">2<sup>1000</sup>?</span></p>
+            </div>
+		</blockquote>
+    </div>
+	<h2 id="brute_force_solution">Brute-force solution</h2>
+<pre class="python"><code class="python">
+<span class="constant">def </span><span class="function">get_sum_digits</span><span class="default">(</span><span class="default">num):</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">sum_digits </span><span class="default">= </span><span class="numeric">0</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="constant">for </span><span class="default">digit </span><span class="constant">in </span><span class="inbuilt">str</span><span class="default">(</span><span class="default">num)</span><span class="default">:</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">sum_digits </span><span class="default">= </span><span class="default">sum_digits </span><span class="default">+ </span><span class="inbuilt">int</span><span class="default">(</span><span class="default">digit)</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="constant">return </span><span class="default">sum_digits</span>
+</code></pre>
+	<div class="explanation">
+		<p>
+
+        </p>
+	</div>
+<pre class="python"><code class="python">
+<span class="constant">def </span><span class="function">brute</span><span class="default">(</span><span class="default">):</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">powered </span><span class="default">= </span><span class="numeric">2</span><span class="default">**lim_up</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">sum_digits </span><span class="default">= </span><span class="default">get_sum_digits</span><span class="default">(</span><span class="default">powered)</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="inbuilt">print</span><span class="default">(</span><span class="default">sum_digits)</span>
+</code></pre>
+	<div class="explanation">
+		<p>
+
+        </p>
+	</div>
+	<h2 id="modular_visualization">Modular Visualization</h2>
+<pre class="python"><code class="python">
+<span class="constant">from </span><span class="default">matplotlib </span><span class="constant">import </span><span class="default">pyplot </span><span class="constant">as </span><span class="default">plt</span>
+<span class="default"></span>
+<span class="default"></span>
+<span class="constant">def </span><span class="function">visualize_remainders</span><span class="default">(</span><span class="default">):</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">digit_sums </span><span class="default">= </span><span class="default">[]</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">single_digit_sums </span><span class="default">= </span><span class="default">[]</span>
+<span class="default"></span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="constant">for </span><span class="default">i </span><span class="constant">in </span><span class="inbuilt">range</span><span class="default">(</span><span class="numeric">51</span><span class="default">)</span><span class="default">:</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">two_to_power </span><span class="default">= </span><span class="numeric">2 </span><span class="default">** </span><span class="default">i</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">sum_digits </span><span class="default">= </span><span class="numeric">0</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="constant">for </span><span class="default">digit </span><span class="constant">in </span><span class="inbuilt">str</span><span class="default">(</span><span class="default">two_to_power)</span><span class="default">:</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">sum_digits </span><span class="default">= </span><span class="default">sum_digits </span><span class="default">+ </span><span class="inbuilt">int</span><span class="default">(</span><span class="default">digit)</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">digit_sums.append</span><span class="default">(</span><span class="default">sum_digits)</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">single_digit_sums.append</span><span class="default">(</span><span class="default">sum_digits)</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="constant">while </span><span class="default">single_digit_sums[-</span><span class="numeric">1</span><span class="default">] </span><span class="default">> </span><span class="numeric">9</span><span class="default">:</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">sum_digits </span><span class="default">= </span><span class="numeric">0</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="constant">for </span><span class="default">digit </span><span class="constant">in </span><span class="inbuilt">str</span><span class="default">(</span><span class="default">single_digit_sums[-</span><span class="numeric">1</span><span class="default">])</span><span class="default">:</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">sum_digits </span><span class="default">= </span><span class="default">sum_digits </span><span class="default">+ </span><span class="inbuilt">int</span><span class="default">(</span><span class="default">digit)</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">single_digit_sums[-</span><span class="numeric">1</span><span class="default">] </span><span class="default">= </span><span class="default">sum_digits</span>
+<span class="default"></span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">plt.scatter(</span><span class="inbuilt">list</span><span class="default">(</span><span class="inbuilt">range</span><span class="default">(</span><span class="inbuilt">len</span><span class="default">(single_digit_sums)))</span><span class="constant">, </span><span class="default">single_digit_sums)</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">plt.show</span><span class="default">(</span><span class="default">)</span>
+<span class="default"></span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="inbuilt">print</span><span class="default">(</span><span class="default">single_digit_sums[:</span><span class="numeric">21</span><span class="default">])</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="inbuilt">print</span><span class="default">(</span><span class="default">digit_sums[:</span><span class="numeric">21</span><span class="default">])</span>
+</code></pre>
+	<div class="explanation">
+		<p>
+
+        </p>
+	</div>
+	<h2 id="trend_visualization">Trend Visualization</h2>
+<pre class="python"><code class="python">
+<span class="constant">def </span><span class="function">single_digit_sum</span><span class="default">(</span><span class="default">given_power):</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">modular_sum </span><span class="default">= </span><span class="default">[</span><span class="numeric">1</span><span class="constant">, </span><span class="numeric">2</span><span class="constant">, </span><span class="numeric">4</span><span class="constant">, </span><span class="numeric">8</span><span class="constant">, </span><span class="numeric">7</span><span class="constant">, </span><span class="numeric">5</span><span class="default">]</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="constant">return </span><span class="default">modular_sum[given_power </span><span class="default">% </span><span class="numeric">6</span><span class="default">]</span>
+<span class="default"></span>
+<span class="default"></span>
+<span class="constant">def </span><span class="function">visualize_trend</span><span class="default">(</span><span class="default">):</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">digit_sums </span><span class="default">= </span><span class="default">[]</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">trend </span><span class="default">= </span><span class="default">[]</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="constant">for </span><span class="default">i </span><span class="constant">in </span><span class="inbuilt">list</span><span class="default">(</span><span class="inbuilt">range</span><span class="default">(</span><span class="numeric">1001</span><span class="default">))[single_digit_sum(</span><span class="numeric">1001</span><span class="default">)::</span><span class="numeric">6</span><span class="default">]</span><span class="default">:</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">trend.append((</span><span class="numeric">9 </span><span class="default">* </span><span class="default"></span><span class="default">(</span><span class="default">i </span><span class="default">// </span><span class="numeric">6</span><span class="default">)</span><span class="default">) </span><span class="default">+ </span><span class="default">single_digit_sum</span><span class="default">(</span><span class="default">i))</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">powered </span><span class="default">= </span><span class="numeric">2 </span><span class="default">** </span><span class="default">i</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">powered_sum </span><span class="default">= </span><span class="numeric">0</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="constant">for </span><span class="default">digit </span><span class="constant">in </span><span class="inbuilt">str</span><span class="default">(</span><span class="default">powered)</span><span class="default">:</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">powered_sum </span><span class="default">= </span><span class="default">powered_sum </span><span class="default">+ </span><span class="inbuilt">int</span><span class="default">(</span><span class="default">digit)</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">digit_sums.append</span><span class="default">(</span><span class="default">powered_sum)</span>
+<span class="default"></span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">plt.scatter(</span><span class="inbuilt">list</span><span class="default">(</span><span class="inbuilt">range</span><span class="default">(</span><span class="inbuilt">len</span><span class="default">(digit_sums)))</span><span class="constant">, </span><span class="default">digit_sums</span><span class="constant">, </span><span class="default">s=</span><span class="numeric">5</span><span class="default">)</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">plt.scatter(</span><span class="inbuilt">list</span><span class="default">(</span><span class="inbuilt">range</span><span class="default">(</span><span class="inbuilt">len</span><span class="default">(trend)))</span><span class="constant">, </span><span class="default">trend</span><span class="constant">, </span><span class="default">s=</span><span class="numeric">3</span><span class="default">)</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">plt.show</span><span class="default">(</span><span class="default">)</span>
+</code></pre>
+	<div class="explanation">
+		<p>
+
+        </p>
+	</div>
+	<h2 id="execution">Execution</h2>
+<pre class="python"><code class="python">
+<span class="default">lim_up </span><span class="default">= </span><span class="numeric">1000</span>
+<span class="default"></span>
+<span class="default">brute</span><span class="default">(</span><span class="default">)</span>
+<span class="default">visualize_remainders</span><span class="default">(</span><span class="default">)</span>
+<span class="default">visualize_trend</span><span class="default">(</span><span class="default">)</span>
+<span class="default"></span>
+<span class="comment">#228408th</span>
+</code></pre>
+	<div class="explanation">
+		<p>
+
+        </p>
+	</div>
+	<h2 id="output">Output</h2>
+<pre class="python output"><samp class="python output"><code class="python">
+<span class="default">brute_force</span><span class="default">: </span><span class="numeric">1366</span>
+<span class="default">modular_output</span><span class="default">: </span><span class="numeric">[1, 2, 4, 8, 7, 5, 1, 2, 4, 8, 7, 5, 1, 2, 4, 8, 7, 5, 1, 2, 4]</span>
+<span class="default">trend_output</span><span class="default">: </span><span class="numeric">[1, 2, 4, 8, 7, 5, 10, 11, 13, 8, 7, 14, 19, 20, 22, 26, 25, 14, 19, 29, 31]</span>
+</code></samp></pre>
+	<div class="explanation">
+		<p>
+
+        </p>
+	</div>
+</main>
+<footer></footer>
+</body>
+</html>
