@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta name="format-detection" content="telephone=no" />
+    <title>Project Euler - 37</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/project.css">
+    <link rel="stylesheet" href="../css/navigation.css">
+    <link rel="stylesheet" href="../css/coding.css">
+    <link href="../fonts/hind_siliguri.css" rel="stylesheet">
+	<link href="../fonts/consolas.css" rel="stylesheet">
+    <script type="text/javascript" src="../js/project-euler.js"></script>
+    <script type="text/javascript" src="../js/header.js"></script>
+    <script type="text/javascript" src="../js/breadcrumbs.js"></script>
+	<script type="text/javascript" src="../js/navigation.js"></script>
+</head>
+<body>
+<header><nav class="global"></nav></header>
+<aside class="nav-box-aside"><nav class="breadcrumbs"></nav></aside>
+<main>
+	<div class="question">
+		<div class="title">
+			<h1 id="question">Truncatable primes</h1>
+			<div class="solve">Solved on <time datetime="2020-12-20">Sun, 20 Dec 2020</time></div>
+			<div class="upload">Uploaded on <time datetime="2020-12-20">Sun, 20 Dec 2020</time></div>
+        </div>
+        <blockquote class="question">
+			<div>
+                <p>The number 3797 has an interesting property. Being prime itself, it is possible to continuously remove digits from left to right, and remain prime at each stage: <span style="display: inline-block">3797, 797, 97, and 7.</span> Similarly we can work from right to left: <span style="display: inline-block">3797, 379, 37, and 3.</span></p>
+                <p>Find the sum of the only eleven primes that are both truncatable from left to right and right to left.</p>
+			    <p>NOTE: 2, 3, 5, and 7 are not considered to be truncatable primes.</p>
+            </div>
+		</blockquote>
+    </div>
+	<h2 id="brute_force_solution">Brute-force solution</h2>
+<pre class="python"><code class="python">
+<span class="constant">def </span><span class="function">brute</span><span class="default">(</span><span class="default">):</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">primes </span><span class="default">= </span><span class="default">[</span><span class="numeric">2</span><span class="constant">, </span><span class="numeric">3</span><span class="constant">, </span><span class="numeric">5</span><span class="constant">, </span><span class="numeric">7</span><span class="default">]</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">truncatable_primes </span><span class="default">= </span><span class="default">[</span><span class="numeric">23</span><span class="default">]</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">num </span><span class="default">= </span><span class="numeric">9</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="constant">while </span><span class="inbuilt">len</span><span class="default">(</span><span class="default">truncatable_primes</span><span class="default">) </span><span class="default">< </span><span class="numeric">11</span><span class="default">:</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">num </span><span class="default">= </span><span class="default">num </span><span class="default">+ </span><span class="numeric">2</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="constant">if </span><span class="default">is_prime</span><span class="default">(</span><span class="default">num</span><span class="constant">, </span><span class="default">primes)</span><span class="default">:</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">primes.append</span><span class="default">(</span><span class="default">num)</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="constant">if </span><span class="default">is_truncatable(</span><span class="inbuilt">str</span><span class="default">(num)</span><span class="constant">, </span><span class="default">primes)</span><span class="default">:</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">truncatable_primes.append</span><span class="default">(</span><span class="default">num)</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="inbuilt">print</span><span class="default">(</span><span class="inbuilt">sum</span><span class="default">(truncatable_primes))</span>
+</code></pre>
+	<div class="explanation">
+		<p>
+
+        </p>
+	</div>
+<pre class="python"><code class="python">
+<span class="constant">def </span><span class="function">is_prime</span><span class="default">(</span><span class="default">num</span><span class="constant">,</span><span class="default"> primes</span><span class="default">):</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">root </span><span class="default">= </span><span class="default">num**</span><span class="default">(</span><span class="numeric">1 </span><span class="default">/ </span><span class="numeric">2</span><span class="default">)</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="constant">for </span><span class="default">prime </span><span class="constant">in </span><span class="default">primes</span><span class="default">:</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="constant">if </span><span class="default">prime </span><span class="default">> </span><span class="default">root</span><span class="default">: </span><span class="constant">return </span><span class="constant">True</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="constant">if </span><span class="default">num </span><span class="default">% </span><span class="default">prime </span><span class="default">== </span><span class="numeric">0</span><span class="default">: </span><span class="constant">return </span><span class="constant">False</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="constant">return </span><span class="constant">True</span>
+<span class="default"></span>
+<span class="default"></span>
+<span class="constant">def </span><span class="function">is_truncatable</span><span class="default">(</span><span class="default">str_num</span><span class="constant">,</span><span class="default"> primes</span><span class="default">):</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="constant">if </span><span class="inbuilt">any</span><span class="default">(</span><span class="default">even </span><span class="constant">in </span><span class="default">str_num </span><span class="constant">for </span><span class="default">even </span><span class="constant">in </span><span class="default">[</span><span class="string">"2"</span><span class="default"></span><span class="constant">, </span><span class="default"></span><span class="string">"4"</span><span class="default"></span><span class="constant">, </span><span class="default"></span><span class="string">"6"</span><span class="default"></span><span class="constant">, </span><span class="default"></span><span class="string">"8"</span><span class="default"></span><span class="constant">, </span><span class="default"></span><span class="string">"0"</span><span class="default">])</span><span class="default">: </span><span class="constant">return </span><span class="constant">False</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="constant">for </span><span class="default">i </span><span class="constant">in </span><span class="inbuilt">range</span><span class="default">(</span><span class="inbuilt">len</span><span class="default">(str_num))</span><span class="default">:</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="constant">if </span><span class="constant">not </span><span class="inbuilt">int</span><span class="default">(</span><span class="default">str_num[i::]</span><span class="default">) </span><span class="constant">in </span><span class="default">primes</span><span class="default">: </span><span class="constant">return </span><span class="constant">False</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="constant">if </span><span class="constant">not </span><span class="inbuilt">int</span><span class="default">(</span><span class="default">str_num[:i+</span><span class="numeric">1</span><span class="default">:]</span><span class="default">) </span><span class="constant">in </span><span class="default">primes</span><span class="default">: </span><span class="constant">return </span><span class="constant">False</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="constant">return </span><span class="constant">True</span>
+</code></pre>
+	<div class="explanation">
+		<p>
+
+        </p>
+	</div>
+	<h2 id="execution">Execution</h2>
+<pre class="python"><code class="python">
+<span class="default">brute</span><span class="default">(</span><span class="default">)</span>
+<span class="default"></span>
+<span class="comment">#72940th</span>
+</code></pre>
+	<div class="explanation">
+		<p>
+
+        </p>
+	</div>
+	<h2 id="output">Output</h2>
+<pre class="python output"><samp class="python output"><code class="python">
+<span class="default">brute</span><span class="default">: </span><span class="numeric">748317</span>
+</code></samp></pre>
+	<div class="explanation">
+		<p>
+
+        </p>
+	</div>
+</main>
+<footer></footer>
+</body>
+</html>

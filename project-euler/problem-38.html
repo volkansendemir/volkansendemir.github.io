@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta name="format-detection" content="telephone=no" />
+    <title>Project Euler - 38</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/project.css">
+    <link rel="stylesheet" href="../css/navigation.css">
+    <link rel="stylesheet" href="../css/coding.css">
+    <link href="../fonts/hind_siliguri.css" rel="stylesheet">
+	<link href="../fonts/consolas.css" rel="stylesheet">
+    <script type="text/javascript" src="../js/project-euler.js"></script>
+    <script type="text/javascript" src="../js/header.js"></script>
+    <script type="text/javascript" src="../js/breadcrumbs.js"></script>
+	<script type="text/javascript" src="../js/navigation.js"></script>
+</head>
+<body>
+<header><nav class="global"></nav></header>
+<aside class="nav-box-aside"><nav class="breadcrumbs"></nav></aside>
+<main>
+	<div class="question">
+		<div class="title">
+			<h1 id="question">Pandigital multiples</h1>
+			<div class="solve">Solved on <time datetime="2020-12-20">Sun, 20 Dec 2020</time></div>
+			<div class="upload">Uploaded on <time datetime="2020-12-20">Sun, 20 Dec 2020</time></div>
+        </div>
+        <blockquote class="question">
+			<div>
+				<p>Take the number 192 and multiply it by each of 1, 2, and 3:</p>
+                <p><span style="display: inline-block">192 × 1 = 192</span></p>
+                <p><span style="display: inline-block">192 × 2 = 384</span></p>
+                <p><span style="display: inline-block">192 × 3 = 576</span></p>
+                <p>By concatenating each product we get the 1 to 9 pandigital, 192384576. We will call 192384576 the concatenated product of <span style="display: inline-block">192 and (1,2,3)</span></p>
+                <p>The same can be achieved by starting with 9 and multiplying by 1, 2, 3, 4, and 5, giving the pandigital, 918273645, which is the concatenated product of <span style="display: inline-block">9 and (1,2,3,4,5).</span></p>
+                <p>What is the largest 1 to 9 pandigital 9-digit number that can be formed as the concatenated product of an integer with <span style="display: inline-block">(1,2, ... , n)</span> where <span style="display: inline-block">n > 1?</span></p>
+            </div>
+		</blockquote>
+    </div>
+	<h2 id="brute_force_solution">Brute-force solution</h2>
+<pre class="python"><code class="python">
+<span class="constant">def </span><span class="function">is_pandigital</span><span class="default">(</span><span class="default">num):</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">pandigital </span><span class="default">= </span><span class="default"></span><span class="string">""</span><span class="default"></span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="constant">for </span><span class="default">i </span><span class="constant">in </span><span class="inbuilt">range</span><span class="default">(</span><span class="numeric">1</span><span class="constant">, </span><span class="numeric">10</span><span class="default">)</span><span class="default">:</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">pandigital </span><span class="default">= </span><span class="default">pandigital </span><span class="default">+ </span><span class="inbuilt">str</span><span class="default">(</span><span class="default">i </span><span class="default">* </span><span class="default">num)</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="constant">if </span><span class="inbuilt">len</span><span class="default">(</span><span class="default">pandigital</span><span class="default">) </span><span class="default">== </span><span class="numeric">9 </span><span class="constant">and </span><span class="inbuilt">all</span><span class="default">(</span><span class="default">digit </span><span class="constant">in </span><span class="default">pandigital </span><span class="constant">for </span><span class="default">digit </span><span class="constant">in </span><span class="default">digits)</span><span class="default">:</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="constant">return </span><span class="inbuilt">int</span><span class="default">(</span><span class="default">pandigital)</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="constant">return </span><span class="numeric">0</span>
+<span class="default"></span>
+<span class="default"></span>
+<span class="constant">def </span><span class="function">brute</span><span class="default">(</span><span class="default">):</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">highest_pandigital </span><span class="default">= </span><span class="numeric">0</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="constant">for </span><span class="default">i </span><span class="constant">in </span><span class="inbuilt">range</span><span class="default">(</span><span class="default">lim_up)</span><span class="default">:</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">pandigital </span><span class="default">= </span><span class="default">is_pandigital</span><span class="default">(</span><span class="default">i)</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="constant">if </span><span class="default">highest_pandigital </span><span class="default">< </span><span class="default">pandigital</span><span class="default">:</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">highest_pandigital </span><span class="default">= </span><span class="default">pandigital</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="inbuilt">print</span><span class="default">(</span><span class="default">highest_pandigital)</span>
+</code></pre>
+	<div class="explanation">
+		<p>
+
+        </p>
+	</div>
+	<h2 id="execution">Execution</h2>
+<pre class="python"><code class="python">
+<span class="default">digits </span><span class="default">= </span><span class="default">[str</span><span class="default">(</span><span class="default">i</span><span class="default">) </span><span class="constant">for </span><span class="default">i </span><span class="constant">in </span><span class="inbuilt">range</span><span class="default">(</span><span class="numeric">1</span><span class="constant">, </span><span class="numeric">10</span><span class="default">)]</span>
+<span class="default">lim_up </span><span class="default">= </span><span class="numeric">10000</span>
+<span class="default">brute</span><span class="default">(</span><span class="default">)</span>
+<span class="default"></span>
+<span class="comment">#62363rd</span>
+</code></pre>
+	<div class="explanation">
+		<p>
+
+        </p>
+	</div>
+	<h2 id="output">Output</h2>
+<pre class="python output"><samp class="python output"><code class="python">
+<span class="default">brute</span><span class="default">: </span><span class="numeric">932718654</span>
+</code></samp></pre>
+	<div class="explanation">
+		<p>
+
+        </p>
+	</div>
+</main>
+<footer></footer>
+</body>
+</html>

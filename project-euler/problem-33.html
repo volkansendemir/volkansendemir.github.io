@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta name="format-detection" content="telephone=no" />
+    <title>Project Euler - 33</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/project.css">
+    <link rel="stylesheet" href="../css/navigation.css">
+    <link rel="stylesheet" href="../css/coding.css">
+    <link href="../fonts/hind_siliguri.css" rel="stylesheet">
+	<link href="../fonts/consolas.css" rel="stylesheet">
+    <script type="text/javascript" src="../js/project-euler.js"></script>
+    <script type="text/javascript" src="../js/header.js"></script>
+    <script type="text/javascript" src="../js/breadcrumbs.js"></script>
+	<script type="text/javascript" src="../js/navigation.js"></script>
+</head>
+<body>
+<header><nav class="global"></nav></header>
+<aside class="nav-box-aside"><nav class="breadcrumbs"></nav></aside>
+<main>
+	<div class="question">
+		<div class="title">
+			<h1 id="question">Digit cancelling fractions</h1>
+			<div class="solve">Solved on <time datetime="2020-12-20">Sun, 20 Dec 2020</time></div>
+			<div class="upload">Uploaded on <time datetime="2020-12-20">Sun, 20 Dec 2020</time></div>
+        </div>
+        <blockquote class="question">
+			<div>
+                <p>The fraction <span style="display: inline-block"><sup>49</sup>/<sub>98</sub></span> is a curious fraction, as an inexperienced mathematician in attempting to simplify it may incorrectly believe that <span style="display: inline-block"><sup>49</sup>/<sub>98</sub> = <sup>4</sup>/<sub>8</sub>,</span> which is correct, is obtained by cancelling the 9s.</p>
+                <p>We shall consider fractions like, <span style="display: inline-block"><sup>30</sup>/<sub>50</sub> = <sup>3</sup>/<sub>5</sub>,</span> to be trivial examples.</p>
+			    <p>There are exactly four non-trivial examples of this type of fraction, less than one in value, and containing two digits in the numerator and denominator.</p>
+                <p>If the product of these four fractions is given in its lowest common terms, find the value of the denominator.</p>
+            </div>
+		</blockquote>
+    </div>
+	<h2 id="brute_force_solution">Brute-force solution</h2>
+<pre class="python"><code class="python">
+<span class="constant">def </span><span class="function">brute</span><span class="default">(</span><span class="default">):</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">matches </span><span class="default">= </span><span class="default">[]</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="constant">for </span><span class="default">i </span><span class="constant">in </span><span class="inbuilt">range</span><span class="default">(</span><span class="default">lim_bottom</span><span class="constant">, </span><span class="default">lim_up)</span><span class="default">:</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="constant">for </span><span class="default">j </span><span class="constant">in </span><span class="inbuilt">range</span><span class="default">(</span><span class="default">lim_bottom</span><span class="constant">, </span><span class="default">lim_up)</span><span class="default">:</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="constant">if </span><span class="default">i </span><span class="default">== </span><span class="default">j </span><span class="constant">or </span><span class="default">i </span><span class="default">> </span><span class="default">j</span><span class="default">: </span><span class="constant">continue</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">fr </span><span class="default">= </span><span class="default">i / j</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">it </span><span class="default">= </span><span class="inbuilt">str</span><span class="default">(</span><span class="default">i)[</span><span class="numeric">0</span><span class="default">]</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">io </span><span class="default">= </span><span class="inbuilt">str</span><span class="default">(</span><span class="default">i)[</span><span class="numeric">1</span><span class="default">]</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">jt </span><span class="default">= </span><span class="inbuilt">str</span><span class="default">(</span><span class="default">j)[</span><span class="numeric">0</span><span class="default">]</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">jo </span><span class="default">= </span><span class="inbuilt">str</span><span class="default">(</span><span class="default">j)[</span><span class="numeric">1</span><span class="default">]</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="constant">if </span><span class="default">it </span><span class="default">== </span><span class="default">jt </span><span class="constant">and </span><span class="default">it </span><span class="default">!= </span><span class="default"></span><span class="string">"0"</span><span class="default"> </span><span class="constant">and </span><span class="default">jo </span><span class="default">!= </span><span class="default"></span><span class="string">"0"</span><span class="default"></span><span class="default">:</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="constant">if </span><span class="default">(</span><span class="inbuilt">int</span><span class="default">(io</span><span class="default">) </span><span class="default">/ </span><span class="inbuilt">int</span><span class="default">(</span><span class="default">jo)</span><span class="default">) </span><span class="default">== </span><span class="default">fr</span><span class="default">:</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">matches.append([</span><span class="inbuilt">int</span><span class="default">(io)</span><span class="constant">, </span><span class="inbuilt">int</span><span class="default">(</span><span class="default">jo)])</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="constant">elif </span><span class="default">io </span><span class="default">== </span><span class="default">jt </span><span class="constant">and </span><span class="default">io </span><span class="default">!= </span><span class="default"></span><span class="string">"0"</span><span class="default"> </span><span class="constant">and </span><span class="default">jo </span><span class="default">!= </span><span class="default"></span><span class="string">"0"</span><span class="default"></span><span class="default">:</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="constant">if </span><span class="default">(</span><span class="inbuilt">int</span><span class="default">(it</span><span class="default">) </span><span class="default">/ </span><span class="inbuilt">int</span><span class="default">(</span><span class="default">jo)</span><span class="default">) </span><span class="default">== </span><span class="default">fr</span><span class="default">:</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">matches.append([</span><span class="inbuilt">int</span><span class="default">(it)</span><span class="constant">, </span><span class="inbuilt">int</span><span class="default">(</span><span class="default">jo)])</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="constant">elif </span><span class="default">io </span><span class="default">== </span><span class="default">jo </span><span class="constant">and </span><span class="default">io </span><span class="default">!= </span><span class="default"></span><span class="string">"0"</span><span class="default"> </span><span class="constant">and </span><span class="default">jt </span><span class="default">!= </span><span class="default"></span><span class="string">"0"</span><span class="default"></span><span class="default">:</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="constant">if </span><span class="default">(</span><span class="inbuilt">int</span><span class="default">(it</span><span class="default">) </span><span class="default">/ </span><span class="inbuilt">int</span><span class="default">(</span><span class="default">jt)</span><span class="default">) </span><span class="default">== </span><span class="default">fr</span><span class="default">:</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">matches.append([</span><span class="inbuilt">int</span><span class="default">(it)</span><span class="constant">, </span><span class="inbuilt">int</span><span class="default">(</span><span class="default">jt)])</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="constant">elif </span><span class="default">jo </span><span class="default">== </span><span class="default">it </span><span class="constant">and </span><span class="default">it </span><span class="default">!= </span><span class="default"></span><span class="string">"0"</span><span class="default"> </span><span class="constant">and </span><span class="default">jt </span><span class="default">!= </span><span class="default"></span><span class="string">"0"</span><span class="default"></span><span class="default">:</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="constant">if </span><span class="default">(</span><span class="inbuilt">int</span><span class="default">(io</span><span class="default">) </span><span class="default">/ </span><span class="inbuilt">int</span><span class="default">(</span><span class="default">jt)</span><span class="default">) </span><span class="default">== </span><span class="default">fr</span><span class="default">:</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">matches.append([</span><span class="inbuilt">int</span><span class="default">(io)</span><span class="constant">, </span><span class="inbuilt">int</span><span class="default">(</span><span class="default">jt)])</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="inbuilt">print</span><span class="default">(</span><span class="default">matches)</span>
+</code></pre>
+	<div class="explanation">
+		<p>
+
+        </p>
+	</div>
+	<h2 id="execution">Execution</h2>
+<pre class="python"><code class="python">
+<span class="default">lim_bottom </span><span class="default">= </span><span class="numeric">10</span>
+<span class="default">lim_up </span><span class="default">= </span><span class="numeric">100</span>
+<span class="default"></span>
+<span class="comment">#71060th</span>
+</code></pre>
+	<div class="explanation">
+		<p>
+
+        </p>
+	</div>
+	<h2 id="output">Output</h2>
+<pre class="python output"><samp class="python output"><code class="python">
+<span class="default">brute</span><span class="default">: </span><span class="numeric">100</span>
+</code></samp></pre>
+	<div class="explanation">
+		<p>
+
+        </p>
+	</div>
+</main>
+<footer></footer>
+</body>
+</html>

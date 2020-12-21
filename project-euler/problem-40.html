@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta name="format-detection" content="telephone=no" />
+    <title>Project Euler - 40</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/project.css">
+    <link rel="stylesheet" href="../css/navigation.css">
+    <link rel="stylesheet" href="../css/coding.css">
+    <link href="../fonts/hind_siliguri.css" rel="stylesheet">
+	<link href="../fonts/consolas.css" rel="stylesheet">
+    <script type="text/javascript" src="../js/project-euler.js"></script>
+    <script type="text/javascript" src="../js/header.js"></script>
+    <script type="text/javascript" src="../js/breadcrumbs.js"></script>
+	<script type="text/javascript" src="../js/navigation.js"></script>
+</head>
+<body>
+<header><nav class="global"></nav></header>
+<aside class="nav-box-aside"><nav class="breadcrumbs"></nav></aside>
+<main>
+	<div class="question">
+		<div class="title">
+			<h1 id="question">Champernowne's constant</h1>
+			<div class="solve">Solved on <time datetime="2020-12-20">Sun, 20 Dec 2020</time></div>
+			<div class="upload">Uploaded on <time datetime="2020-12-20">Sun, 20 Dec 2020</time></div>
+        </div>
+        <blockquote class="question">
+			<div>
+				<p>An irrational decimal fraction is created by concatenating the positive integers:</p>
+                <p><span style="display: inline-block">0.12345678910<b style="color:red">1</b>112131415161718192021...</span></p>
+                <p>It can be seen that the 12<sup>th</sup> digit of the fractional part is 1.</p>
+                <p>If d<sub>n</sub> represents the n<sup>th</sup> digit of the fractional part, find the value of the following expression.</p>
+                <p><span style="display: inline-block">d<sub>1</sub></span> × <span style="display: inline-block">d<sub>10</sub></span> × <span style="display: inline-block">d<sub>100</sub></span> × <span style="display: inline-block">d<sub>1000</sub></span> × <span style="display: inline-block">d<sub>10000</sub></span> × <span style="display: inline-block">d<sub>100000</sub></span> × <span style="display: inline-block">d<sub>1000000</sub></span></p>
+            </div>
+		</blockquote>
+    </div>
+	<h2 id="brute_force_solution">Brute-force solution</h2>
+<pre class="python"><code class="python">
+<span class="constant">def </span><span class="function">brute</span><span class="default">(</span><span class="default">l_up):</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">st </span><span class="default">= </span><span class="default"></span><span class="string">""</span><span class="default"></span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">num </span><span class="default">= </span><span class="numeric">1</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="constant">while </span><span class="inbuilt">len</span><span class="default">(</span><span class="default">st</span><span class="default">) </span><span class="default">< </span><span class="default">l_up</span><span class="default">:</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">st </span><span class="default">= </span><span class="default">st </span><span class="default">+ </span><span class="inbuilt">str</span><span class="default">(</span><span class="default">num)</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">num </span><span class="default">= </span><span class="default">num </span><span class="default">+ </span><span class="numeric">1</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">mult </span><span class="default">= </span><span class="numeric">1</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="constant">while </span><span class="default">l_up </span><span class="default">> </span><span class="numeric">1</span><span class="default">:</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">mult </span><span class="default">= </span><span class="default">mult </span><span class="default">* </span><span class="inbuilt">int</span><span class="default">(</span><span class="default">st[l_up </span><span class="default">- </span><span class="numeric">1</span><span class="default">])</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">l_up </span><span class="default">= </span><span class="inbuilt">int</span><span class="default">(</span><span class="default">l_up </span><span class="default">/ </span><span class="numeric">10</span><span class="default">)</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="inbuilt">print</span><span class="default">(</span><span class="default">mult)</span>
+</code></pre>
+	<div class="explanation">
+		<p>
+
+        </p>
+	</div>
+	<h2 id="execution">Execution</h2>
+<pre class="python"><code class="python">
+<span class="default">lim_up </span><span class="default">= </span><span class="numeric">1000000</span>
+<span class="default">brute</span><span class="default">(</span><span class="default">lim_up)</span>
+<span class="default"></span>
+<span class="comment">#79423rd</span>
+</code></pre>
+	<div class="explanation">
+		<p>
+
+        </p>
+	</div>
+	<h2 id="output">Output</h2>
+<pre class="python output"><samp class="python output"><code class="python">
+<span class="default">brute</span><span class="default">: </span><span class="numeric">210</span>
+</code></samp></pre>
+	<div class="explanation">
+		<p>
+
+        </p>
+	</div>
+</main>
+<footer></footer>
+</body>
+</html>

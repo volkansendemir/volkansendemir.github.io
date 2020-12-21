@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta name="format-detection" content="telephone=no" />
+    <title>Project Euler - 39</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/project.css">
+    <link rel="stylesheet" href="../css/navigation.css">
+    <link rel="stylesheet" href="../css/coding.css">
+    <link href="../fonts/hind_siliguri.css" rel="stylesheet">
+	<link href="../fonts/consolas.css" rel="stylesheet">
+    <script type="text/javascript" src="../js/project-euler.js"></script>
+    <script type="text/javascript" src="../js/header.js"></script>
+    <script type="text/javascript" src="../js/breadcrumbs.js"></script>
+	<script type="text/javascript" src="../js/navigation.js"></script>
+</head>
+<body>
+<header><nav class="global"></nav></header>
+<aside class="nav-box-aside"><nav class="breadcrumbs"></nav></aside>
+<main>
+	<div class="question">
+		<div class="title">
+			<h1 id="question">Integer right triangles</h1>
+			<div class="solve">Solved on <time datetime="2020-12-20">Sun, 20 Dec 2020</time></div>
+			<div class="upload">Uploaded on <time datetime="2020-12-20">Sun, 20 Dec 2020</time></div>
+        </div>
+        <blockquote class="question">
+			<div>
+                <p>If p is the perimeter of a right angle triangle with integral length sides, <span style="display: inline-block">{a,b,c},</span> there are exactly three solutions for <span style="display: inline-block">p = 120.</span></p>
+                <p><span style="display: inline-block">{20,48,52},</span> <span style="display: inline-block">{24,45,51},</span> <span style="display: inline-block">{30,40,50}</span></p>
+			    <p>For which value of <span style="display: inline-block">p ≤ 1000,</span> is the number of solutions maximised?</p>
+            </div>
+		</blockquote>
+    </div>
+	<h2 id="brute_force_solution">Brute-force solution</h2>
+<pre class="python"><code class="python">
+<span class="constant">def </span><span class="function">brute</span><span class="default">(</span><span class="default">):</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">max_reps </span><span class="default">= </span><span class="numeric">0</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">max_at </span><span class="default">= </span><span class="numeric">0</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="constant">for </span><span class="default">i </span><span class="constant">in </span><span class="inbuilt">range</span><span class="default">(</span><span class="numeric">1</span><span class="constant">, </span><span class="default">lim_up)</span><span class="default">:</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">reps </span><span class="default">= </span><span class="numeric">0</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="constant">for </span><span class="default">j </span><span class="constant">in </span><span class="inbuilt">range</span><span class="default">(</span><span class="numeric">1</span><span class="constant">, </span><span class="default">i)</span><span class="default">:</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="constant">for </span><span class="default">k </span><span class="constant">in </span><span class="inbuilt">range</span><span class="default">(</span><span class="numeric">1</span><span class="constant">, </span><span class="inbuilt">min</span><span class="default">(</span><span class="default">j</span><span class="constant">, </span><span class="default">i </span><span class="default">- </span><span class="default">j))</span><span class="default">:</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="constant">if </span><span class="default">((i**</span><span class="numeric">2</span><span class="default">) </span><span class="default">- </span><span class="default"></span><span class="default">(</span><span class="numeric">2 </span><span class="default">* </span><span class="default">i </span><span class="default">* </span><span class="default">j</span><span class="default">) </span><span class="default">- </span><span class="default"></span><span class="default">(</span><span class="numeric">2 </span><span class="default">* </span><span class="default">i </span><span class="default">* </span><span class="default">k</span><span class="default">) </span><span class="default">+ </span><span class="default"></span><span class="default">(</span><span class="numeric">2 </span><span class="default">* </span><span class="default">j </span><span class="default">* </span><span class="default">k)</span><span class="default">) </span><span class="default">== </span><span class="numeric">0</span><span class="default">:</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">reps </span><span class="default">= </span><span class="default">reps </span><span class="default">+ </span><span class="numeric">1</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="inbuilt">print</span><span class="default">(</span><span class="default">i)</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="constant">if </span><span class="default">reps </span><span class="default">> </span><span class="default">max_reps</span><span class="default">:</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">max_reps </span><span class="default">= </span><span class="default">reps</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">max_at </span><span class="default">= </span><span class="default">i</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="inbuilt">print</span><span class="default">(</span><span class="default">max_at</span><span class="constant">, </span><span class="default">max_reps)</span>
+</code></pre>
+	<div class="explanation">
+		<p>
+
+        </p>
+	</div>
+	<h2 id="strategic_solution">Strategic solution</h2>
+<pre class="python"><code class="python">
+<span class="constant">def </span><span class="function">strategic</span><span class="default">(</span><span class="default">):</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">hits </span><span class="default">= </span><span class="default">[</span><span class="numeric">0 </span><span class="constant">for </span><span class="default">i </span><span class="constant">in </span><span class="inbuilt">range</span><span class="default">(</span><span class="default">lim_up)]</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="constant">for </span><span class="default">i </span><span class="constant">in </span><span class="inbuilt">range</span><span class="default">(</span><span class="numeric">1</span><span class="constant">, </span><span class="default">lim_up)</span><span class="default">:</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="constant">for </span><span class="default">j </span><span class="constant">in </span><span class="inbuilt">range</span><span class="default">(</span><span class="numeric">1</span><span class="constant">, </span><span class="default">i)</span><span class="default">:</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="constant">if </span><span class="default">i </span><span class="default">+ </span><span class="default">j </span><span class="default">> </span><span class="default">lim_up</span><span class="default">: </span><span class="constant">break</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">c </span><span class="default">= </span><span class="default">((i**</span><span class="numeric">2</span><span class="default">) </span><span class="default">+ </span><span class="default">(j**</span><span class="numeric">2</span><span class="default">))**(</span><span class="numeric">1 </span><span class="default">/ </span><span class="numeric">2</span><span class="default">)</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="constant">if </span><span class="default">i </span><span class="default">+ </span><span class="default">j </span><span class="default">+ </span><span class="default">c </span><span class="default">> </span><span class="default">lim_up</span><span class="default">: </span><span class="constant">break</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="constant">if </span><span class="inbuilt">int</span><span class="default">(</span><span class="default">c</span><span class="default">) </span><span class="default">== </span><span class="default">c</span><span class="default">: </span><span class="default">hits[</span><span class="inbuilt">int</span><span class="default">(</span><span class="default">i </span><span class="default">+ </span><span class="default">j </span><span class="default">+ </span><span class="default">c)</span><span class="default">] </span><span class="default">= </span><span class="default">hits[</span><span class="inbuilt">int</span><span class="default">(</span><span class="default">i </span><span class="default">+ </span><span class="default">j </span><span class="default">+ </span><span class="default">c)</span><span class="default">] </span><span class="default">+ </span><span class="numeric">1</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">max_hit </span><span class="default">= </span><span class="default">max</span><span class="default">(</span><span class="default">hits)</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">max_at </span><span class="default">= </span><span class="numeric">0</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="constant">for </span><span class="default">i </span><span class="constant">in </span><span class="inbuilt">range</span><span class="default">(</span><span class="default">lim_up)</span><span class="default">:</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="constant">if </span><span class="default">hits[i</span><span class="default">] </span><span class="default">== </span><span class="default">max_hit</span><span class="default">:</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">max_at </span><span class="default">= </span><span class="default">i</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="constant">break</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="inbuilt">print</span><span class="default">(</span><span class="default">max_at</span><span class="constant">, </span><span class="default">max_hit)</span>
+</code></pre>
+	<div class="explanation">
+		<p>
+
+        </p>
+	</div>
+	<h2 id="execution">Execution</h2>
+<pre class="python"><code class="python">
+<span class="default">lim_up </span><span class="default">= </span><span class="numeric">1001</span>
+<span class="comment">#brute()</span>
+<span class="default">strategic</span><span class="default">(</span><span class="default">)</span>
+<span class="default"></span>
+<span class="comment">#72500th</span>
+</code></pre>
+	<div class="explanation">
+		<p>
+
+        </p>
+	</div>
+	<h2 id="output">Output</h2>
+<pre class="python output"><samp class="python output"><code class="python">
+<span class="default">brute</span><span class="default">: </span><span class="numeric">840</span>
+</code></samp></pre>
+	<div class="explanation">
+		<p>
+
+        </p>
+	</div>
+</main>
+<footer></footer>
+</body>
+</html>
