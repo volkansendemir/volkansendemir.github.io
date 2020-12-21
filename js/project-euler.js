@@ -37,7 +37,7 @@ window.addEventListener("load", function() {
         bc.appendChild(div);
         newnav.appendChild(div.cloneNode(true));
     }
-    if (parseInt(qnum) < 27) {
+    if (parseInt(qnum) < 40) {
         div = document.createElement("div");
         div.classList.add("next");
         ancItem = document.createElement("a");
