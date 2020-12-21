@@ -61,9 +61,11 @@ window.onload = function() {
 
     if (!('ontouchstart' in window) && !(window.navigator.msPointerEnabled)) {
         navbox.onmouseover = navbox_mouseover;
+        aside.style.width = "80vw";
+    } else {
+        aside.style.width = "100vw";
     }
     aside.style.height = aside.getBoundingClientRect().height +"px";
-    aside.style.width = "80vw";
 
     navbox.onmouseout = function(e) {
         if (navbox_pop) {
