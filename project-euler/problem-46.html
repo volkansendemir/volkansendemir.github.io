@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta name="format-detection" content="telephone=no" />
+    <title>Project Euler - 46</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/project.css">
+    <link rel="stylesheet" href="../css/navigation.css">
+    <link rel="stylesheet" href="../css/coding.css">
+    <link href="../fonts/hind_siliguri.css" rel="stylesheet">
+	<link href="../fonts/consolas.css" rel="stylesheet">
+    <script type="text/javascript" src="../js/project-euler.js"></script>
+    <script type="text/javascript" src="../js/header.js"></script>
+    <script type="text/javascript" src="../js/breadcrumbs.js"></script>
+	<script type="text/javascript" src="../js/navigation.js"></script>
+</head>
+<body>
+<header><nav class="global"></nav></header>
+<aside class="nav-box-aside"><nav class="breadcrumbs"></nav></aside>
+<main>
+	<div class="question">
+		<div class="title">
+			<h1 id="question">Goldbach's other conjecture</h1>
+			<div class="solve">Solved on <time datetime="2020-12-22">Tue, 22 Dec 2020</time></div>
+			<div class="upload">Uploaded on <time datetime="2020-12-22">Tue, 22 Dec 2020</time></div>
+        </div>
+        <blockquote class="question">
+			<div>
+                <p>It was proposed by Christian Goldbach that every odd composite number can be written as the sum of a prime and twice a square.</p>
+                <ul style="margin-left: 1em;">
+                    <li><span style="display: inline-block">9 = 7 + 2×1<sup>2</sup></span></li>
+                    <li><span style="display: inline-block">15 = 7 + 2×2<sup>2</sup></span></li>
+                    <li><span style="display: inline-block">21 = 3 + 2×3<sup>2</sup></span></li>
+                    <li><span style="display: inline-block">25 = 7 + 2×3<sup>2</sup></span></li>
+                    <li><span style="display: inline-block">27 = 19 + 2×2<sup>2</sup></span></li>
+                    <li><span style="display: inline-block">33 = 31 + 2×1<sup>2</sup></span></li>
+                </ul>
+				<p>It turns out that the conjecture was false.</p>
+            	<p>What is the smallest odd composite that cannot be written as the sum of a prime and twice a square?</p>
+			</div>
+		</blockquote>
+    </div>
+	<h2 id="brute_force_solution">Brute-force solution</h2>
+<pre class="python"><code class="python">
+<span class="constant">def </span><span class="function">brute</span><span class="default">(</span><span class="default">):</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">primes </span><span class="default">= </span><span class="default">[</span><span class="numeric">2</span><span class="default">]</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">j </span><span class="default">= </span><span class="numeric">100</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="constant">while </span><span class="default">j </span><span class="default">< </span><span class="numeric">100000</span><span class="default">:</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="constant">for </span><span class="default">i </span><span class="constant">in </span><span class="inbuilt">range</span><span class="default">(</span><span class="default">j - </span><span class="numeric">97</span><span class="constant">, </span><span class="default">j</span><span class="constant">, </span><span class="numeric">2</span><span class="default">)</span><span class="default">:</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="constant">if </span><span class="default">is_prime</span><span class="default">(</span><span class="default">i</span><span class="constant">, </span><span class="default">primes)</span><span class="default">: </span><span class="default">primes.append</span><span class="default">(</span><span class="default">i)</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="constant">for </span><span class="default">i </span><span class="constant">in </span><span class="inbuilt">range</span><span class="default">(</span><span class="default">j - </span><span class="numeric">97</span><span class="constant">, </span><span class="default">j</span><span class="constant">, </span><span class="numeric">2</span><span class="default">)</span><span class="default">:</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="constant">if </span><span class="default">i </span><span class="constant">not </span><span class="constant">in </span><span class="default">primes</span><span class="default">:</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="constant">if </span><span class="constant">not </span><span class="default">is_goldbach</span><span class="default">(</span><span class="default">i</span><span class="constant">, </span><span class="default">primes)</span><span class="default">:</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="inbuilt">print</span><span class="default">(</span><span class="default">i)</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">j </span><span class="default">= </span><span class="default">j </span><span class="default">+ </span><span class="numeric">100</span>
+</code></pre>
+	<div class="explanation">
+		<p>
+
+        </p>
+	</div>
+<pre class="python"><code class="python">
+<span class="constant">def </span><span class="function">is_prime</span><span class="default">(</span><span class="default">num</span><span class="constant">,</span><span class="default"> primes</span><span class="default">):</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="constant">for </span><span class="default">prime </span><span class="constant">in </span><span class="default">primes</span><span class="default">:</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="constant">if </span><span class="default">num </span><span class="default">% </span><span class="default">prime </span><span class="default">== </span><span class="numeric">0</span><span class="default">: </span><span class="constant">return </span><span class="constant">False</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="constant">if </span><span class="default">prime </span><span class="default">> </span><span class="default">num</span><span class="default">: </span><span class="constant">return </span><span class="constant">True</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="constant">return </span><span class="constant">True</span>
+<span class="default"></span>
+<span class="default"></span>
+<span class="constant">def </span><span class="function">is_goldbach</span><span class="default">(</span><span class="default">num</span><span class="constant">,</span><span class="default"> primes</span><span class="default">):</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">a </span><span class="default">= </span><span class="inbuilt">int</span><span class="default">((num </span><span class="default">/ </span><span class="numeric">2</span><span class="default">)**</span><span class="default">(</span><span class="numeric">1 </span><span class="default">/ </span><span class="numeric">2</span><span class="default">)</span><span class="default">) </span><span class="default">+ </span><span class="numeric">1</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="constant">for </span><span class="default">i </span><span class="constant">in </span><span class="inbuilt">range</span><span class="default">(</span><span class="numeric">1</span><span class="constant">, </span><span class="default">a)</span><span class="default">:</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="constant">if </span><span class="default"></span><span class="default">(</span><span class="default">num </span><span class="default">- </span><span class="default">((i**</span><span class="numeric">2</span><span class="default">) </span><span class="default">* </span><span class="numeric">2</span><span class="default">)</span><span class="default">) </span><span class="constant">in </span><span class="default">primes</span><span class="default">: </span><span class="constant">return </span><span class="constant">True</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="constant">return </span><span class="constant">False</span>
+</code></pre>
+	<div class="explanation">
+		<p>
+
+        </p>
+	</div>
+	<h2 id="execution">Execution</h2>
+<pre class="python"><code class="python">
+<span class="default">brute</span><span class="default">(</span><span class="default">)</span>
+<span class="default"></span>
+<span class="comment"># 60924th</span>
+</code></pre>
+	<div class="explanation">
+		<p>
+
+        </p>
+	</div>
+	<h2 id="output">Output</h2>
+<pre class="python output"><samp class="python output"><code class="python">
+<span class="default">brute</span><span class="default">: </span><span class="numeric">5777</span>
+</code></samp></pre>
+	<div class="explanation">
+		<p>
+
+        </p>
+	</div>
+</main>
+<footer></footer>
+</body>
+</html>

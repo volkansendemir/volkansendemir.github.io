@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta name="format-detection" content="telephone=no" />
+    <title>Project Euler - 42</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/project.css">
+    <link rel="stylesheet" href="../css/navigation.css">
+    <link rel="stylesheet" href="../css/coding.css">
+    <link href="../fonts/hind_siliguri.css" rel="stylesheet">
+	<link href="../fonts/consolas.css" rel="stylesheet">
+    <script type="text/javascript" src="../js/project-euler.js"></script>
+    <script type="text/javascript" src="../js/header.js"></script>
+    <script type="text/javascript" src="../js/breadcrumbs.js"></script>
+	<script type="text/javascript" src="../js/navigation.js"></script>
+</head>
+<body>
+<header><nav class="global"></nav></header>
+<aside class="nav-box-aside"><nav class="breadcrumbs"></nav></aside>
+<main>
+	<div class="question">
+		<div class="title">
+			<h1 id="question">Coded triangle numbers</h1>
+			<div class="solve">Solved on <time datetime="2020-12-21">Mon, 21 Dec 2020</time></div>
+			<div class="upload">Uploaded on <time datetime="2020-12-22">Tue, 22 Dec 2020</time></div>
+        </div>
+        <blockquote class="question">
+			<div>
+                <p>he nth term of the sequence of triangle numbers is given by, <span style="display: inline-block">t<sub>n</sub> = <sup>1</sup>/<sub>2</sub>n(n+1);</span> so the first ten triangle numbers are:</p>
+                <p>1, 3, 6, 10, 15, 21, 28, 36, 45, 55, ...</p>
+                <p>By converting each letter in a word to a number corresponding to its alphabetical position and adding these values we form a word value. For example, the word value for SKY is <span style="display: inline-block">19 + 11 + 25 = 55 = t<sub>10</sub>.</span> If the word value is a triangle number then we shall call the word a triangle word.</p>
+                <p>Using words.txt (right click and 'Save Link/Target As...'), a 16K text file containing nearly two-thousand common English words, how many are triangle words?</p>
+            </div>
+		</blockquote>
+    </div>
+	<h2 id="brute_force_solution">Brute-force solution</h2>
+<pre class="python"><code class="python">
+<span class="constant">def </span><span class="function">brute</span><span class="default">(</span><span class="default">):</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">count </span><span class="default">= </span><span class="numeric">0</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">alphabet </span><span class="default">= </span><span class="default">[</span><span class="string">"A"</span><span class="default"></span><span class="constant">, </span><span class="default"></span><span class="string">"B"</span><span class="default"></span><span class="constant">, </span><span class="default"></span><span class="string">"C"</span><span class="default"></span><span class="constant">, </span><span class="default"></span><span class="string">"D"</span><span class="default"></span><span class="constant">, </span><span class="default"></span><span class="string">"E"</span><span class="default"></span><span class="constant">, </span><span class="default"></span><span class="string">"F"</span><span class="default"></span><span class="constant">, </span><span class="default"></span><span class="string">"G"</span><span class="default"></span><span class="constant">, </span><span class="default"></span><span class="string">"H"</span><span class="default"></span><span class="constant">, </span><span class="default"></span><span class="string">"I"</span><span class="default"></span><span class="constant">, </span><span class="default"></span><span class="string">"J"</span><span class="default"></span><span class="constant">, </span><span class="default"></span><span class="string">"K"</span><span class="default"></span><span class="constant">, </span><span class="default"></span><span class="string">"L"</span><span class="default"></span><span class="constant">, </span><span class="default"></span><span class="string">"M"</span><span class="default"></span><span class="constant">,</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"></span><span class="string">"N"</span><span class="default"></span><span class="constant">, </span><span class="default"></span><span class="string">"O"</span><span class="default"></span><span class="constant">, </span><span class="default"></span><span class="string">"P"</span><span class="default"></span><span class="constant">, </span><span class="default"></span><span class="string">"Q"</span><span class="default"></span><span class="constant">, </span><span class="default"></span><span class="string">"R"</span><span class="default"></span><span class="constant">, </span><span class="default"></span><span class="string">"S"</span><span class="default"></span><span class="constant">, </span><span class="default"></span><span class="string">"T"</span><span class="default"></span><span class="constant">, </span><span class="default"></span><span class="string">"U"</span><span class="default"></span><span class="constant">, </span><span class="default"></span><span class="string">"V"</span><span class="default"></span><span class="constant">, </span><span class="default"></span><span class="string">"W"</span><span class="default"></span><span class="constant">, </span><span class="default"></span><span class="string">"X"</span><span class="default"></span><span class="constant">, </span><span class="default"></span><span class="string">"Y"</span><span class="default"></span><span class="constant">, </span><span class="default"></span><span class="string">"Z"</span><span class="default">]</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">words </span><span class="default">= </span><span class="default">read_words</span><span class="default">(</span><span class="default">)</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">triangle_numbers </span><span class="default">= </span><span class="default">get_triangle_numbers</span><span class="default">(</span><span class="default">)</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="constant">for </span><span class="default">word </span><span class="constant">in </span><span class="default">words</span><span class="default">:</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">word_score </span><span class="default">= </span><span class="default">get_word_score</span><span class="default">(</span><span class="default">word</span><span class="constant">, </span><span class="default">alphabet)</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="constant">if </span><span class="default">word_score </span><span class="constant">in </span><span class="default">triangle_numbers</span><span class="default">: </span><span class="default">count </span><span class="default">= </span><span class="default">count </span><span class="default">+ </span><span class="numeric">1</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="inbuilt">print</span><span class="default">(</span><span class="default">count)</span>
+</code></pre>
+	<div class="explanation">
+		<p>
+
+        </p>
+	</div>
+<pre class="python"><code class="python">
+<span class="constant">def </span><span class="function">read_words</span><span class="default">(</span><span class="default">):</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">words </span><span class="default">= </span><span class="default">[]</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="constant">with </span><span class="inbuilt">open</span><span class="default">(</span><span class="default">file_location</span><span class="constant">, </span><span class="default"></span><span class="string">"r"</span><span class="default"></span><span class="default">) </span><span class="constant">as </span><span class="default">fd</span><span class="default">:</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="constant">for </span><span class="default">line </span><span class="constant">in </span><span class="default">fd</span><span class="default">:</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="constant">for </span><span class="default">word </span><span class="constant">in </span><span class="default">line.split</span><span class="default">(</span><span class="default"></span><span class="string">","</span><span class="default">)</span><span class="default">:</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">words.append(word.replace('</span><span class="string">"', "</span><span class="default"></span><span class="string">"))"</span><span class="default">))</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">words </span><span class="default">= </span><span class="inbuilt">sorted</span><span class="default">(</span><span class="default">words)</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="constant">return </span><span class="default">words</span>
+<span class="default"></span>
+<span class="default"></span>
+<span class="constant">def </span><span class="function">get_triangle_numbers</span><span class="default">(</span><span class="default">):</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">triangle_numbers </span><span class="default">= </span><span class="default">[</span><span class="numeric">1</span><span class="default">]</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="constant">for </span><span class="default">i </span><span class="constant">in </span><span class="inbuilt">range</span><span class="default">(</span><span class="numeric">2</span><span class="constant">, </span><span class="numeric">1000</span><span class="default">)</span><span class="default">:</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">triangle_numbers.append</span><span class="default">(</span><span class="default">triangle_numbers[-</span><span class="numeric">1</span><span class="default">] </span><span class="default">+ </span><span class="default">i)</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="constant">return </span><span class="default">triangle_numbers</span>
+<span class="default"></span>
+<span class="default"></span>
+<span class="constant">def </span><span class="function">get_word_score</span><span class="default">(</span><span class="default">word</span><span class="constant">,</span><span class="default">alphabet</span><span class="default">):</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">word_score </span><span class="default">= </span><span class="numeric">0</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="constant">for </span><span class="default">letter </span><span class="constant">in </span><span class="default">word</span><span class="default">:</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">word_score </span><span class="default">= </span><span class="default">word_score </span><span class="default">+ </span><span class="default">alphabet.index</span><span class="default">(</span><span class="default">letter</span><span class="default">) </span><span class="default">+ </span><span class="numeric">1</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="constant">return </span><span class="default">word_score</span>
+</code></pre>
+	<div class="explanation">
+		<p>
+
+        </p>
+	</div>
+	<h2 id="execution">Execution</h2>
+<pre class="python"><code class="python">
+<span class="default">file_location </span><span class="default">= </span><span class="default"></span><span class="string">""</span><span class="default"></span>
+<span class="default"></span>
+<span class="default">brute</span><span class="default">(</span><span class="default">)</span>
+<span class="default"></span>
+<span class="comment">#73758th</span>
+</code></pre>
+	<div class="explanation">
+		<p>
+
+        </p>
+	</div>
+	<h2 id="output">Output</h2>
+<pre class="python output"><samp class="python output"><code class="python">
+<span class="default">brute</span><span class="default">: </span><span class="numeric">162</span>
+</code></samp></pre>
+	<div class="explanation">
+		<p>
+
+        </p>
+	</div>
+</main>
+<footer></footer>
+</body>
+</html>
