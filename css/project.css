@@ -181,11 +181,15 @@ ol.bc > span.mo {
         padding-right: 0;
     }
     main > div.explanation {
-        margin-left: 0;
-        margin-right: 0;
+        margin-left: 5px;
+        margin-right: 5px;
     }
     main > div.explanation > p {
         font-size: 4vw;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        margin-left: 5px;
+        margin-right: 5px;
     }
     pre {
         letter-spacing: 0.025em;
