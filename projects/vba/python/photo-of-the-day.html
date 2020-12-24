@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta name="format-detection" content="telephone=no" />
+    <title>Photo of the Day</title>
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/project.css">
+    <link rel="stylesheet" href="../../css/navigation.css">
+    <link rel="stylesheet" href="../../css/coding.css">
+    <link href="../../fonts/hind_siliguri.css" rel="stylesheet">
+	<link href="../../fonts/consolas.css" rel="stylesheet">
+    <script type="text/javascript" src="../../js/header.js"></script>
+    <script type="text/javascript" src="../../js/breadcrumbs.js"></script>
+	<script type="text/javascript" src="../../js/navigation.js"></script>
+</head>
+<body>
+<header><nav class="global"></nav></header>
+<aside class="nav-box-aside"><nav class="breadcrumbs"></nav></aside>
+<main>
+	<div class="question">
+		<div class="title">
+			<h1 id="Description"><a href="https://www.nationalgeographic.com/photography/photo-of-the-day/" target="_blank">National Geographic Photo of the Day</a></h1>
+			<div class="solve">Solved on <time datetime="2020-08-25">Tue, 25 Aug 2020</time></div>
+			<div class="upload">Uploaded on <time datetime="2020-12-24">Thu, 24 Dec 2020</time></div>
+        </div>
+        <blockquote class="question">
+			<div>
+				<p>This project downloads the "Photo of the Day" from National Geographic's website and saves it as the desktop background picture.</p>
+				<p><i style="font-weight:100;font-size:0.9em">Designed for Windows, might work on Linux and macOS after a little tempering.</i></p>
+			</div>
+            <cite><a href="https://www.nationalgeographic.com/" target="_blank">National Geographic</a></cite>
+		</blockquote>
+    </div>
+	<h2 id="dependencies">Dependencies</h2>
+<pre class="python"><code class="python">
+<span class="constant">import </span><span class="default">requests </span><span class="constant">as </span><span class="default">req</span>
+<span class="constant">from </span><span class="default">bs4 </span><span class="constant">import </span><span class="default">BeautifulSoup</span>
+<span class="constant">import </span><span class="default">lxml</span>
+<span class="constant">import </span><span class="default">shutil</span>
+<span class="constant">import </span><span class="default">ctypes</span>
+<span class="constant">import </span><span class="default">os</span>
+<span class="constant">from </span><span class="default">PIL </span><span class="constant">import </span><span class="default">Image</span>
+<span class="constant">from </span><span class="default">time </span><span class="constant">import </span><span class="default">sleep</span>
+</code></pre>
+	<div class="explanation">
+		<p>We will be visiting the website using the <code class="inline">requests</code> library. Later, we will parse its contents using <code class="inline">BeautifulSoup</code>.
+        <br>The <code class="inline">BeautifulSoup</code> library requires us to set a parsing library, therefore we import the <code class="inline">lxml</code> library.</p>
+        <p>We use the <code class="inline">shutil</code> library to save the image data object to disk. We will also use the <code class="inline">ctypes</code> library to change the background picture.</p>
+        <p>The <code class="inline">os</code> library is needed to delete the image file after we are done with it. Windows 10 does not require the image to be present after the background has been set.</p>
+        <p>The <code class="inline">Image</code> package of the <code class="inline">PIL</code> library is used to resize the image to fit the computers screen dimensions.</p>
+        <p>Finally, the <code class="inline">sleep</code> function from the <code class="inline">time</code> library is used to sleep the thread for a second before deleting the image. This is needed as deleting the image before the system is done setting it as the background picture can cause issues.</p>
+    </div>
+	<h2 id="getting_the_picture">Getting the picture</h2>
+<pre class="python"><code class="python">
+<span class="constant">def </span><span class="function">get_picture_of_the_day</span><span class="default">(</span><span class="default">):</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">resp </span><span class="default">= </span><span class="default">req.get</span><span class="default">(</span><span class="default"></span><span class="string">"https://www.nationalgeographic.com/photography/photo-of-the-day"</span><span class="default">)</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">soup </span><span class="default">= </span><span class="default">BeautifulSoup</span><span class="default">(</span><span class="default">resp.content</span><span class="constant">, </span><span class="default"></span><span class="string">"lxml"</span><span class="default">)</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">ori_image </span><span class="default">= </span><span class="default">soup.find</span><span class="default">(</span><span class="default"></span><span class="string">"meta"</span><span class="default"></span><span class="constant">, </span><span class="default">{</span><span class="string">"property"</span><span class="default"></span><span class="default">: </span><span class="default"></span><span class="string">"og:image"</span><span class="default"></span><span class="constant">, </span><span class="default"></span><span class="string">"content"</span><span class="default"></span><span class="default">: </span><span class="constant">True</span><span class="default">})</span>
+<span class="default"></span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">img_bytes </span><span class="default">= </span><span class="default">req.get</span><span class="default">(</span><span class="default">ori_image[</span><span class="string">"content"</span><span class="default">]</span><span class="constant">, </span><span class="argument">stream</span><span class="default">=</span><span class="constant">True</span><span class="default">)</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="constant">if </span><span class="default">img_bytes.status_code </span><span class="default">== </span><span class="numeric">200</span><span class="default">:</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="constant">with </span><span class="inbuilt">open</span><span class="default">(</span><span class="default"></span><span class="string">f"</span><span class="constant">{</span><span class="default">path</span><span class="constant">}</span><span class="string">/natgeo.jpg"</span><span class="default"></span><span class="constant">, </span><span class="default"></span><span class="string">"wb"</span><span class="default"></span><span class="default">) </span><span class="constant">as </span><span class="default">f</span><span class="default">:</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">img_bytes.raw.decode_content </span><span class="default">= </span><span class="constant">True</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">shutil.copyfileobj</span><span class="default">(</span><span class="default">img_bytes.raw</span><span class="constant">, </span><span class="default">f)</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="constant">return </span><span class="constant">True</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="constant">else</span><span class="default">: </span><span class="constant">return </span><span class="constant">False</span>
+</code></pre>
+	<div class="explanation">
+		<p>
+            We access National Geographic's site with a GET request sent via the <code class="inline">requests</code> library. The site does not require any special headers as of the publication of this article, however, it is common that sites require a <code class="inline">user-agent</code> header.
+        <br>We parse the contents of the response object using <code class="inline">BeautifulSoup</code>.
+        <br>The URL of the day's picture can be found in the meta headers of the page. The <code class="inline">og:image</code> meta header holds, in this case, a URL for the high resolution version of the image.
+        </p>
+        <p>
+            Next, we visit the URL of the image, once again using <code class="inline">requests</code>, yet this time set the <code class="inline">stream</code> argument to <code class="inline">True</code>. We check whether the connection was successful, which would return a <code class="inline">status-code: 200</code>.
+        <br>If the connection was not successful, we return <code class="inline">False</code> to prevent the code from executing further. Otherwise, if all went well, we use the contents of the response to save the image to the path specified.
+        </p>
+	</div>
+	<h2 id="changing_the_background">Changing the Background Picture</h2>
+<pre class="python"><code class="python">
+<span class="constant">def </span><span class="function">change_background_image</span><span class="default">(</span><span class="default">):</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">im </span><span class="default">= </span><span class="default">Image.open</span><span class="default">(</span><span class="default"></span><span class="string">f"</span><span class="constant">{</span><span class="default">path</span><span class="constant">}</span><span class="string">/natgeo.jpg"</span><span class="default">)</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">width</span><span class="constant">, </span><span class="default">height </span><span class="default">= </span><span class="default">im.size</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="constant">if </span><span class="default"></span><span class="default">(</span><span class="default">width </span><span class="default">/ </span><span class="default">height</span><span class="default">) </span><span class="default">< </span><span class="default"></span><span class="default">(</span><span class="default">resolution_width </span><span class="default">/ </span><span class="default">resolution_height)</span><span class="default">:</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">new_w </span><span class="default">= </span><span class="default">resolution_width</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">new_h </span><span class="default">= </span><span class="inbuilt">int</span><span class="default">(</span><span class="default">height </span><span class="default">/ </span><span class="default">resolution_width </span><span class="default">* </span><span class="default">resolution_height)</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="constant">elif </span><span class="default"></span><span class="default">(</span><span class="default">width </span><span class="default">/ </span><span class="default">height</span><span class="default">) </span><span class="default">> </span><span class="default"></span><span class="default">(</span><span class="default">resolution_width </span><span class="default">/ </span><span class="default">resolution_height)</span><span class="default">:</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">new_w </span><span class="default">= </span><span class="inbuilt">int</span><span class="default">(</span><span class="default">height </span><span class="default">/ </span><span class="default">resolution_height </span><span class="default">* </span><span class="default">resolution_width)</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">new_h </span><span class="default">= </span><span class="default">resolution_height</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="constant">else</span><span class="default">:</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">new_w </span><span class="default">= </span><span class="default">resolution_width</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">new_h </span><span class="default">= </span><span class="default">resolution_height</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">resized_image </span><span class="default">= </span><span class="default">im.resize((new_w</span><span class="constant">, </span><span class="default">new_h)</span><span class="constant">, </span><span class="default">Image.ANTIALIAS)</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">resized_image.save</span><span class="default">(</span><span class="default"></span><span class="string">f"</span><span class="constant">{</span><span class="default">path</span><span class="constant">}</span><span class="string">/natgeo.jpg"</span><span class="default"></span><span class="constant">, </span><span class="string">"JPEG"</span><span class="constant">, </span><span class="constant">quality</span><span class="default">=</span><span class="numeric">300</span><span class="default">)</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">ctypes.windll.user32.SystemParametersInfoW</span><span class="default">(</span><span class="numeric">20</span><span class="constant">, </span><span class="numeric">0</span><span class="constant">, </span><span class="default"></span><span class="string">f"</span><span class="constant">{</span><span class="default">path</span><span class="constant">}</span><span class="string">/natgeo.jpg"</span><span class="default"></span><span class="constant">, </span><span class="numeric">0</span><span class="default">)</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">sleep</span><span class="default">(</span><span class="numeric">1</span><span class="default">)</span>
+<span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default"> </span><span class="default">os.remove</span><span class="default">(</span><span class="default"></span><span class="string">f"</span><span class="constant">{</span><span class="default">path</span><span class="constant">}</span><span class="string">/natgeo.jpg"</span><span class="default">)</span>
+</code></pre>
+	<div class="explanation">
+		<p>
+            Once we have the image saved to the disk, we read its contents to an <code class="inline">Image</code> object of the <code class="inline">PIL</code> library.
+        <br>We compare the image's size to the defined screen resolutions, and by keeping the aspect ratio of the image constant, we resize it to fit the screen.
+        <br>We then save the resized image on top of the original image.
+        </p>
+        <p>
+            After the resizing is complete, we save the image as the background picture using the <code class="inline">ctypes</code> library.
+        <br>We sleep for 1 second to make sure the task is done, and then we remove the image file as we do not need it any longer.
+        <br><i style="font-weight:100; font-size:0.9em;">The desktop background might reset everytime the machine is rebooted as the file is removed.</i>
+        </p>
+	</div>
+	<h2 id="execution">Execution</h2>
+<pre class="python"><code class="python">
+<span class="default">path </span><span class="default">= </span><span class="default"></span><span class="string">""</span><span class="default"></span>
+<span class="default">resolution_width </span><span class="default">= </span><span class="numeric">1366</span>
+<span class="default">resolution_height </span><span class="default">= </span><span class="numeric">786</span>
+<span class="default"></span>
+<span class="default">got_picture </span><span class="default">= </span><span class="default">get_picture_of_the_day</span><span class="default">(</span><span class="default">)</span>
+<span class="constant">if </span><span class="default">got_picture</span><span class="default">: </span><span class="default">change_background_image</span><span class="default">(</span><span class="default">)</span>
+</code></pre>
+	<div class="explanation">
+		<p>
+            The path variable is a secure location where we can save and retrieve the image. I set it as the path to my desktop.
+        <br>The resolution width and height are used when resizing the image to fit the screen properly.
+        </p>
+        <p>
+            As a safety measure, the <code class="inline">get_picture_of_the_day</code> function returns a boolean indicating whether the connection was successful.
+        </p>
+	</div>
+</main>
+<footer></footer>
+</body>
+</html>
