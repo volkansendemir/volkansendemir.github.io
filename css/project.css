@@ -172,6 +172,18 @@ ol.bc > span.mo {
         margin-top: 0;
         padding-top: 0;
     }
+    header > nav.global > ul > li {
+        margin-left: 0.75em;
+        margin-right: 0.75em;
+    }
+    main {
+        padding-left: 0;
+        padding-right: 0;
+    }
+    main > div.explanation {
+        margin-left: 0;
+        margin-right: 0;
+    }
     main > div.explanation > p {
         font-size: 4vw;
     }
