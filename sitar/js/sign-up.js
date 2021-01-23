@@ -10,9 +10,9 @@ window.addEventListener('load', function () {
         });
 
         const result = await response.json();
-        window.localStorage.setItem('username', JSON.stringify(response["username"]));
-        window.localStorage.setItem('user-key', JSON.stringify(response["user-key"]));
-        window.localStorage.setItem('user-details', JSON.stringify(response["details"]));
-        window.localStorage.setItem('projects', JSON.stringify(response["projects"]));
+        window.localStorage.setItem('username', JSON.stringify(response["user"]["username"]));
+        window.localStorage.setItem('user-key', JSON.stringify(response["user"]["user-key"]));
+        window.localStorage.setItem('user-details', JSON.stringify(response["user"]["details"]));
+        window.localStorage.setItem('projects', JSON.stringify(response["user"]["projects"]));
     });
 });
