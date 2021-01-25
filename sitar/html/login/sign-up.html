@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset ="utf-8">
+    <title>Sign Up</title>
+    <style>
+        body {
+            display: grid;
+            align-items: center;
+            justify-items: center;
+            width: 100%;
+        }
+        form {margin-bottom: 25px;}
+        div.api-key {margin-bottom: 25px;}
+        button {margin-top: 5px;width: 100%;}
+    </style>
+</head>
+<body>
+    <h1>Sign up</h1>
+    <form class="login-form" id="sign-up">
+        <div class="username">
+            <input class="login-input" id="username" name="username" required type="text" placeholder="username">
+        </div>
+        <div class="password">
+            <input class="login-input" id="password" name="password" required type="password" placeholder="password">
+        </div>
+        <div class="name">
+            <input class="login-input" id="name" name="name" required type="text" placeholder="name">
+        </div>
+        <div class="surname">
+            <input class="login-input" id="surname" name="surname" required type="text" placeholder="surname">
+        </div>
+        <div class="email">
+            <input class="login-input" id="email" name="email" required type="email" placeholder="email">
+        </div>
+        <button class="login" type="submit" formmethod="post" tabindex="-1">Create new account!</button>
+    </form>
+    <div class="api-key">
+        <input class="login-input" id="api-key" name="api-key" required type="text" placeholder="api-key">
+    </div>
+    <a class="sign-in" href="./sign-in.html" tabindex="-1">Already have an account? Sign in!</a>
+</body>
+<script>
+    window.addEventListener("load", function () {
+        window.parent.document.title = "Sign Up";
+        const thisForm = document.getElementById("sign-up");
+        thisForm.addEventListener("submit", async function (e) {
+            e.preventDefault();
+            const formData = new FormData(thisForm).entries()
+            const response = await fetch("https://api.volkansendemir.com/sitar/login/sign-up", {
+                method: "POST",
+                headers: { "Content-Type": "application/json", "x-api-key": document.getElementById("api-key").value },
+                body: JSON.stringify(Object.fromEntries(formData))
+            });
+
+            const result = await response.json();
+
+            if (result["status"] == "success") {
+
+                x_api_key = result["x-api-key"]
+                username = formData["username"];
+                user = result["user"];
+                user_key = user["user-key"];
+                user_details = user["details"];
+                projects = user["projects"];
+
+                window.localStorage.setItem("x-api-key", JSON.stringify(x_api_key));
+                window.localStorage.setItem("username", JSON.stringify(username));
+                window.localStorage.setItem("user-key", JSON.stringify(user_key));
+                window.localStorage.setItem("user-details", JSON.stringify(user_details));
+                window.localStorage.setItem("projects", JSON.stringify(projects));
+
+                window.top.location.href = "../account.html";
+
+            } else {window.alert(result["message"]);}
+        });
+    });
+</script>
+</html>
