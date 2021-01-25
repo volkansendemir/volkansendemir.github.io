@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en" style="margin:0;padding:0;height:100%;">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body {
+            display: grid;
+            align-items: center;
+            justify-items: center;
+            width: 100%;
+        }
+        table, th, td {
+          border: 1px solid black;
+          border-collapse: collapse;
+        }
+        table {
+            margin: 5px;
+        }
+        th, td {
+            padding: 2px 3px;
+        }
+        tbody > tr {cursor: pointer;}
+        tbody > tr:hover {background-color: rgb(225,255,225);}
+        div.project {display: grid; width: 30%; grid-template-columns: 3fr 4fr;}
+        div.project > label {justify-self: end;padding-right:3px;user-select:none;}
+        div.project > label.code_label {grid-column:1/2;grid-row:1/2;font-weight:700;}
+        div.project > label.name_label {grid-column:1/2;grid-row:2/3;font-weight:700;}
+        div.project > label.start_label {grid-column:1/2;grid-row:3/4;font-weight:700;}
+        div.project > div {justify-self: start;padding-left:2px;user-select:none;}
+        div.project > div.code_box {grid-column:2/3;grid-row:1/2;}
+        div.project > div.name_box {grid-column:2/3;grid-row:2/3;}
+        div.project > div.start_box {grid-column:2/3;grid-row:3/4;}
+        div.project > form.edit {grid-column:1/3;grid-row:4/5;width: 100%;}
+        div.project > form.access {grid-column:1/3;grid-row:5/6;width: 100%;}
+        div.project > form.approve {grid-column:1/3;grid-row:6/7;width: 100%;}
+        div.project > form.delete {grid-column:1/3;grid-row:7/8;width: 100%;}
+        div.project > form > input {width: 80%;margin: 0 10%;}
+        form.create {width:100%}
+        form.create > input {width:60%;margin: 0 20%;}
+    </style>
+</head>
+<body>
+    <div class="project">
+        <label class="code_label">Project Code</label>
+        <div class="code_box"></div>
+        <label class="name_label">Project Name</label>
+        <div class="name_box"></div>
+        <label class="start_label">Project Start</label>
+        <div class="start_box"></div>
+        <form action="./edit-project.html" class="edit"><input type="submit" value="Edit project details"/></form>
+        <form action="./edit-access.html" class="access"><input type="submit" value="Edit user access"/></form>
+        <form action="./approve-project.html" class="approve"><input type="submit" value="Approve project"/></form>
+        <form action="./delete-project.html" class="delete"><input type="submit" value="Delete project"/></form>
+    </div>
+    <div class="reports">
+        <table class="reports">
+            <thead>
+                <tr><th>Report Name</th><th>Authority</th><th>Created by</th><th>Create at</th><th>Updated by</th><th>Updated at</th><th>Approval status</th></tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+        <form action="./insert-record.html" class="create"><input type="submit" value="Insert record"/></form>
+    </div>
+</body>
+<script>
+    var projects = JSON.parse(localStorage.getItem("projects"));
+    var project = JSON.parse(localStorage.getItem("project"));
+    var reports =  project["reports"];
+
+    var code_box = document.body.querySelector(".code_box");
+    code_box.innerHTML  = project["details"]["ProjectCode"];
+    var name_box = document.body.querySelector(".name_box");
+    name_box.innerHTML  = project["details"]["ProjectName"];
+    var start_box = document.body.querySelector(".start_box");
+    start_box.innerHTML  = project["details"]["ProjectStart"];
+    var table_body = document.body.querySelector("tbody");
+    for (var report_name in reports) {
+        var row = document.createElement("tr");
+        var cell = document.createElement("td");
+        var text = document.createTextNode(report_name);
+        cell.appendChild(text);
+        row.appendChild(cell);
+
+        var report = reports[report_name];
+
+        var authority = report["authority"];
+        cell = document.createElement("td");
+        text = document.createTextNode(authority);
+        cell.appendChild(text);
+        row.appendChild(cell);
+
+        var created_by = report["created_by"];
+        cell = document.createElement("td");
+        text = document.createTextNode(created_by);
+        cell.appendChild(text);
+        row.appendChild(cell);
+
+        var created_at = report["created_at"];
+        cell = document.createElement("td");
+        text = document.createTextNode(created_at);
+        cell.appendChild(text);
+        row.appendChild(cell);
+
+        var updated_by = report["updated_by"];
+        cell = document.createElement("td");
+        text = document.createTextNode(updated_by);
+        cell.appendChild(text);
+        row.appendChild(cell);
+
+        var updated_at = report["updated_at"];
+        cell = document.createElement("td");
+        text = document.createTextNode(updated_at);
+        cell.appendChild(text);
+        row.appendChild(cell);
+
+        var approval_status = report["approval"]["status"];
+        cell = document.createElement("td");
+        text = document.createTextNode(approval_status);
+        cell.appendChild(text);
+        row.appendChild(cell);
+
+        row.onclick = (function(rn, pc) {return function() {localStorage.setItem("report_name",rn);window.top.location.href = "../report.html?ProjectCode="+pc+"&report_name="+rn;};})(report_name, project["details"]["ProjectCode"]);
+        table_body.appendChild(row);
+    }
+</script>
+</html>

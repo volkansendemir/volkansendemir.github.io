@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" style="margin:0;padding:0;height:100%;">
+<head>
+    <meta charset="UTF-8">
+    <title>Delete profile</title>
+    <style>
+        body {
+            display: grid;
+            align-items: center;
+            justify-items: center;
+            width: 100%;
+        }
+        form {margin-bottom: 25px;}
+        button {margin-top: 5px;width: 100%;}
+    </style>
+</head>
+<body>
+    <h1>Delete profile</h1>
+    <form class="profile-form" id="delete-profile">
+        <div class="password">
+            <input class="profile-input" id="password" name="password" required type="password" placeholder="password">
+        </div>
+        <button class="delete" type="submit" formmethod="post" tabindex="-1">Delete profile</button>
+    </form>
+</body>
+<script>
+    window.addEventListener("load", function () {
+        const thisForm = document.getElementById("delete-profile");
+        thisForm.addEventListener("submit", async function (e) {
+            e.preventDefault();
+            const formData = new FormData(thisForm).entries()
+            fdata = Object.fromEntries(formData);
+            fdata["username"] = localStorage.getItem("username");
+            fdata["user-key"] = localStorage.getItem("user-key");
+            const response = await fetch("https://api.volkansendemir.com/sitar/account/delete-profile", {
+                method: "POST",
+                headers: { "Content-Type": "application/json", "x-api-key": localStorage.getItem("x_api_key"); },
+                body: JSON.stringify(fdata)
+            });
+
+            const result = await response.json();
+
+            window.alert(result["message"]);
+            if (result["status"] == "success") {
+                localStorage.clear();
+                window.location.href = "../login.html";
+            }
+        });
+    });
+</script>
+</html>

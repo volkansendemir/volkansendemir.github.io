@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" style="margin:0;padding:0;height:100%;">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project</title>
+    <style>*{margin:0;padding:0;border:0;}</style>
+</head>
+<body style="margin:0;padding:0;border:0;height:100%;">
+    <iframe src="./project/project-home.html" style="width: 100vw; height: 100vh;border:0;" height="100%" width="100%" frameborder="0"></iframe>
+</body>
+<script>
+    window.addEventListener("load", function () {
+        if (window.location.href.includes("?")) {
+            query_params = indow.location.href.split("?")[1].split("&");
+            for (var query_param in query_params) {
+                query_key = query_param.split("=")[0];
+                query_value = query_param.split("=")[1];
+                if (query_key == "ProjectCode") {
+                    var projects = JSON.parse(localStorage.getItem("projects"));
+                    for (var project_key in projects) {
+                        if (projects[project_key]["details"]["ProjectCode"] == query_value) {
+                            document.title = "Project "+query_value;
+                            localStorage.setItem("project", JSON.stringify(projects[project_key]));
+                            localStorage.setItem("project-key", project_key);
+                            return;
+                        }
+                    }
+                    window.location.href.replace("="+query_value, JSON.parse(localStorage.getItem("projects"))[localStorage.getItem("project-key")]["details"]["ProjectCode"]);
+                    break;
+                }
+            }
+        }
+    });
+</script>
+</html>

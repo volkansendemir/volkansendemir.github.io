@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" style="margin:0;padding:0;height:100%;">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit profile</title>
+    <style>
+        body {
+            display: grid;
+            align-items: center;
+            justify-items: center;
+            width: 100%;
+        }
+        form {margin-bottom: 25px;}
+        button {margin-top: 5px;width: 100%;}
+    </style>
+</head>
+<body>
+    <h1>Edit profile</h1>
+    <form class="profile-form" id="edit-profile">
+        <div class="name">
+            <input class="profile-input" id="name" name="name" required type="text" placeholder="name">
+        </div>
+        <div class="surname">
+            <input class="profile-input" id="surname" name="surname" required type="text" placeholder="surname">
+        </div>
+        <div class="email">
+            <input class="profile-input" id="email" name="email" required type="email" placeholder="email">
+        </div>
+        <button class="edit" type="submit" formmethod="post" tabindex="-1">Update profile</button>
+    </form>
+</body>
+<script>
+    window.addEventListener("load", function () {
+
+        var name_box = document.querySelector("#name");
+        name_box.value = localStorage.getItem("user-details")["name"];
+        var surname_box = document.querySelector("#surname");
+        surname_box.value = localStorage.getItem("user-details")["surname"];
+        var email_box = document.querySelector("#email");
+        email_box.value = localStorage.getItem("user-details")["email"];
+        const thisForm = document.getElementById("edit-profile");
+        thisForm.addEventListener("submit", async function (e) {
+            e.preventDefault();
+            const formData = new FormData(thisForm).entries()
+            fdata = Object.fromEntries(formData);
+            fdata["username"] = localStorage.getItem("username");
+            fdata["user-key"] = localStorage.getItem("user-key");
+            const response = await fetch("https://api.volkansendemir.com/sitar/account/edit-profile", {
+                method: "POST",
+                headers: { "Content-Type": "application/json", "x-api-key": localStorage.getItem("x_api_key"); },
+                body: JSON.stringify(fdata)
+            });
+
+            const result = await response.json();
+
+            if (result["status"] == "success") {
+
+                user_details = result["details"];
+
+                window.localStorage.setItem("user-details", JSON.stringify(user_details));
+
+                window.location.href = "./profile-home.html";
+
+            } else {window.alert(result["message"]);}
+        });
+    });
+</script>
+</html>

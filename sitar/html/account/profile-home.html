@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en" style="margin:0;padding:0;height:100%;">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body {
+            display: grid;
+            align-items: center;
+            justify-items: center;
+            width: 100%;
+        }
+    table, th, td {
+      border: 1px solid black;
+      border-collapse: collapse;
+    }
+    table {
+        margin: 5px;
+    }
+    th, td {
+        padding: 2px 3px;
+    }
+    tbody > tr {cursor: pointer;}
+    tbody > tr:hover {background-color: rgb(225,255,225);}
+    div.profile {display: grid; width: 30%; grid-template-columns: 3fr 4fr;}
+    div.profile > label {justify-self: end;padding-right:3px;user-select:none;}
+    div.profile > label.name_label {grid-column:1/2;grid-row:1/2;font-weight:700;}
+    div.profile > label.surname_label {grid-column:1/2;grid-row:2/3;font-weight:700;}
+    div.profile > label.email_label {grid-column:1/2;grid-row:3/4;font-weight:700;}
+    div.profile > div {justify-self: start;padding-left:2px;user-select:none;}
+    div.profile > div.name_box {grid-column:2/3;grid-row:1/2;}
+    div.profile > div.surname_box {grid-column:2/3;grid-row:2/3;}
+    div.profile > div.email_box {grid-column:2/3;grid-row:3/4;}
+    div.profile > form.change {grid-column:1/3;grid-row:4/5;width: 100%;}
+    div.profile > form.edit {grid-column:1/3;grid-row:5/6;width: 100%;}
+    div.profile > form.delete {grid-column:1/3;grid-row:6/7;width: 100%;}
+    div.profile > form > input {width: 80%;margin: 0 10%;}
+    form.create {width:100%}
+    form.create > input {width:60%;margin: 0 20%;}
+    </style>
+</head>
+<body>
+    <div class="profile">
+        <label class="name_label">Name</label>
+        <div class="name_box"></div>
+        <label class="surname_label">Surname</label>
+        <div class="surname_box"></div>
+        <label class="email_label">E-mail</label>
+        <div class="email_box"></div>
+        <form action="./change-password.html" class="change"><input type="submit" value="Change password"/></form>
+        <form action="./edit-profile.html" class="edit"><input type="submit" value="Edit profile"/></form>
+        <form action="./delete-profile.html" class="delete"><input type="submit" value="Delete profile"/></form>
+    </div>
+    <div class="projects">
+        <table class="projects">
+            <thead>
+                <tr><th>Project Code</th><th>Project Name</th><th>Project Start</th><th>Authority</th></tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+        <form action="./create-project.html" class="create"><input type="submit" value="Create project"/></form>
+    </div>
+</body>
+<script>
+    window.addEventListener("load", function () {
+        var user_details = JSON.parse(localStorage.getItem("user-details"));
+        var name_box = document.body.querySelector(".name_box");
+        name_box.innerHTML  = user_details["name"];
+        var surname_box = document.body.querySelector(".surname_box");
+        surname_box.innerHTML  = user_details["surname"];
+        var email_box = document.body.querySelector(".email_box");
+        email_box.innerHTML  = user_details["email"];
+        var projects = JSON.parse(localStorage.getItem("projects"));
+        var table_body = document.body.querySelector("tbody");
+        for (var project_key in projects) {
+            var project = projects[project_key];
+            var project_details = project["details"];
+            var row = document.createElement("tr");
+
+            var cell = document.createElement("td");
+            var text = document.createTextNode(project_details["ProjectCode"]);
+            cell.appendChild(text);
+            row.appendChild(cell);
+
+            cell = document.createElement("td");
+            text = document.createTextNode(project_details["ProjectName"]);
+            cell.appendChild(text);
+            row.appendChild(cell);
+
+            cell = document.createElement("td");
+            text = document.createTextNode(project_details["ProjectStart"]);
+            cell.appendChild(text);
+            row.appendChild(cell);
+
+            cell = document.createElement("td");
+            text = document.createTextNode(project["authority"]);
+            cell.appendChild(text);
+            row.appendChild(cell);
+
+            row.onclick = (function(pk, code) {return function() {localStorage.setItem("project-key",pk);window.top.location.href = "../project.html?ProjectCode="+code;}})(project_key, project_details["ProjectCode"]);
+            table_body.appendChild(row);
+        }
+    });
+</script>
+</html>
